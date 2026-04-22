@@ -14,19 +14,26 @@ export default async function Home() {
   const posts: SanityPost[] = await client.fetch(postsQuery);
 
   return (
-    <main className="min-h-screen bg-gray-50 px-4 py-10">
+    <main className="min-h-screen bg-gray-50 px-4 py-8 sm:py-10">
       <div className="mx-auto max-w-6xl">
-        <section className="mb-24">
-          <h1 className="mb-4 text-center text-4xl font-bold">
-            🌸 Enciclopedia Florilor
-          </h1>
+        <section className="mb-20 sm:mb-24">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--primary)] sm:text-sm">
+              Enciclopedia Florilor
+            </p>
 
-          <p className="mb-10 text-center text-gray-600">
-            Descoperă frumusețea, semnificația și farmecul celor mai iubite
-            flori.
-          </p>
+            <h1 className="mb-4 text-3xl font-bold tracking-tight text-gray-950 sm:text-4xl md:text-5xl">
+              Flori, inspirație și frumusețe naturală
+            </h1>
 
-          <div className="relative mx-auto mt-10 hidden h-110 w-full max-w-5xl md:block">
+            <p className="mx-auto max-w-2xl text-sm leading-7 text-gray-600 sm:text-base sm:leading-8">
+              Descoperă frumusețea, semnificația și farmecul celor mai iubite
+              flori, într-un spațiu elegant și ușor de explorat.
+            </p>
+          </div>
+
+          {/* desktop stacked cards */}
+          <div className="relative mx-auto mt-10 hidden h-[440px] w-full max-w-5xl md:block">
             <Link
               href={`/flori/${flowers[0].slug}`}
               className="absolute left-0 top-10 block w-[50%] rotate-[-5deg] scale-95 opacity-85 transition duration-300 hover:z-20 hover:scale-100 hover:opacity-100"
@@ -100,26 +107,34 @@ export default async function Home() {
             </Link>
           </div>
 
-          <div className="grid gap-6 md:hidden">
+          {/* mobile cards */}
+          <div className="mt-8 grid gap-5 md:hidden">
             {flowers.map((flower) => (
               <Link
                 key={flower.slug}
                 href={`/flori/${flower.slug}`}
-                className="block overflow-hidden rounded-2xl bg-white shadow-md"
+                className="group block overflow-hidden rounded-3xl border border-white/60 bg-white/95 shadow-sm transition duration-300 active:scale-[0.99]"
               >
-                <div className="relative h-48 w-full">
+                <div className="relative h-52 w-full overflow-hidden">
                   <Image
                     src={flower.image}
                     alt={flower.name}
                     fill
-                    className="object-cover"
+                    className="object-cover transition duration-500 group-hover:scale-105"
                   />
+                  <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/25 to-transparent" />
                 </div>
 
                 <div className="p-5">
-                  <h2 className="mb-2 text-xl font-semibold">{flower.name}</h2>
+                  <div className="mb-3 inline-flex rounded-full bg-[var(--primary-soft)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--primary)]">
+                    Floare
+                  </div>
 
-                  <p className="text-sm text-gray-600 line-clamp-3">
+                  <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-950">
+                    {flower.name}
+                  </h2>
+
+                  <p className="text-sm leading-7 text-gray-600">
                     {flower.description}
                   </p>
                 </div>
@@ -129,15 +144,15 @@ export default async function Home() {
         </section>
 
         <section>
-          <div className="mb-8 flex items-end justify-between gap-4">
+          <div className="mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
-              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-pink-600">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--primary)] sm:text-sm">
                 Blog
               </p>
-              <h2 className="mb-3 text-4xl font-bold tracking-tight text-gray-950">
+              <h2 className="mb-3 text-3xl font-bold tracking-tight text-gray-950 sm:text-4xl">
                 Articole recente
               </h2>
-              <p className="text-base leading-7 text-gray-600">
+              <p className="text-sm leading-7 text-gray-600 sm:text-base">
                 Citește cele mai noi articole despre flori, îngrijire,
                 simbolistică și inspirație florală.
               </p>
@@ -145,13 +160,14 @@ export default async function Home() {
 
             <Link
               href="/blog"
-              className="shrink-0 text-sm font-semibold text-gray-700 transition hover:text-pink-700"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 transition hover:text-[var(--primary)]"
             >
-              Vezi toate articolele →
+              Vezi toate articolele
+              <span aria-hidden="true">→</span>
             </Link>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-2">
+          <div className="grid gap-6 lg:grid-cols-2">
             {posts.slice(0, 2).map((post) => {
               const imageUrl = post.mainImage
                 ? urlFor(post.mainImage).width(1200).height(800).url()
@@ -164,7 +180,7 @@ export default async function Home() {
                 >
                   {imageUrl && (
                     <Link href={`/blog/${post.slug}`} className="block">
-                      <div className="relative h-72 w-full overflow-hidden">
+                      <div className="relative h-60 w-full overflow-hidden sm:h-72">
                         <Image
                           src={imageUrl}
                           alt={post.title}
@@ -175,8 +191,8 @@ export default async function Home() {
                     </Link>
                   )}
 
-                  <div className="p-7">
-                    <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-gray-500">
+                  <div className="p-5 sm:p-7">
+                    <div className="mb-4 flex flex-wrap items-center gap-3 text-xs text-gray-500 sm:text-sm">
                       {post.publishedAt && (
                         <span>
                           {new Date(post.publishedAt).toLocaleDateString(
@@ -188,17 +204,17 @@ export default async function Home() {
                       {post.author?.name && <span>• {post.author.name}</span>}
                     </div>
 
-                    <h3 className="mb-4 text-3xl font-bold tracking-tight text-gray-950">
+                    <h3 className="mb-4 text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl">
                       <Link
                         href={`/blog/${post.slug}`}
-                        className="transition hover:text-pink-700"
+                        className="transition hover:text-[var(--primary)]"
                       >
                         {post.title}
                       </Link>
                     </h3>
 
                     {post.excerpt && (
-                      <p className="mb-6 text-base leading-7 text-gray-600">
+                      <p className="mb-6 text-sm leading-7 text-gray-600 sm:text-base">
                         {post.excerpt}
                       </p>
                     )}
@@ -208,7 +224,7 @@ export default async function Home() {
                         {post.categories.map((category, index) => (
                           <span
                             key={`${category.title}-${index}`}
-                            className="rounded-full bg-pink-50 px-3 py-1 text-xs font-semibold text-pink-700"
+                            className="rounded-full bg-[var(--primary-soft)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--primary)]"
                           >
                             {category.title}
                           </span>
@@ -218,7 +234,7 @@ export default async function Home() {
 
                     <Link
                       href={`/blog/${post.slug}`}
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-gray-900 transition hover:text-green-600"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-gray-900 transition hover:text-[var(--secondary)]"
                     >
                       Citește articolul
                       <span aria-hidden="true">→</span>
