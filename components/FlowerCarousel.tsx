@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 type Flower = {
   slug: string;
@@ -15,22 +15,81 @@ type Props = {
   flowers: Flower[];
 };
 
+const AUTOPLAY_DELAY = 4000;
+
 export default function FlowerCarousel({ flowers }: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const animationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const total = flowers.length;
 
-  useEffect(() => {
+  const clearAutoplay = useCallback(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  }, []);
+
+  const startAutoplay = useCallback(() => {
+    clearAutoplay();
+
     if (total <= 1) return;
 
-    const interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
+      setIsAnimating(true);
       setActiveIndex((prev) => (prev + 1) % total);
-    }, 3500);
 
-    return () => clearInterval(interval);
-  }, [total]);
+      if (animationTimeoutRef.current) {
+        clearTimeout(animationTimeoutRef.current);
+      }
+
+      animationTimeoutRef.current = setTimeout(() => {
+        setIsAnimating(false);
+      }, 550);
+    }, AUTOPLAY_DELAY);
+  }, [clearAutoplay, total]);
+
+  useEffect(() => {
+    startAutoplay();
+
+    return () => {
+      clearAutoplay();
+      if (animationTimeoutRef.current) {
+        clearTimeout(animationTimeoutRef.current);
+      }
+    };
+  }, [startAutoplay, clearAutoplay]);
+
+  const changeSlide = useCallback(
+    (newIndex: number) => {
+      setIsAnimating(true);
+      setActiveIndex(newIndex);
+
+      if (animationTimeoutRef.current) {
+        clearTimeout(animationTimeoutRef.current);
+      }
+
+      animationTimeoutRef.current = setTimeout(() => {
+        setIsAnimating(false);
+      }, 550);
+
+      startAutoplay();
+    },
+    [startAutoplay],
+  );
+
+  const goToNext = useCallback(() => {
+    changeSlide((activeIndex + 1) % total);
+  }, [activeIndex, total, changeSlide]);
+
+  const goToPrev = useCallback(() => {
+    changeSlide((activeIndex - 1 + total) % total);
+  }, [activeIndex, total, changeSlide]);
 
   const orderedFlowers = useMemo(() => {
     return flowers.map((_, i) => flowers[(activeIndex + i) % total]);
@@ -39,14 +98,6 @@ export default function FlowerCarousel({ flowers }: Props) {
   const activeFlower = orderedFlowers[0];
   const nextFlower = orderedFlowers[1];
   const thirdFlower = orderedFlowers[2];
-
-  function goToNext() {
-    setActiveIndex((prev) => (prev + 1) % total);
-  }
-
-  function goToPrev() {
-    setActiveIndex((prev) => (prev - 1 + total) % total);
-  }
 
   function handleTouchStart(e: React.TouchEvent<HTMLDivElement>) {
     touchStartX.current = e.changedTouches[0].clientX;
@@ -83,7 +134,11 @@ export default function FlowerCarousel({ flowers }: Props) {
         onTouchEnd={handleTouchEnd}
       >
         {thirdFlower && (
-          <div className="pointer-events-none absolute left-4 top-6 w-[82%] scale-95 opacity-35 transition-all duration-500">
+          <div
+            className={`pointer-events-none absolute left-4 top-6 w-[82%] transition-all duration-500 ease-out ${
+              isAnimating ? "scale-[0.93] opacity-30" : "scale-95 opacity-35"
+            }`}
+          >
             <div className="overflow-hidden rounded-3xl border border-white/60 bg-white/80 shadow-md">
               <div className="relative h-52 w-full">
                 <Image
@@ -98,7 +153,13 @@ export default function FlowerCarousel({ flowers }: Props) {
         )}
 
         {nextFlower && (
-          <div className="pointer-events-none absolute right-2 top-3 z-10 w-[86%] scale-[0.98] opacity-65 transition-all duration-500">
+          <div
+            className={`pointer-events-none absolute right-2 top-3 z-10 w-[86%] transition-all duration-500 ease-out ${
+              isAnimating
+                ? "translate-x-1 scale-[0.96] opacity-55"
+                : "scale-[0.98] opacity-65"
+            }`}
+          >
             <div className="overflow-hidden rounded-3xl border border-white/60 bg-white/90 shadow-lg">
               <div className="relative h-52 w-full">
                 <Image
@@ -114,7 +175,9 @@ export default function FlowerCarousel({ flowers }: Props) {
 
         <Link
           href={`/flori/${activeFlower.slug}`}
-          className="absolute left-0 top-0 z-20 block w-[90%] transition-all duration-500 active:scale-[0.99]"
+          className={`absolute left-0 top-0 z-20 block w-[90%] transition-all duration-500 ease-out active:scale-[0.99] ${
+            isAnimating ? "translate-y-1 scale-[0.995]" : "translate-y-0"
+          }`}
         >
           <div className="overflow-hidden rounded-3xl border border-white/70 bg-white shadow-xl">
             <div className="relative h-56 w-full">
@@ -151,8 +214,8 @@ export default function FlowerCarousel({ flowers }: Props) {
                 key={index}
                 type="button"
                 aria-label={`Mergi la cardul ${index + 1}`}
-                onClick={() => setActiveIndex(index)}
-                className={`h-2.5 rounded-full transition-all ${
+                onClick={() => changeSlide(index)}
+                className={`h-2.5 rounded-full transition-all duration-300 ${
                   isActive
                     ? "w-8 bg-[var(--primary)]"
                     : "w-2.5 bg-gray-300 hover:bg-gray-400"
@@ -166,7 +229,11 @@ export default function FlowerCarousel({ flowers }: Props) {
       {/* Desktop */}
       <div className="relative hidden h-[460px] md:block">
         {thirdFlower && (
-          <div className="pointer-events-none absolute left-0 top-10 w-[48%] rotate-[-5deg] scale-95 opacity-40 transition-all duration-500">
+          <div
+            className={`pointer-events-none absolute left-0 top-10 w-[48%] rotate-[-5deg] transition-all duration-500 ease-out ${
+              isAnimating ? "scale-[0.92] opacity-30" : "scale-95 opacity-40"
+            }`}
+          >
             <div className="overflow-hidden rounded-3xl border border-white/60 bg-white/80 shadow-md">
               <div className="relative h-60 w-full">
                 <Image
@@ -181,7 +248,13 @@ export default function FlowerCarousel({ flowers }: Props) {
         )}
 
         {nextFlower && (
-          <div className="pointer-events-none absolute right-0 top-6 z-10 w-[50%] rotate-[4deg] scale-[0.98] opacity-70 transition-all duration-500">
+          <div
+            className={`pointer-events-none absolute right-0 top-6 z-10 w-[50%] rotate-[4deg] transition-all duration-500 ease-out ${
+              isAnimating
+                ? "translate-x-1 scale-[0.95] opacity-55"
+                : "scale-[0.98] opacity-70"
+            }`}
+          >
             <div className="overflow-hidden rounded-3xl border border-white/60 bg-white/90 shadow-lg">
               <div className="relative h-60 w-full">
                 <Image
@@ -197,7 +270,9 @@ export default function FlowerCarousel({ flowers }: Props) {
 
         <Link
           href={`/flori/${activeFlower.slug}`}
-          className="absolute left-1/2 top-0 z-20 block w-[54%] -translate-x-1/2 transition-all duration-500 hover:scale-[1.01]"
+          className={`absolute left-1/2 top-0 z-20 block w-[54%] -translate-x-1/2 transition-all duration-500 ease-out hover:scale-[1.01] ${
+            isAnimating ? "translate-y-1 scale-[0.995]" : "translate-y-0"
+          }`}
         >
           <div className="overflow-hidden rounded-3xl border border-white/70 bg-white shadow-xl">
             <div className="relative h-64 w-full">
@@ -234,8 +309,8 @@ export default function FlowerCarousel({ flowers }: Props) {
                 key={index}
                 type="button"
                 aria-label={`Mergi la cardul ${index + 1}`}
-                onClick={() => setActiveIndex(index)}
-                className={`h-2.5 rounded-full transition-all ${
+                onClick={() => changeSlide(index)}
+                className={`h-2.5 rounded-full transition-all duration-300 ${
                   isActive
                     ? "w-8 bg-[var(--primary)]"
                     : "w-2.5 bg-gray-300 hover:bg-gray-400"
