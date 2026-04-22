@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import FlowerCarousel from "@/components/FlowerCarousel";
 import { flowers } from "@/lib/flowers";
 import { client, postsQuery, type SanityPost, urlFor } from "@/lib/sanity";
 
@@ -32,115 +33,7 @@ export default async function Home() {
             </p>
           </div>
 
-          {/* desktop stacked cards */}
-          <div className="relative mx-auto mt-10 hidden h-[440px] w-full max-w-5xl md:block">
-            <Link
-              href={`/flori/${flowers[0].slug}`}
-              className="absolute left-0 top-10 block w-[50%] rotate-[-5deg] scale-95 opacity-85 transition duration-300 hover:z-20 hover:scale-100 hover:opacity-100"
-            >
-              <div className="overflow-hidden rounded-2xl bg-white shadow-md">
-                <div className="relative h-56 w-full">
-                  <Image
-                    src={flowers[0].image}
-                    alt={flowers[0].name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-5">
-                  <h2 className="mb-2 text-xl font-semibold">
-                    {flowers[0].name}
-                  </h2>
-                  <p className="text-sm text-gray-600 line-clamp-3">
-                    {flowers[0].description}
-                  </p>
-                </div>
-              </div>
-            </Link>
-
-            <Link
-              href={`/flori/${flowers[1].slug}`}
-              className="absolute left-1/2 top-5 block w-[50%] -translate-x-1/2 rotate-[4deg] scale-95 opacity-90 transition duration-300 hover:z-20 hover:scale-100 hover:opacity-100"
-            >
-              <div className="overflow-hidden rounded-2xl bg-white shadow-md">
-                <div className="relative h-56 w-full">
-                  <Image
-                    src={flowers[1].image}
-                    alt={flowers[1].name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-5">
-                  <h2 className="mb-2 text-xl font-semibold">
-                    {flowers[1].name}
-                  </h2>
-                  <p className="text-sm text-gray-600 line-clamp-3">
-                    {flowers[1].description}
-                  </p>
-                </div>
-              </div>
-            </Link>
-
-            <Link
-              href={`/flori/${flowers[2].slug}`}
-              className="absolute right-0 top-0 z-10 block w-[50%] transition duration-300 hover:z-30 hover:scale-105"
-            >
-              <div className="overflow-hidden rounded-2xl bg-white shadow-md">
-                <div className="relative h-56 w-full">
-                  <Image
-                    src={flowers[2].image}
-                    alt={flowers[2].name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-5">
-                  <h2 className="mb-2 text-xl font-semibold">
-                    {flowers[2].name}
-                  </h2>
-                  <p className="text-sm text-gray-600 line-clamp-3">
-                    {flowers[2].description}
-                  </p>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          {/* mobile cards */}
-          <div className="mt-8 grid gap-5 md:hidden">
-            {flowers.map((flower) => (
-              <Link
-                key={flower.slug}
-                href={`/flori/${flower.slug}`}
-                className="group block overflow-hidden rounded-3xl border border-white/60 bg-white/95 shadow-sm transition duration-300 active:scale-[0.99]"
-              >
-                <div className="relative h-52 w-full overflow-hidden">
-                  <Image
-                    src={flower.image}
-                    alt={flower.name}
-                    fill
-                    className="object-cover transition duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/25 to-transparent" />
-                </div>
-
-                <div className="p-5">
-                  <div className="mb-3 inline-flex rounded-full bg-[var(--primary-soft)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--primary)]">
-                    Floare
-                  </div>
-
-                  <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-950">
-                    {flower.name}
-                  </h2>
-
-                  <p className="text-sm leading-7 text-gray-600">
-                    {flower.description}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <FlowerCarousel flowers={flowers} />
         </section>
 
         <section>
