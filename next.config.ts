@@ -10,10 +10,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-
-  allowedDevOrigins: [
-    "https://ellis-quotations-thompson-curve.trycloudflare.com",
-  ],
 };
 
 export default nextConfig;
