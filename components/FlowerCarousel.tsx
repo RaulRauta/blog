@@ -16,7 +16,6 @@ type Props = {
 };
 
 const AUTOPLAY_DELAY = 4000;
-const TRANSITION_MS = 550;
 
 export default function FlowerCarousel({ flowers }: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -51,15 +50,10 @@ export default function FlowerCarousel({ flowers }: Props) {
 
   const goToIndex = useCallback(
     (index: number) => {
-      if (index === activeIndex) {
-        startAutoplay();
-        return;
-      }
-
       setActiveIndex(index);
       startAutoplay();
     },
-    [activeIndex, startAutoplay],
+    [startAutoplay],
   );
 
   const goToNext = useCallback(() => {
@@ -96,22 +90,23 @@ export default function FlowerCarousel({ flowers }: Props) {
   }
 
   return (
-    <div className="mx-auto mt-8 w-full max-w-sm md:max-w-5xl">
+    <div className="mx-auto mt-8 w-full max-w-5xl">
+      {/* Mobile */}
       <div
-        className="relative overflow-hidden md:hidden"
+        className="relative md:hidden"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="relative h-[430px]">
+        <div className="relative mx-auto h-[500px] w-full max-w-sm overflow-hidden">
           {flowers.map((flower, index) => {
             let relativeIndex = index - activeIndex;
             if (relativeIndex < 0) relativeIndex += total;
 
             let classes =
-              "absolute top-0 left-1/2 w-[88%] -translate-x-1/2 transition-all ease-[cubic-bezier(0.22,1,0.36,1)]";
+              "absolute left-1/2 top-0 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]";
             const style: React.CSSProperties = {
-              transitionDuration: `${TRANSITION_MS}ms`,
+              width: "84%",
             };
 
             if (relativeIndex === 0) {
@@ -120,15 +115,15 @@ export default function FlowerCarousel({ flowers }: Props) {
               style.opacity = 1;
             } else if (relativeIndex === 1) {
               classes += " z-20 pointer-events-none";
-              style.transform = "translateX(-34%) translateY(16px) scale(0.94)";
-              style.opacity = 0.7;
+              style.transform = "translateX(-44%) translateY(16px) scale(0.92)";
+              style.opacity = 0.45;
             } else if (relativeIndex === 2) {
               classes += " z-10 pointer-events-none";
-              style.transform = "translateX(-66%) translateY(30px) scale(0.88)";
-              style.opacity = 0.35;
+              style.transform = "translateX(-56%) translateY(28px) scale(0.86)";
+              style.opacity = 0.18;
             } else {
               classes += " z-0 pointer-events-none";
-              style.transform = "translateX(-50%) translateY(40px) scale(0.82)";
+              style.transform = "translateX(-50%) translateY(36px) scale(0.82)";
               style.opacity = 0;
             }
 
@@ -187,9 +182,7 @@ export default function FlowerCarousel({ flowers }: Props) {
                 aria-label={`Mergi la cardul ${index + 1}`}
                 onClick={() => goToIndex(index)}
                 className={`h-2.5 rounded-full transition-all duration-300 ${
-                  isActive
-                    ? "w-8 bg-[var(--primary)]"
-                    : "w-2.5 bg-gray-300 hover:bg-gray-400"
+                  isActive ? "w-8 bg-[var(--primary)]" : "w-2.5 bg-gray-300"
                 }`}
               />
             );
@@ -197,37 +190,36 @@ export default function FlowerCarousel({ flowers }: Props) {
         </div>
       </div>
 
-      <div className="relative hidden overflow-hidden md:block">
-        <div className="relative h-[470px]">
+      {/* Desktop */}
+      <div className="relative hidden md:block">
+        <div className="relative mx-auto h-[470px] w-full max-w-5xl overflow-hidden">
           {flowers.map((flower, index) => {
             let relativeIndex = index - activeIndex;
             if (relativeIndex < 0) relativeIndex += total;
 
             let classes =
-              "absolute top-0 left-1/2 w-[54%] -translate-x-1/2 transition-all ease-[cubic-bezier(0.22,1,0.36,1)]";
+              "absolute left-1/2 top-0 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]";
             const style: React.CSSProperties = {
-              transitionDuration: `${TRANSITION_MS}ms`,
+              width: "52%",
             };
 
             if (relativeIndex === 0) {
               classes += " z-30 pointer-events-auto";
-              style.transform =
-                "translateX(-50%) translateY(0px) scale(1) rotate(0deg)";
+              style.transform = "translateX(-50%) scale(1) rotate(0deg)";
               style.opacity = 1;
             } else if (relativeIndex === 1) {
               classes += " z-20 pointer-events-none";
               style.transform =
-                "translateX(-6%) translateY(18px) scale(0.92) rotate(4deg)";
-              style.opacity = 0.7;
+                "translateX(-10%) translateY(18px) scale(0.92) rotate(4deg)";
+              style.opacity = 0.55;
             } else if (relativeIndex === 2) {
               classes += " z-10 pointer-events-none";
               style.transform =
-                "translateX(-94%) translateY(28px) scale(0.88) rotate(-5deg)";
-              style.opacity = 0.35;
+                "translateX(-90%) translateY(28px) scale(0.88) rotate(-5deg)";
+              style.opacity = 0.22;
             } else {
               classes += " z-0 pointer-events-none";
-              style.transform =
-                "translateX(-50%) translateY(40px) scale(0.82) rotate(0deg)";
+              style.transform = "translateX(-50%) translateY(36px) scale(0.82)";
               style.opacity = 0;
             }
 
@@ -286,9 +278,7 @@ export default function FlowerCarousel({ flowers }: Props) {
                 aria-label={`Mergi la cardul ${index + 1}`}
                 onClick={() => goToIndex(index)}
                 className={`h-2.5 rounded-full transition-all duration-300 ${
-                  isActive
-                    ? "w-8 bg-[var(--primary)]"
-                    : "w-2.5 bg-gray-300 hover:bg-gray-400"
+                  isActive ? "w-8 bg-[var(--primary)]" : "w-2.5 bg-gray-300"
                 }`}
               />
             );
