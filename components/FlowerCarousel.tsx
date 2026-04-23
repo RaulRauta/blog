@@ -22,7 +22,6 @@ export default function FlowerCarousel({ flowers }: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const animationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
@@ -42,25 +41,13 @@ export default function FlowerCarousel({ flowers }: Props) {
 
     intervalRef.current = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % total);
-
-      if (animationTimeoutRef.current) {
-        clearTimeout(animationTimeoutRef.current);
-      }
-
-      animationTimeoutRef.current = setTimeout(() => {}, TRANSITION_MS);
     }, AUTOPLAY_DELAY);
   }, [clearAutoplay, total]);
 
   useEffect(() => {
     startAutoplay();
-
-    return () => {
-      clearAutoplay();
-      if (animationTimeoutRef.current) {
-        clearTimeout(animationTimeoutRef.current);
-      }
-    };
-  }, [clearAutoplay, startAutoplay]);
+    return () => clearAutoplay();
+  }, [startAutoplay, clearAutoplay]);
 
   const goToIndex = useCallback(
     (index: number) => {
@@ -70,13 +57,6 @@ export default function FlowerCarousel({ flowers }: Props) {
       }
 
       setActiveIndex(index);
-
-      if (animationTimeoutRef.current) {
-        clearTimeout(animationTimeoutRef.current);
-      }
-
-      animationTimeoutRef.current = setTimeout(() => {}, TRANSITION_MS);
-
       startAutoplay();
     },
     [activeIndex, startAutoplay],
@@ -117,7 +97,6 @@ export default function FlowerCarousel({ flowers }: Props) {
 
   return (
     <div className="mx-auto mt-8 w-full max-w-sm md:max-w-5xl">
-      {/* Mobile */}
       <div
         className="relative overflow-hidden md:hidden"
         onTouchStart={handleTouchStart}
@@ -130,8 +109,7 @@ export default function FlowerCarousel({ flowers }: Props) {
             if (relativeIndex < 0) relativeIndex += total;
 
             let classes =
-              "pointer-events-none absolute top-0 left-1/2 w-[90%] -translate-x-1/2 transition-all ease-[cubic-bezier(0.22,1,0.36,1)]";
-
+              "absolute top-0 left-1/2 w-[88%] -translate-x-1/2 transition-all ease-[cubic-bezier(0.22,1,0.36,1)]";
             const style: React.CSSProperties = {
               transitionDuration: `${TRANSITION_MS}ms`,
             };
@@ -141,15 +119,15 @@ export default function FlowerCarousel({ flowers }: Props) {
               style.transform = "translateX(-50%) translateY(0px) scale(1)";
               style.opacity = 1;
             } else if (relativeIndex === 1) {
-              classes += " z-20";
-              style.transform = "translateX(-32%) translateY(14px) scale(0.94)";
+              classes += " z-20 pointer-events-none";
+              style.transform = "translateX(-34%) translateY(16px) scale(0.94)";
               style.opacity = 0.7;
             } else if (relativeIndex === 2) {
-              classes += " z-10";
-              style.transform = "translateX(-68%) translateY(28px) scale(0.88)";
+              classes += " z-10 pointer-events-none";
+              style.transform = "translateX(-66%) translateY(30px) scale(0.88)";
               style.opacity = 0.35;
             } else {
-              classes += " z-0";
+              classes += " z-0 pointer-events-none";
               style.transform = "translateX(-50%) translateY(40px) scale(0.82)";
               style.opacity = 0;
             }
@@ -219,7 +197,6 @@ export default function FlowerCarousel({ flowers }: Props) {
         </div>
       </div>
 
-      {/* Desktop */}
       <div className="relative hidden overflow-hidden md:block">
         <div className="relative h-[470px]">
           {flowers.map((flower, index) => {
@@ -227,10 +204,8 @@ export default function FlowerCarousel({ flowers }: Props) {
             if (relativeIndex < 0) relativeIndex += total;
 
             let classes =
-              "pointer-events-none absolute top-0 left-1/2 transition-all ease-[cubic-bezier(0.22,1,0.36,1)]";
-
+              "absolute top-0 left-1/2 w-[54%] -translate-x-1/2 transition-all ease-[cubic-bezier(0.22,1,0.36,1)]";
             const style: React.CSSProperties = {
-              width: "54%",
               transitionDuration: `${TRANSITION_MS}ms`,
             };
 
@@ -240,17 +215,17 @@ export default function FlowerCarousel({ flowers }: Props) {
                 "translateX(-50%) translateY(0px) scale(1) rotate(0deg)";
               style.opacity = 1;
             } else if (relativeIndex === 1) {
-              classes += " z-20";
+              classes += " z-20 pointer-events-none";
               style.transform =
                 "translateX(-6%) translateY(18px) scale(0.92) rotate(4deg)";
               style.opacity = 0.7;
             } else if (relativeIndex === 2) {
-              classes += " z-10";
+              classes += " z-10 pointer-events-none";
               style.transform =
                 "translateX(-94%) translateY(28px) scale(0.88) rotate(-5deg)";
               style.opacity = 0.35;
             } else {
-              classes += " z-0";
+              classes += " z-0 pointer-events-none";
               style.transform =
                 "translateX(-50%) translateY(40px) scale(0.82) rotate(0deg)";
               style.opacity = 0;
