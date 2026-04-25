@@ -17,7 +17,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-[9999] border-b border-white/40 bg-white/55 backdrop-blur-xl shadow-sm">
+    <header className="sticky top-0 z-9999 border-b border-white/40 bg-white/55 backdrop-blur-xl shadow-sm">
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex items-center justify-between py-4">
           <Link
@@ -25,7 +25,7 @@ export default function Navbar() {
             className="flex items-center gap-3 transition hover:opacity-90"
             onClick={() => setOpen(false)}
           >
-            <div className="relative h-10 w-10 overflow-hidden rounded-xl border border-white/60 bg-white shadow-sm sm:h-11 sm:w-11">
+            <div className="relative h-10 w-10 overflow-hidden rounded-xl border border-white/60 bg-white shadow-sm sm:h-11 sm:w-17">
               <Image src="/logo.png" alt="Logo" fill className="object-cover" />
             </div>
 
@@ -33,7 +33,7 @@ export default function Navbar() {
               <p className="truncate text-base font-bold tracking-tight text-gray-950 sm:text-lg">
                 Enciclopedia Florilor
               </p>
-              <p className="hidden text-[10px] uppercase tracking-[0.24em] text-[var(--primary)] sm:block">
+              <p className="hidden text-[10px] uppercase tracking-[0.24em] text-primary sm:block">
                 Blog floral
               </p>
             </div>
@@ -49,8 +49,8 @@ export default function Navbar() {
                   href={link.href}
                   className={`rounded-xl px-4 py-2.5 text-sm font-semibold tracking-wide transition duration-200 ${
                     isActive
-                      ? "bg-[var(--primary-soft)] text-[var(--primary)]"
-                      : "text-gray-600 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
+                      ? "bg-primary-soft text-primary"
+                      : "text-gray-600 hover:bg-primary-soft hover:text-primary"
                   }`}
                 >
                   {link.label}
@@ -64,7 +64,7 @@ export default function Navbar() {
             onClick={() => setOpen((prev) => !prev)}
             aria-label={open ? "Închide meniul" : "Deschide meniul"}
             aria-expanded={open}
-            className="relative inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/60 bg-white/95 text-gray-800 shadow-sm transition hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] md:hidden"
+            className="relative inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/60 bg-white/95 text-gray-800 shadow-sm transition hover:bg-primary-soft hover:text-primary md:hidden"
           >
             <span
               className={`absolute h-0.5 w-5 rounded-full bg-current transition-all duration-300 ${
@@ -101,8 +101,8 @@ export default function Navbar() {
                     onClick={() => setOpen(false)}
                     className={`rounded-2xl px-4 py-3 text-sm font-semibold tracking-wide transition ${
                       isActive
-                        ? "bg-[var(--primary-soft)] text-[var(--primary)]"
-                        : "text-gray-700 hover:bg-[var(--secondary-soft)] hover:text-[var(--secondary)]"
+                        ? "bg-primary-soft text-primary"
+                        : "text-gray-700 hover:bg-secondary-soft hover:text-secondary"
                     }`}
                   >
                     {link.label}
