@@ -4,11 +4,11 @@
   --background: #ffffff;
   --foreground: #171717;
 
-  --primary: #ec4899;
-  --primary-soft: #fce7f3;
+  --primary: #c23a7a;
+  --primary-soft: rgba(243, 139, 200, 0.22);
 
-  --secondary: #16a34a;
-  --secondary-soft: #dcfce7;
+  --secondary: #3e5a3e;
+  --secondary-soft: rgba(94, 143, 94, 0.22);
 }
 
 @theme inline {
@@ -22,36 +22,6 @@
   --font-mono: var(--font-geist-mono);
 }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  background:
-    radial-gradient(
-      circle at 10% 10%,
-      rgba(236, 72, 153, 0.08),
-      transparent 35%
-    ),
-    radial-gradient(
-      circle at 90% 90%,
-      rgba(22, 163, 74, 0.08),
-      transparent 35%
-    ),
-    var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-::selection {
-  background: rgba(236, 72, 153, 0.2);
-  color: #111827;
-}
-
-/* Animated gradient - softer / transparent */
-
 @keyframes gradientFlow {
   0% {
     background-position: 0% 50%;
@@ -64,22 +34,32 @@ body {
   }
 }
 
+html,
 body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
   background: linear-gradient(
     120deg,
     rgba(194, 58, 122, 0.55) 0%,
-    /* roz deep */ rgba(216, 90, 156, 0.5) 20%,
-    /* roz mediu */ rgba(243, 139, 200, 0.45) 40%,
-    /* roz soft */ rgba(42, 61, 42, 0.55) 60%,
-    /* verde închis */ rgba(62, 90, 62, 0.5) 75%,
-    /* verde natural */ rgba(94, 143, 94, 0.45) 90%,
-    /* verde soft */ rgba(194, 58, 122, 0.55) 100%
+    rgba(216, 90, 156, 0.5) 20%,
+    rgba(243, 139, 200, 0.45) 40%,
+    rgba(42, 61, 42, 0.55) 60%,
+    rgba(62, 90, 62, 0.5) 75%,
+    rgba(94, 143, 94, 0.45) 90%,
+    rgba(194, 58, 122, 0.55) 100%
   );
-
   background-size: 300% 300%;
   background-attachment: fixed;
   animation: gradientFlow 18s ease infinite;
+}
 
-  /* 🔥 magic touch */
-  backdrop-filter: blur(2px);
+::selection {
+  background: rgba(194, 58, 122, 0.25);
+  color: #111827;
 }
