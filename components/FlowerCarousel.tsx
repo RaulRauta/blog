@@ -16,13 +16,15 @@ type Props = {
 };
 
 const AUTOPLAY_DELAY = 4000;
+const DRAG_THRESHOLD = 50;
 
 export default function FlowerCarousel({ flowers }: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const touchStartX = useRef<number | null>(null);
-  const touchEndX = useRef<number | null>(null);
+  const dragStartX = useRef<number | null>(null);
+  const dragEndX = useRef<number | null>(null);
+  const didDrag = useRef(false);
 
   const total = flowers.length;
 
@@ -64,44 +66,68 @@ export default function FlowerCarousel({ flowers }: Props) {
     goToIndex((activeIndex - 1 + total) % total);
   }, [activeIndex, total, goToIndex]);
 
-  function handleTouchStart(e: React.TouchEvent<HTMLDivElement>) {
-    touchStartX.current = e.changedTouches[0].clientX;
-    touchEndX.current = null;
+  function handlePointerDown(e: React.PointerEvent<HTMLDivElement>) {
+    dragStartX.current = e.clientX;
+    dragEndX.current = e.clientX;
+    didDrag.current = false;
   }
 
-  function handleTouchMove(e: React.TouchEvent<HTMLDivElement>) {
-    touchEndX.current = e.changedTouches[0].clientX;
+  function handlePointerMove(e: React.PointerEvent<HTMLDivElement>) {
+    if (dragStartX.current === null) return;
+
+    dragEndX.current = e.clientX;
+
+    const distance = Math.abs(dragStartX.current - dragEndX.current);
+
+    if (distance > 8) {
+      didDrag.current = true;
+    }
   }
 
-  function handleTouchEnd() {
-    if (touchStartX.current === null || touchEndX.current === null) return;
+  function handlePointerUp() {
+    if (dragStartX.current === null || dragEndX.current === null) return;
 
-    const distance = touchStartX.current - touchEndX.current;
-    const minSwipeDistance = 50;
+    const distance = dragStartX.current - dragEndX.current;
 
-    if (distance > minSwipeDistance) {
+    if (distance > DRAG_THRESHOLD) {
       goToNext();
-    } else if (distance < -minSwipeDistance) {
+    } else if (distance < -DRAG_THRESHOLD) {
       goToPrev();
     }
 
-    touchStartX.current = null;
-    touchEndX.current = null;
+    dragStartX.current = null;
+    dragEndX.current = null;
+  }
+
+  function handleActiveClick(e: React.MouseEvent<HTMLAnchorElement>) {
+    if (didDrag.current) {
+      e.preventDefault();
+      didDrag.current = false;
+    }
+  }
+
+  function getRelativeIndex(index: number) {
+    let relativeIndex = index - activeIndex;
+    if (relativeIndex < 0) relativeIndex += total;
+    return relativeIndex;
   }
 
   return (
     <div className="mx-auto mt-8 w-full max-w-5xl">
-      {/* Mobile */}
       <div
-        className="relative md:hidden"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
+        className="relative cursor-grab select-none active:cursor-grabbing"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={() => {
+          dragStartX.current = null;
+          dragEndX.current = null;
+        }}
       >
-        <div className="relative mx-auto h-[500px] w-full max-w-sm overflow-hidden">
+        {/* Mobile */}
+        <div className="relative mx-auto h-[500px] w-full max-w-sm overflow-hidden md:hidden">
           {flowers.map((flower, index) => {
-            let relativeIndex = index - activeIndex;
-            if (relativeIndex < 0) relativeIndex += total;
+            const relativeIndex = getRelativeIndex(index);
 
             let classes =
               "absolute left-1/2 top-0 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]";
@@ -114,11 +140,11 @@ export default function FlowerCarousel({ flowers }: Props) {
               style.transform = "translateX(-50%) translateY(0px) scale(1)";
               style.opacity = 1;
             } else if (relativeIndex === 1) {
-              classes += " z-20 pointer-events-none";
+              classes += " z-20 cursor-pointer";
               style.transform = "translateX(-44%) translateY(16px) scale(0.92)";
               style.opacity = 0.45;
             } else if (relativeIndex === 2) {
-              classes += " z-10 pointer-events-none";
+              classes += " z-10 cursor-pointer";
               style.transform = "translateX(-56%) translateY(28px) scale(0.86)";
               style.opacity = 0.18;
             } else {
@@ -134,6 +160,7 @@ export default function FlowerCarousel({ flowers }: Props) {
                     src={flower.image}
                     alt={flower.name}
                     fill
+                    draggable={false}
                     className="object-cover"
                     priority={relativeIndex === 0}
                   />
@@ -155,47 +182,38 @@ export default function FlowerCarousel({ flowers }: Props) {
               </div>
             );
 
-            return relativeIndex === 0 ? (
-              <Link
+            if (relativeIndex === 0) {
+              return (
+                <Link
+                  key={flower.slug}
+                  href={`/flori/${flower.slug}`}
+                  onClick={handleActiveClick}
+                  className={classes}
+                  style={style}
+                >
+                  {card}
+                </Link>
+              );
+            }
+
+            return (
+              <button
                 key={flower.slug}
-                href={`/flori/${flower.slug}`}
+                type="button"
+                onClick={() => goToIndex(index)}
                 className={classes}
                 style={style}
               >
                 {card}
-              </Link>
-            ) : (
-              <div key={flower.slug} className={classes} style={style}>
-                {card}
-              </div>
+              </button>
             );
           })}
         </div>
 
-        <div className="mt-4 flex items-center justify-center gap-2">
-          {flowers.map((_, index) => {
-            const isActive = index === activeIndex;
-            return (
-              <button
-                key={index}
-                type="button"
-                aria-label={`Mergi la cardul ${index + 1}`}
-                onClick={() => goToIndex(index)}
-                className={`h-2.5 rounded-full transition-all duration-300 ${
-                  isActive ? "w-8 bg-[var(--primary)]" : "w-2.5 bg-gray-300"
-                }`}
-              />
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Desktop */}
-      <div className="relative hidden md:block">
-        <div className="relative mx-auto h-[470px] w-full max-w-5xl overflow-hidden">
+        {/* Desktop */}
+        <div className="relative mx-auto hidden h-[470px] w-full max-w-5xl overflow-hidden md:block">
           {flowers.map((flower, index) => {
-            let relativeIndex = index - activeIndex;
-            if (relativeIndex < 0) relativeIndex += total;
+            const relativeIndex = getRelativeIndex(index);
 
             let classes =
               "absolute left-1/2 top-0 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]";
@@ -208,12 +226,12 @@ export default function FlowerCarousel({ flowers }: Props) {
               style.transform = "translateX(-50%) scale(1) rotate(0deg)";
               style.opacity = 1;
             } else if (relativeIndex === 1) {
-              classes += " z-20 pointer-events-none";
+              classes += " z-20 cursor-pointer";
               style.transform =
                 "translateX(-10%) translateY(18px) scale(0.92) rotate(4deg)";
               style.opacity = 0.55;
             } else if (relativeIndex === 2) {
-              classes += " z-10 pointer-events-none";
+              classes += " z-10 cursor-pointer";
               style.transform =
                 "translateX(-90%) translateY(28px) scale(0.88) rotate(-5deg)";
               style.opacity = 0.22;
@@ -224,12 +242,13 @@ export default function FlowerCarousel({ flowers }: Props) {
             }
 
             const card = (
-              <div className="overflow-hidden rounded-3xl border border-white/70 bg-white shadow-xl">
+              <div className="overflow-hidden rounded-3xl border border-white/70 bg-white shadow-xl transition hover:shadow-2xl">
                 <div className="relative h-64 w-full">
                   <Image
                     src={flower.image}
                     alt={flower.name}
                     fill
+                    draggable={false}
                     className="object-cover"
                     priority={relativeIndex === 0}
                   />
@@ -251,39 +270,51 @@ export default function FlowerCarousel({ flowers }: Props) {
               </div>
             );
 
-            return relativeIndex === 0 ? (
-              <Link
+            if (relativeIndex === 0) {
+              return (
+                <Link
+                  key={flower.slug}
+                  href={`/flori/${flower.slug}`}
+                  onClick={handleActiveClick}
+                  className={classes}
+                  style={style}
+                >
+                  {card}
+                </Link>
+              );
+            }
+
+            return (
+              <button
                 key={flower.slug}
-                href={`/flori/${flower.slug}`}
+                type="button"
+                onClick={() => goToIndex(index)}
                 className={classes}
                 style={style}
               >
                 {card}
-              </Link>
-            ) : (
-              <div key={flower.slug} className={classes} style={style}>
-                {card}
-              </div>
+              </button>
             );
           })}
         </div>
+      </div>
 
-        <div className="mt-4 flex items-center justify-center gap-2">
-          {flowers.map((_, index) => {
-            const isActive = index === activeIndex;
-            return (
-              <button
-                key={index}
-                type="button"
-                aria-label={`Mergi la cardul ${index + 1}`}
-                onClick={() => goToIndex(index)}
-                className={`h-2.5 rounded-full transition-all duration-300 ${
-                  isActive ? "w-8 bg-[var(--primary)]" : "w-2.5 bg-gray-300"
-                }`}
-              />
-            );
-          })}
-        </div>
+      <div className="mt-4 flex items-center justify-center gap-2">
+        {flowers.map((_, index) => {
+          const isActive = index === activeIndex;
+
+          return (
+            <button
+              key={index}
+              type="button"
+              aria-label={`Mergi la cardul ${index + 1}`}
+              onClick={() => goToIndex(index)}
+              className={`h-2.5 rounded-full transition-all duration-300 ${
+                isActive ? "w-8 bg-[var(--primary)]" : "w-2.5 bg-gray-300"
+              }`}
+            />
+          );
+        })}
       </div>
     </div>
   );

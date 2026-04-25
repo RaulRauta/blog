@@ -29,14 +29,14 @@ export default async function FlowerPage({
 
   if (!flower) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-gray-50">
+      <main className="min-h-screen flex items-center justify-center bg-transparent">
         <h1 className="text-2xl font-semibold">Floare inexistentă ❌</h1>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen bg-gray-50 px-4 py-10">
+    <main className="min-h-screen bg-transparent px-4 py-10">
       <div className="mx-auto max-w-3xl">
         <Link
           href="/"

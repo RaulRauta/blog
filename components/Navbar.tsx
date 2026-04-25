@@ -17,7 +17,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-[9999] border-b border-white/40 bg-white/85 backdrop-blur-xl">
+    <header className="sticky top-0 z-[9999] border-b border-white/40 bg-white/55 backdrop-blur-xl shadow-sm">
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex items-center justify-between py-4">
           <Link
@@ -39,7 +39,7 @@ export default function Navbar() {
             </div>
           </Link>
 
-          <nav className="hidden items-center gap-1 rounded-2xl border border-white/60 bg-white/95 p-1.5 shadow-sm md:flex">
+          <nav className="hidden items-center gap-1 rounded-2xl border border-white/50 bg-white/45 p-1.5 shadow-sm backdrop-blur-xl md:flex">
             {links.map((link) => {
               const isActive = pathname === link.href;
 
@@ -89,7 +89,7 @@ export default function Navbar() {
             open ? "max-h-96 pb-4 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="rounded-3xl border border-white/60 bg-white/95 p-3 shadow-xl">
+          <div className="rounded-3xl border border-white/50 bg-white/60 p-3 shadow-xl backdrop-blur-xl">
             <nav className="flex flex-col gap-2">
               {links.map((link) => {
                 const isActive = pathname === link.href;

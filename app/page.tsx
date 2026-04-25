@@ -17,7 +17,7 @@ export default async function Home() {
   const posts: SanityPost[] = await client.fetch(postsQuery);
 
   return (
-    <main className="min-h-screen bg-gray-50 px-4 py-8 sm:py-10">
+    <main className="min-h-screen bg-transparent px-4 py-8 sm:py-10">
       <div className="mx-auto max-w-6xl">
         <section className="mb-20 sm:mb-24">
           <div className="mx-auto max-w-3xl text-center">

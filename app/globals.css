@@ -49,3 +49,37 @@ body {
   background: rgba(236, 72, 153, 0.2);
   color: #111827;
 }
+
+/* Animated gradient - softer / transparent */
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+body {
+  background: linear-gradient(
+    120deg,
+    rgba(194, 58, 122, 0.55) 0%,
+    /* roz deep */ rgba(216, 90, 156, 0.5) 20%,
+    /* roz mediu */ rgba(243, 139, 200, 0.45) 40%,
+    /* roz soft */ rgba(42, 61, 42, 0.55) 60%,
+    /* verde închis */ rgba(62, 90, 62, 0.5) 75%,
+    /* verde natural */ rgba(94, 143, 94, 0.45) 90%,
+    /* verde soft */ rgba(194, 58, 122, 0.55) 100%
+  );
+
+  background-size: 300% 300%;
+  background-attachment: fixed;
+  animation: gradientFlow 18s ease infinite;
+
+  /* 🔥 magic touch */
+  backdrop-filter: blur(2px);
+}

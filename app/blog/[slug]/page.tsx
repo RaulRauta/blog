@@ -32,7 +32,7 @@ export default async function BlogPostPage({
 
   if (!post) {
     return (
-      <main className="min-h-screen bg-gray-50 px-4 py-16">
+      <main className="min-h-screen bg-transparent px-4 py-16">
         <div className="mx-auto max-w-3xl rounded-3xl bg-white p-8 text-center shadow-sm">
           <h1 className="mb-4 text-3xl font-bold text-gray-950">
             Articol inexistent
@@ -56,7 +56,7 @@ export default async function BlogPostPage({
     : null;
 
   return (
-    <main className="min-h-screen bg-gray-50 px-4 py-10 sm:py-14">
+    <main className="min-h-screen bg-transparent px-4 py-10 sm:py-14">
       <article className="mx-auto max-w-5xl">
         <Link
           href="/blog"

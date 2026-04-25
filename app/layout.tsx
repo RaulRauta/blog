@@ -29,12 +29,12 @@ export default function RootLayout({
       lang="ro"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-gray-50 text-gray-900">
+      <body className="min-h-full text-gray-900">
         <div className="flex min-h-screen flex-col">
           <Navbar />
           <main className="flex-1">{children}</main>
 
-          <footer className="mt-16 border-t border-white/50 bg-white/85 backdrop-blur-sm">
+          <footer className="mt-16 border-t border-white/20 bg-transparent">
             <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-3">
               <div>
                 <h3 className="mb-2 text-lg font-semibold text-gray-900">

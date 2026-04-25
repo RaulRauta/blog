@@ -18,7 +18,7 @@ export default async function BlogPage() {
   const otherPosts = posts.slice(1);
 
   return (
-    <main className="min-h-screen bg-gray-50 px-4 py-10 sm:py-14">
+    <main className="min-h-screen bg-transparent px-4 py-10 sm:py-14">
       <div className="mx-auto max-w-6xl">
         <Link
           href="/"
