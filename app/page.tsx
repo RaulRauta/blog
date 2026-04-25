@@ -5,6 +5,8 @@ import FlowerCarousel from "@/components/FlowerCarousel";
 import { flowers } from "@/lib/flowers";
 import { client, postsQuery, type SanityPost, urlFor } from "@/lib/sanity";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Enciclopedia Florilor",
   description:
