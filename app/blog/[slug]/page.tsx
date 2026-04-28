@@ -42,7 +42,7 @@ export default async function BlogPostPage({
           </p>
           <Link
             href="/blog"
-            className="inline-flex rounded-full bg-[var(--primary)] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90"
+            className="inline-flex rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90"
           >
             Înapoi la blog
           </Link>
@@ -60,18 +60,18 @@ export default async function BlogPostPage({
       <article className="mx-auto max-w-5xl">
         <Link
           href="/blog"
-          className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-gray-500 transition hover:text-[var(--primary)]"
+          className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-gray-500 transition hover:text-primary"
         >
           <span aria-hidden="true">←</span>
           Înapoi la blog
         </Link>
 
-        <header className="mb-10 rounded-[2rem] border border-white/70 bg-white p-6 shadow-xl sm:p-8 lg:p-10">
+        <header className="mb-10 rounded-4xl border border-white/70 bg-white p-6 shadow-xl sm:p-8 lg:p-10">
           <div className="mb-6 flex flex-wrap gap-2">
             {post.categories?.map((category, index) => (
               <span
                 key={`${category.title}-${index}`}
-                className="rounded-full bg-[var(--primary-soft)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--primary)]"
+                className="rounded-full bg-primary-soft px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary"
               >
                 {category.title}
               </span>
@@ -105,8 +105,8 @@ export default async function BlogPostPage({
         </header>
 
         {imageUrl && (
-          <div className="mb-10 overflow-hidden rounded-[2rem] border border-white/70 bg-white shadow-xl">
-            <div className="relative h-72 w-full sm:h-[460px]">
+          <div className="mb-10 overflow-hidden rounded-4xl border border-white/70 bg-white shadow-xl">
+            <div className="relative h-72 w-full sm:h-115">
               <Image
                 src={imageUrl}
                 alt={post.title}
@@ -118,14 +118,14 @@ export default async function BlogPostPage({
           </div>
         )}
 
-        <div className="mx-auto max-w-3xl rounded-[2rem] border border-white/70 bg-white p-6 shadow-sm sm:p-10">
+        <div className="mx-auto max-w-3xl rounded-4xl border border-white/70 bg-white p-6 shadow-sm sm:p-10">
           <div className="prose prose-gray max-w-none prose-headings:tracking-tight prose-h2:text-3xl prose-p:leading-8 prose-a:text-[var(--primary)] prose-strong:text-gray-950">
             <PortableText value={post.body || []} />
           </div>
         </div>
 
-        <div className="mx-auto mt-10 max-w-3xl rounded-[2rem] border border-white/70 bg-white p-6 shadow-sm sm:p-8">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-[var(--secondary)]">
+        <div className="mx-auto mt-10 max-w-3xl rounded-4xl border border-white/70 bg-white p-6 shadow-sm sm:p-8">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-secondary">
             Continuă explorarea
           </p>
 
@@ -142,7 +142,7 @@ export default async function BlogPostPage({
 
             <Link
               href="/blog"
-              className="inline-flex w-fit items-center gap-2 rounded-full bg-[var(--primary)] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90"
+              className="inline-flex w-fit items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90"
             >
               Vezi blogul
               <span aria-hidden="true">→</span>

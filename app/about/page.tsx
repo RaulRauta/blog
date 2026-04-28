@@ -13,14 +13,14 @@ export default function AboutPage() {
       <div className="mx-auto max-w-6xl">
         <Link
           href="/"
-          className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-gray-500 transition hover:text-[var(--primary)]"
+          className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-gray-500 transition hover:text-primary"
         >
           <span aria-hidden="true">←</span>
           Înapoi acasă
         </Link>
 
-        <section className="mb-14 rounded-[2rem] border border-white/70 bg-white p-6 shadow-xl sm:p-10 lg:p-14">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--primary)]">
+        <section className="mb-14 rounded-4xl border border-white/70 bg-white p-6 shadow-xl sm:p-10 lg:p-14">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-primary">
             Despre proiect
           </p>
 
@@ -38,8 +38,8 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="rounded-[2rem] bg-gradient-to-br from-[var(--primary-soft)] via-white to-[var(--secondary-soft)] p-6 shadow-inner">
-              <div className="rounded-[1.5rem] bg-white/80 p-6">
+            <div className="rounded-4xl bg-linear-to-br from-primary-soft via-white to-secondary-soft p-6 shadow-inner">
+              <div className="rounded-3xl bg-white/80 p-6">
                 <p className="mb-3 text-5xl">🌸</p>
                 <h2 className="mb-3 text-2xl font-bold text-gray-950">
                   Flori, sens și inspirație
@@ -84,9 +84,9 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="mb-14 grid gap-8 rounded-[2rem] border border-white/70 bg-white p-6 shadow-sm sm:p-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <section className="mb-14 grid gap-8 rounded-4xl border border-white/70 bg-white p-6 shadow-sm sm:p-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--secondary)]">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-secondary">
               Povestea noastră
             </p>
             <h2 className="mb-4 text-3xl font-bold tracking-tight text-gray-950 sm:text-4xl">
@@ -109,9 +109,9 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="rounded-[2rem] bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)] p-1 shadow-xl">
+        <section className="rounded-4xl bg-linear-to-br from-primary to-secondary p-1 shadow-xl">
           <div className="rounded-[1.8rem] bg-white p-6 text-center sm:p-10">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--primary)]">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-primary">
               Explorează mai departe
             </p>
 
@@ -126,7 +126,7 @@ export default function AboutPage() {
 
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 rounded-full bg-[var(--primary)] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
             >
               Mergi la blog
               <span aria-hidden="true">→</span>

@@ -125,7 +125,7 @@ export default function FlowerCarousel({ flowers }: Props) {
         }}
       >
         {/* Mobile */}
-        <div className="relative mx-auto h-[500px] w-full max-w-sm overflow-hidden md:hidden">
+        <div className="relative mx-auto h-125 w-full max-w-sm overflow-hidden md:hidden">
           {flowers.map((flower, index) => {
             const relativeIndex = getRelativeIndex(index);
 
@@ -167,7 +167,7 @@ export default function FlowerCarousel({ flowers }: Props) {
                 </div>
 
                 <div className="p-5">
-                  <div className="mb-3 inline-flex rounded-full bg-[var(--primary-soft)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--primary)]">
+                  <div className="mb-3 inline-flex rounded-full bg-primary-soft px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
                     Floare
                   </div>
 
@@ -211,7 +211,7 @@ export default function FlowerCarousel({ flowers }: Props) {
         </div>
 
         {/* Desktop */}
-        <div className="relative mx-auto hidden h-[470px] w-full max-w-5xl overflow-hidden md:block">
+        <div className="relative mx-auto hidden h-117.5 w-full max-w-5xl overflow-hidden md:block">
           {flowers.map((flower, index) => {
             const relativeIndex = getRelativeIndex(index);
 
@@ -255,7 +255,7 @@ export default function FlowerCarousel({ flowers }: Props) {
                 </div>
 
                 <div className="p-6">
-                  <div className="mb-3 inline-flex rounded-full bg-[var(--primary-soft)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--primary)]">
+                  <div className="mb-3 inline-flex rounded-full bg-primary-soft px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
                     Floare
                   </div>
 
@@ -310,7 +310,7 @@ export default function FlowerCarousel({ flowers }: Props) {
               aria-label={`Mergi la cardul ${index + 1}`}
               onClick={() => goToIndex(index)}
               className={`h-2.5 rounded-full transition-all duration-300 ${
-                isActive ? "w-8 bg-[var(--primary)]" : "w-2.5 bg-gray-300"
+                isActive ? "w-8 bg-primary" : "w-2.5 bg-gray-300"
               }`}
             />
           );

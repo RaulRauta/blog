@@ -49,7 +49,7 @@ export default function ContactPage() {
     <main className="min-h-screen bg-transparent px-4 py-10 sm:py-14">
       <div className="mx-auto max-w-6xl">
         <section className="mb-10">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--primary)]">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-primary">
             Contact
           </p>
 
@@ -64,8 +64,8 @@ export default function ContactPage() {
         </section>
 
         <section className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
-          <aside className="rounded-[2rem] border border-white/70 bg-white p-6 shadow-xl sm:p-8">
-            <div className="mb-8 rounded-[1.5rem] bg-gradient-to-br from-[var(--primary-soft)] via-white to-[var(--secondary-soft)] p-6">
+          <aside className="rounded-4xl border border-white/70 bg-white p-6 shadow-xl sm:p-8">
+            <div className="mb-8 rounded-3xl bg-linear-to-br from-primary-soft via-white to-secondary-soft p-6">
               <p className="mb-4 text-5xl">🌸</p>
               <h2 className="mb-3 text-2xl font-bold tracking-tight text-gray-950">
                 Ne bucurăm să te auzim
@@ -102,7 +102,7 @@ export default function ContactPage() {
             </div>
           </aside>
 
-          <div className="rounded-[2rem] border border-white/70 bg-white p-6 shadow-xl sm:p-8 lg:p-10">
+          <div className="rounded-4xl border border-white/70 bg-white p-6 shadow-xl sm:p-8 lg:p-10">
             <h2 className="mb-2 text-3xl font-bold tracking-tight text-gray-950">
               Trimite un mesaj
             </h2>
@@ -121,7 +121,7 @@ export default function ContactPage() {
                   placeholder="Ex: Maria Popescu"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full rounded-2xl border border-gray-200 bg-transparent px-4 py-3 text-sm outline-none transition placeholder:text-gray-400 focus:border-[var(--primary)] focus:bg-white focus:ring-4 focus:ring-pink-100"
+                  className="w-full rounded-2xl border border-gray-200 bg-transparent px-4 py-3 text-sm outline-none transition placeholder:text-gray-400 focus:border-primary focus:bg-white focus:ring-4 focus:ring-pink-100"
                 />
               </div>
 
@@ -134,7 +134,7 @@ export default function ContactPage() {
                   placeholder="exemplu@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full rounded-2xl border border-gray-200 bg-transparent px-4 py-3 text-sm outline-none transition placeholder:text-gray-400 focus:border-[var(--primary)] focus:bg-white focus:ring-4 focus:ring-pink-100"
+                  className="w-full rounded-2xl border border-gray-200 bg-transparent px-4 py-3 text-sm outline-none transition placeholder:text-gray-400 focus:border-primary focus:bg-white focus:ring-4 focus:ring-pink-100"
                 />
               </div>
 
@@ -147,20 +147,20 @@ export default function ContactPage() {
                   rows={6}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-full resize-none rounded-2xl border border-gray-200 bg-transparent px-4 py-3 text-sm outline-none transition placeholder:text-gray-400 focus:border-[var(--primary)] focus:bg-white focus:ring-4 focus:ring-pink-100"
+                  className="w-full resize-none rounded-2xl border border-gray-200 bg-transparent px-4 py-3 text-sm outline-none transition placeholder:text-gray-400 focus:border-primary focus:bg-white focus:ring-4 focus:ring-pink-100"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="inline-flex w-full items-center justify-center rounded-full bg-[var(--primary)] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+                className="inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
               >
                 {loading ? "Se trimite..." : "Trimite mesajul"}
               </button>
 
               {successMessage && (
-                <div className="rounded-2xl bg-[var(--secondary-soft)] px-4 py-3 text-sm font-semibold text-[var(--secondary)]">
+                <div className="rounded-2xl bg-secondary-soft px-4 py-3 text-sm font-semibold text-secondary">
                   {successMessage}
                 </div>
               )}

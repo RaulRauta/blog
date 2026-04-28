@@ -22,14 +22,14 @@ export default async function BlogPage() {
       <div className="mx-auto max-w-6xl">
         <Link
           href="/"
-          className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-gray-500 transition hover:text-[var(--primary)]"
+          className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-gray-500 transition hover:text-primary"
         >
           <span aria-hidden="true">←</span>
           Înapoi acasă
         </Link>
 
         <section className="mb-14">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--primary)]">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-primary">
             Blog floral
           </p>
 
@@ -54,7 +54,7 @@ export default async function BlogPage() {
               Articol recomandat
             </p>
 
-            <article className="group overflow-hidden rounded-[2rem] border border-white/70 bg-white shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
+            <article className="group overflow-hidden rounded-4xl border border-white/70 bg-white shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
               <div className="grid lg:grid-cols-[1.15fr_0.85fr]">
                 {featuredPost.mainImage && (
                   <Link
@@ -71,7 +71,7 @@ export default async function BlogPage() {
                       priority
                       className="object-cover transition duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/25 via-transparent to-transparent" />
                   </Link>
                 )}
 
@@ -99,7 +99,7 @@ export default async function BlogPage() {
                         {featuredPost.categories.map((category, index) => (
                           <span
                             key={`${category.title}-${index}`}
-                            className="rounded-full bg-[var(--primary-soft)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--primary)]"
+                            className="rounded-full bg-primary-soft px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary"
                           >
                             {category.title}
                           </span>
@@ -110,7 +110,7 @@ export default async function BlogPage() {
                   <h2 className="mb-4 text-3xl font-bold tracking-tight text-gray-950 sm:text-4xl">
                     <Link
                       href={`/blog/${featuredPost.slug}`}
-                      className="transition hover:text-[var(--primary)]"
+                      className="transition hover:text-primary"
                     >
                       {featuredPost.title}
                     </Link>
@@ -124,7 +124,7 @@ export default async function BlogPage() {
 
                   <Link
                     href={`/blog/${featuredPost.slug}`}
-                    className="inline-flex w-fit items-center gap-2 rounded-full bg-[var(--primary)] px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
+                    className="inline-flex w-fit items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
                   >
                     Citește articolul
                     <span aria-hidden="true">→</span>
@@ -138,7 +138,7 @@ export default async function BlogPage() {
         <section>
           <div className="mb-8 flex items-end justify-between gap-4">
             <div>
-              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--secondary)]">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-secondary">
                 Toate articolele
               </p>
               <h2 className="text-3xl font-bold tracking-tight text-gray-950">
@@ -193,7 +193,7 @@ export default async function BlogPage() {
                       <h3 className="mb-4 text-2xl font-bold tracking-tight text-gray-950">
                         <Link
                           href={`/blog/${post.slug}`}
-                          className="transition hover:text-[var(--primary)]"
+                          className="transition hover:text-primary"
                         >
                           {post.title}
                         </Link>
@@ -210,7 +210,7 @@ export default async function BlogPage() {
                           {post.categories.map((category, index) => (
                             <span
                               key={`${category.title}-${index}`}
-                              className="rounded-full bg-[var(--secondary-soft)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--secondary)]"
+                              className="rounded-full bg-secondary-soft px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-secondary"
                             >
                               {category.title}
                             </span>
@@ -220,7 +220,7 @@ export default async function BlogPage() {
 
                       <Link
                         href={`/blog/${post.slug}`}
-                        className="inline-flex items-center gap-2 text-sm font-semibold text-gray-900 transition hover:text-[var(--primary)]"
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-gray-900 transition hover:text-primary"
                       >
                         Citește mai mult
                         <span aria-hidden="true">→</span>

@@ -35,7 +35,7 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
 
           <footer className="mt-16 px-4 pb-6">
-            <div className="mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-white/30 bg-white/35 shadow-xl backdrop-blur-xl">
+            <div className="mx-auto max-w-6xl overflow-hidden rounded-4xl border border-white/30 bg-white/35 shadow-xl backdrop-blur-xl">
               <div className="grid gap-8 px-6 py-10 md:grid-cols-3 md:px-10">
                 <div>
                   <h3 className="mb-3 flex items-center gap-2 text-xl font-bold text-gray-950">
@@ -56,17 +56,14 @@ export default function RootLayout({
 
                   <ul className="space-y-2 text-sm font-medium text-gray-700">
                     <li>
-                      <Link
-                        href="/"
-                        className="transition hover:text-[var(--primary)]"
-                      >
+                      <Link href="/" className="transition hover:text-primary">
                         Home
                       </Link>
                     </li>
                     <li>
                       <Link
                         href="/blog"
-                        className="transition hover:text-[var(--primary)]"
+                        className="transition hover:text-primary"
                       >
                         Blog
                       </Link>
@@ -74,7 +71,7 @@ export default function RootLayout({
                     <li>
                       <Link
                         href="/about"
-                        className="transition hover:text-[var(--primary)]"
+                        className="transition hover:text-primary"
                       >
                         About
                       </Link>
@@ -82,7 +79,7 @@ export default function RootLayout({
                     <li>
                       <Link
                         href="/contact"
-                        className="transition hover:text-[var(--primary)]"
+                        className="transition hover:text-primary"
                       >
                         Contact
                       </Link>
@@ -102,7 +99,7 @@ export default function RootLayout({
 
                   <Link
                     href="/contact"
-                    className="mt-5 inline-flex rounded-full bg-[var(--primary)] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
+                    className="mt-5 inline-flex rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
                   >
                     Trimite mesaj
                   </Link>

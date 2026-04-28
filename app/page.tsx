@@ -21,7 +21,7 @@ export default async function Home() {
       <div className="mx-auto max-w-6xl">
         <section className="mb-20 sm:mb-24">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--primary)] sm:text-sm">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-primary sm:text-sm">
               Enciclopedia Florilor
             </p>
 
@@ -41,7 +41,7 @@ export default async function Home() {
         <section>
           <div className="mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
-              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--primary)] sm:text-sm">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-primary sm:text-sm">
                 Blog
               </p>
               <h2 className="mb-3 text-3xl font-bold tracking-tight text-gray-950 sm:text-4xl">
@@ -55,7 +55,7 @@ export default async function Home() {
 
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 transition hover:text-[var(--primary)]"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 transition hover:text-primary"
             >
               Vezi toate articolele
               <span aria-hidden="true">→</span>
@@ -102,7 +102,7 @@ export default async function Home() {
                     <h3 className="mb-4 text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl">
                       <Link
                         href={`/blog/${post.slug}`}
-                        className="transition hover:text-[var(--primary)]"
+                        className="transition hover:text-primary"
                       >
                         {post.title}
                       </Link>
@@ -119,7 +119,7 @@ export default async function Home() {
                         {post.categories.map((category, index) => (
                           <span
                             key={`${category.title}-${index}`}
-                            className="rounded-full bg-[var(--primary-soft)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--primary)]"
+                            className="rounded-full bg-primary-soft px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary"
                           >
                             {category.title}
                           </span>
@@ -129,7 +129,7 @@ export default async function Home() {
 
                     <Link
                       href={`/blog/${post.slug}`}
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-gray-900 transition hover:text-[var(--secondary)]"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-gray-900 transition hover:text-secondary"
                     >
                       Citește articolul
                       <span aria-hidden="true">→</span>
