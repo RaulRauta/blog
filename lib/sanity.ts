@@ -1,37 +1,52 @@
-import { createClient } from "next-sanity";
+import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
+import type { ImageUrlBuilder } from "@sanity/image-url/lib/types/builder";
 import type { PortableTextBlock } from "@portabletext/types";
 
+type SanityImage = Parameters<ImageUrlBuilder["image"]>[0];
+
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
+const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2024-01-01";
+
 export const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-  apiVersion: "2024-01-01",
+  projectId,
+  dataset,
+  apiVersion,
   useCdn: false,
+});
+
+export const previewClient = createClient({
+  projectId,
+  dataset,
+  apiVersion,
+  useCdn: false,
+  token: process.env.SANITY_API_READ_TOKEN,
+  perspective: "previewDrafts",
 });
 
 const builder = imageUrlBuilder(client);
 
-type SanityImageSource = Parameters<typeof builder.image>[0];
-
-export interface SanityPost {
+export function urlFor(source: SanityImage) {
+  return builder.image(source);
+}
+export type SanityPost = {
   _id: string;
   title: string;
   slug: string;
-  excerpt?: string | null;
+  excerpt?: string;
   body?: PortableTextBlock[];
   publishedAt?: string;
-  mainImage?: SanityImageSource;
+  layout?: "standard" | "editorial" | "gallery" | "guide";
+  mainImage?: SanityImage;
+  galleryImages?: SanityImage[];
   author?: {
     name?: string;
   };
   categories?: {
-    title?: string;
+    title: string;
   }[];
-}
-
-export function urlFor(source: SanityImageSource) {
-  return builder.image(source);
-}
+};
 
 export const postsQuery = `*[_type == "post"] | order(publishedAt desc){
   _id,
@@ -40,7 +55,9 @@ export const postsQuery = `*[_type == "post"] | order(publishedAt desc){
   excerpt,
   body,
   publishedAt,
+  layout,
   mainImage,
+  galleryImages,
   author->{
     name
   },
@@ -56,7 +73,9 @@ export const postBySlugQuery = `*[_type == "post" && slug.current == $slug][0]{
   excerpt,
   body,
   publishedAt,
+  layout,
   mainImage,
+  galleryImages,
   author->{
     name
   },

@@ -3,9 +3,13 @@
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
+import { presentationTool } from "sanity/presentation";
 
 import { apiVersion, dataset, projectId } from "./sanity/env";
 import { schema } from "./sanity/schemaTypes";
+
+const previewUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://blog-plum-nine-49.vercel.app";
 
 export default defineConfig({
   name: "default",
@@ -18,84 +22,57 @@ export default defineConfig({
     types: schema.types,
 
     templates: (prev) => [
-      ...prev,
+      ...prev.filter((template) => template.schemaType !== "post"),
 
       {
-        id: "post-care",
-        title: "Articol de îngrijire",
-        description: "Pentru articole despre cum se îngrijește o floare.",
+        id: "post-standard",
+        title: "Articol standard",
+        description: "Articol clasic, potrivit pentru orice subiect.",
         schemaType: "post",
         value: {
-          title: "Cum se îngrijește...",
+          layout: "standard",
+          title: "Titlul articolului",
           excerpt:
-            "Un ghid simplu despre îngrijirea acestei flori, cu sfaturi practice și ușor de urmat.",
+            "Scrie aici o descriere scurtă a articolului, care va apărea pe pagina de blog.",
           body: [
             {
               _type: "block",
-              _key: "care-intro",
+              _key: "standard-intro",
               style: "normal",
               markDefs: [],
               children: [
                 {
                   _type: "span",
-                  _key: "care-intro-span",
-                  text: "Introducere: prezintă floarea și de ce este importantă îngrijirea ei.",
+                  _key: "standard-intro-span",
+                  text: "Introducere: prezintă subiectul articolului într-un mod clar și plăcut.",
                   marks: [],
                 },
               ],
             },
             {
               _type: "block",
-              _key: "care-light",
+              _key: "standard-section",
               style: "h2",
               markDefs: [],
               children: [
                 {
                   _type: "span",
-                  _key: "care-light-span",
-                  text: "Lumină",
+                  _key: "standard-section-span",
+                  text: "Subtitlu principal",
                   marks: [],
                 },
               ],
             },
             {
               _type: "block",
-              _key: "care-water",
-              style: "h2",
+              _key: "standard-content",
+              style: "normal",
               markDefs: [],
               children: [
                 {
                   _type: "span",
-                  _key: "care-water-span",
-                  text: "Udare",
-                  marks: [],
-                },
-              ],
-            },
-            {
-              _type: "block",
-              _key: "care-soil",
-              style: "h2",
-              markDefs: [],
-              children: [
-                {
-                  _type: "span",
-                  _key: "care-soil-span",
-                  text: "Sol și poziționare",
-                  marks: [],
-                },
-              ],
-            },
-            {
-              _type: "block",
-              _key: "care-mistakes",
-              style: "h2",
-              markDefs: [],
-              children: [
-                {
-                  _type: "span",
-                  _key: "care-mistakes-span",
-                  text: "Greșeli frecvente",
+                  _key: "standard-content-span",
+                  text: "Dezvoltă aici ideea principală a articolului.",
                   marks: [],
                 },
               ],
@@ -105,67 +82,55 @@ export default defineConfig({
       },
 
       {
-        id: "post-meaning",
-        title: "Articol despre semnificație",
-        description: "Pentru articole despre simbolistica unei flori.",
+        id: "post-editorial",
+        title: "Articol editorial",
+        description:
+          "Layout elegant, cu imagine mare și text prezentat mai premium.",
         schemaType: "post",
         value: {
-          title: "Semnificația florii...",
+          layout: "editorial",
+          title: "Povestea florii...",
           excerpt:
-            "Descoperă ce simbolizează această floare, în ce contexte se oferă și ce emoții transmite.",
+            "O introducere elegantă despre floare, simbolistica ei și emoția pe care o transmite.",
           body: [
             {
               _type: "block",
-              _key: "meaning-intro",
+              _key: "editorial-intro",
               style: "normal",
               markDefs: [],
               children: [
                 {
                   _type: "span",
-                  _key: "meaning-intro-span",
-                  text: "Introducere: prezintă floarea și importanța ei simbolică.",
+                  _key: "editorial-intro-span",
+                  text: "Introducere: creează o atmosferă și spune povestea florii.",
                   marks: [],
                 },
               ],
             },
             {
               _type: "block",
-              _key: "meaning-symbol",
+              _key: "editorial-story",
               style: "h2",
               markDefs: [],
               children: [
                 {
                   _type: "span",
-                  _key: "meaning-symbol-span",
-                  text: "Ce simbolizează",
+                  _key: "editorial-story-span",
+                  text: "Poveste și simbolistică",
                   marks: [],
                 },
               ],
             },
             {
               _type: "block",
-              _key: "meaning-when",
-              style: "h2",
+              _key: "editorial-meaning",
+              style: "normal",
               markDefs: [],
               children: [
                 {
                   _type: "span",
-                  _key: "meaning-when-span",
-                  text: "Când se oferă",
-                  marks: [],
-                },
-              ],
-            },
-            {
-              _type: "block",
-              _key: "meaning-colors",
-              style: "h2",
-              markDefs: [],
-              children: [
-                {
-                  _type: "span",
-                  _key: "meaning-colors-span",
-                  text: "Semnificația culorilor",
+                  _key: "editorial-meaning-span",
+                  text: "Scrie aici despre semnificația florii, contextul în care se oferă și ce transmite.",
                   marks: [],
                 },
               ],
@@ -175,67 +140,27 @@ export default defineConfig({
       },
 
       {
-        id: "post-inspiration",
-        title: "Articol inspirațional",
-        description: "Pentru idei de buchete, decor sau cadouri.",
+        id: "post-gallery",
+        title: "Articol galerie",
+        description:
+          "Pentru articole vizuale, cu mai multe imagini în galerie.",
         schemaType: "post",
         value: {
-          title: "Idei florale pentru...",
+          layout: "gallery",
+          title: "Galerie florală...",
           excerpt:
-            "Inspirație florală pentru momente speciale, decoruri elegante și alegeri pline de sens.",
+            "O selecție vizuală de flori, idei și inspirație pentru decor, buchete sau momente speciale.",
           body: [
             {
               _type: "block",
-              _key: "inspiration-intro",
+              _key: "gallery-intro",
               style: "normal",
               markDefs: [],
               children: [
                 {
                   _type: "span",
-                  _key: "inspiration-intro-span",
-                  text: "Introducere: descrie contextul sau ocazia pentru care sunt potrivite aceste idei.",
-                  marks: [],
-                },
-              ],
-            },
-            {
-              _type: "block",
-              _key: "inspiration-ideas",
-              style: "h2",
-              markDefs: [],
-              children: [
-                {
-                  _type: "span",
-                  _key: "inspiration-ideas-span",
-                  text: "Idei principale",
-                  marks: [],
-                },
-              ],
-            },
-            {
-              _type: "block",
-              _key: "inspiration-combinations",
-              style: "h2",
-              markDefs: [],
-              children: [
-                {
-                  _type: "span",
-                  _key: "inspiration-combinations-span",
-                  text: "Combinații recomandate",
-                  marks: [],
-                },
-              ],
-            },
-            {
-              _type: "block",
-              _key: "inspiration-final",
-              style: "h2",
-              markDefs: [],
-              children: [
-                {
-                  _type: "span",
-                  _key: "inspiration-final-span",
-                  text: "Concluzie",
+                  _key: "gallery-intro-span",
+                  text: "Introducere: explică tema galeriei și ce vor descoperi cititorii.",
                   marks: [],
                 },
               ],
@@ -245,67 +170,55 @@ export default defineConfig({
       },
 
       {
-        id: "post-seasonal",
-        title: "Articol sezonier",
-        description: "Pentru articole despre flori de primăvară, vară etc.",
+        id: "post-guide",
+        title: "Ghid pas cu pas",
+        description:
+          "Pentru articole practice, de tip ghid, sfaturi sau instrucțiuni.",
         schemaType: "post",
         value: {
-          title: "Flori potrivite pentru...",
+          layout: "guide",
+          title: "Ghid de îngrijire pentru...",
           excerpt:
-            "O selecție de flori potrivite pentru sezon, atmosferă și stilul dorit.",
+            "Un ghid simplu și practic, cu pași clari pentru îngrijirea acestei flori.",
           body: [
             {
               _type: "block",
-              _key: "seasonal-intro",
+              _key: "guide-intro",
               style: "normal",
               markDefs: [],
               children: [
                 {
                   _type: "span",
-                  _key: "seasonal-intro-span",
-                  text: "Introducere: prezintă sezonul sau contextul articolului.",
+                  _key: "guide-intro-span",
+                  text: "Introducere: explică pentru cine este ghidul și ce problemă rezolvă.",
                   marks: [],
                 },
               ],
             },
             {
               _type: "block",
-              _key: "seasonal-list",
+              _key: "guide-step-1",
               style: "h2",
               markDefs: [],
               children: [
                 {
                   _type: "span",
-                  _key: "seasonal-list-span",
-                  text: "Flori recomandate",
+                  _key: "guide-step-1-span",
+                  text: "Pasul 1: Lumina potrivită",
                   marks: [],
                 },
               ],
             },
             {
               _type: "block",
-              _key: "seasonal-care",
+              _key: "guide-step-2",
               style: "h2",
               markDefs: [],
               children: [
                 {
                   _type: "span",
-                  _key: "seasonal-care-span",
-                  text: "Sfaturi de îngrijire",
-                  marks: [],
-                },
-              ],
-            },
-            {
-              _type: "block",
-              _key: "seasonal-final",
-              style: "h2",
-              markDefs: [],
-              children: [
-                {
-                  _type: "span",
-                  _key: "seasonal-final-span",
-                  text: "Recomandare finală",
+                  _key: "guide-step-2-span",
+                  text: "Pasul 2: Udarea",
                   marks: [],
                 },
               ],
@@ -316,5 +229,38 @@ export default defineConfig({
     ],
   },
 
-  plugins: [structureTool(), visionTool({ defaultApiVersion: apiVersion })],
+  plugins: [
+    structureTool(),
+    presentationTool({
+      previewUrl: {
+        origin: previewUrl,
+        previewMode: {
+          enable: "/api/draft",
+        },
+      },
+      resolve: {
+        locations: {
+          post: {
+            select: {
+              title: "title",
+              slug: "slug.current",
+            },
+            resolve: (doc) => ({
+              locations: [
+                {
+                  title: doc?.title || "Articol",
+                  href: doc?.slug ? `/blog/${doc.slug}` : "/blog",
+                },
+                {
+                  title: "Blog",
+                  href: "/blog",
+                },
+              ],
+            }),
+          },
+        },
+      },
+    }),
+    visionTool({ defaultApiVersion: apiVersion }),
+  ],
 });
