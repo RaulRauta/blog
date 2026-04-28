@@ -1,9 +1,32 @@
 import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
-import type { ImageUrlBuilder } from "@sanity/image-url/lib/types/builder";
 import type { PortableTextBlock } from "@portabletext/types";
 
-type SanityImage = Parameters<ImageUrlBuilder["image"]>[0];
+type SanityImage = {
+  _type?: "image";
+  asset?: {
+    _ref?: string;
+    _type?: "reference";
+    _id?: string;
+    url?: string;
+  };
+  alt?: string;
+  caption?: string;
+  crop?: {
+    _type?: "sanity.imageCrop";
+    top?: number;
+    bottom?: number;
+    left?: number;
+    right?: number;
+  };
+  hotspot?: {
+    _type?: "sanity.imageHotspot";
+    x?: number;
+    y?: number;
+    height?: number;
+    width?: number;
+  };
+};
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
@@ -30,6 +53,7 @@ const builder = imageUrlBuilder(client);
 export function urlFor(source: SanityImage) {
   return builder.image(source);
 }
+
 export type SanityPost = {
   _id: string;
   title: string;
