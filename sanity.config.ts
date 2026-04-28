@@ -232,13 +232,7 @@ export default defineConfig({
   plugins: [
     structureTool(),
     presentationTool({
-      previewUrl: {
-        initial: previewUrl,
-        previewMode: {
-          enable: "/api/draft",
-          disable: "/api/disable-draft",
-        },
-      },
+      previewUrl: previewUrl,
       resolve: {
         locations: {
           post: {
