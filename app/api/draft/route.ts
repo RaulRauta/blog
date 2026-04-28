@@ -4,7 +4,8 @@ import { redirect } from "next/navigation";
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
-  const redirectTo = searchParams.get("redirect") || "/blog";
+  const redirectTo =
+    searchParams.get("redirect") || searchParams.get("slug") || "/blog";
 
   const draft = await draftMode();
   draft.enable();

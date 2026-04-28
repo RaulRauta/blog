@@ -233,9 +233,10 @@ export default defineConfig({
     structureTool(),
     presentationTool({
       previewUrl: {
-        origin: previewUrl,
+        initial: previewUrl,
         previewMode: {
           enable: "/api/draft",
+          disable: "/api/disable-draft",
         },
       },
       resolve: {
@@ -254,6 +255,10 @@ export default defineConfig({
                 {
                   title: "Blog",
                   href: "/blog",
+                },
+                {
+                  title: "Acasă",
+                  href: "/",
                 },
               ],
             }),
