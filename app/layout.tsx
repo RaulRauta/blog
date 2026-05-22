@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { draftMode } from "next/headers";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import SanityVisualEditing from "@/components/VisualEditing";
+import { SanityLive } from "@/sanity/lib/live";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,11 +22,13 @@ export const metadata: Metadata = {
   description: "Descoperă frumusețea și semnificația florilor.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const draft = await draftMode();
+
   return (
     <html
       lang="ro"
@@ -33,6 +38,8 @@ export default function RootLayout({
         <div className="flex min-h-screen flex-col">
           <Navbar />
           <main className="flex-1">{children}</main>
+          {draft.isEnabled && <SanityVisualEditing />}
+          <SanityLive />
 
           <footer className="mt-16 px-4 pb-6">
             <div className="mx-auto max-w-6xl overflow-hidden rounded-4xl border border-white/30 bg-white/35 shadow-xl backdrop-blur-xl">

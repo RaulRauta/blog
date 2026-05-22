@@ -38,7 +38,12 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post: SanityPost | null = await client.fetch(postBySlugQuery, { slug });
+  const draft = await draftMode();
+  const activeClient = draft.isEnabled ? previewClient : client;
+
+  const post: SanityPost | null = await activeClient.fetch(postBySlugQuery, {
+    slug,
+  });
 
   if (!post) {
     return (

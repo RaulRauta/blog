@@ -1,5 +1,5 @@
 import { createClient } from "@sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
+import { createImageUrlBuilder } from "@sanity/image-url";
 import type { PortableTextBlock } from "@portabletext/types";
 
 type SanityImage = {
@@ -48,7 +48,7 @@ export const previewClient = createClient({
   perspective: "previewDrafts",
 });
 
-const builder = imageUrlBuilder(client);
+const builder = createImageUrlBuilder(client);
 
 export function urlFor(source: SanityImage) {
   return builder.image(source);
