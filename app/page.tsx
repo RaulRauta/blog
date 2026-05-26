@@ -19,13 +19,13 @@ export default async function Home() {
   return (
     <main className="min-h-screen bg-transparent px-4 py-8 sm:py-10">
       <div className="mx-auto max-w-6xl">
-        <section className="mb-20 sm:mb-24">
+        <section className="mb-24 sm:mb-28">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-primary sm:text-sm">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-secondary/70 sm:text-sm">
               Enciclopedia Florilor
             </p>
 
-            <h1 className="mb-4 text-3xl font-bold tracking-tight text-gray-950 sm:text-4xl md:text-5xl">
+            <h1 className="mb-5 font-serif text-4xl font-normal tracking-normal text-gray-950 sm:text-5xl md:text-6xl">
               Flori, inspirație și frumusețe naturală
             </h1>
 
@@ -41,10 +41,10 @@ export default async function Home() {
         <section>
           <div className="mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
-              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-primary sm:text-sm">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-secondary/70 sm:text-sm">
                 Blog
               </p>
-              <h2 className="mb-3 text-3xl font-bold tracking-tight text-gray-950 sm:text-4xl">
+              <h2 className="mb-3 font-serif text-4xl font-normal tracking-normal text-gray-950">
                 Articole recente
               </h2>
               <p className="text-sm leading-7 text-gray-600 sm:text-base">
@@ -71,16 +71,16 @@ export default async function Home() {
               return (
                 <article
                   key={post._id}
-                  className="group overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+                  className="group premium-surface overflow-hidden rounded-[1.75rem] transition duration-500 hover:-translate-y-1"
                 >
                   {imageUrl && (
                     <Link href={`/blog/${post.slug}`} className="block">
-                      <div className="relative h-60 w-full overflow-hidden sm:h-72">
+                      <div className="relative h-64 w-full overflow-hidden sm:h-80">
                         <Image
                           src={imageUrl}
                           alt={post.title}
                           fill
-                          className="object-cover transition duration-500 group-hover:scale-105"
+                          className="premium-image object-cover"
                         />
                       </div>
                     </Link>
@@ -99,7 +99,7 @@ export default async function Home() {
                       {post.author?.name && <span>• {post.author.name}</span>}
                     </div>
 
-                    <h3 className="mb-4 text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl">
+                    <h3 className="mb-4 font-serif text-3xl font-normal tracking-normal text-gray-950">
                       <Link
                         href={`/blog/${post.slug}`}
                         className="transition hover:text-primary"

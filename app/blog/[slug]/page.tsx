@@ -30,7 +30,7 @@ export default async function BlogPostPage({
   if (!post) {
     return (
       <main className="min-h-screen bg-transparent px-4 py-16">
-        <div className="mx-auto max-w-3xl rounded-3xl bg-white/80 p-8 text-center shadow-sm backdrop-blur-xl">
+        <div className="premium-surface mx-auto max-w-3xl rounded-[2rem] p-8 text-center">
           <h1 className="mb-4 text-3xl font-bold text-gray-950">
             Articol inexistent
           </h1>
@@ -53,13 +53,13 @@ export default async function BlogPostPage({
       <ArticleLayoutRenderer post={post} />
 
       <section className="mx-auto max-w-5xl px-4 pb-16 pt-4">
-        <div className="rounded-[2rem] border border-white/50 bg-white/68 p-6 shadow-sm backdrop-blur-xl sm:p-8">
+        <div className="premium-surface rounded-[2rem] p-6 sm:p-8">
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-secondary">
             Continua explorarea
           </p>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h2 className="font-serif text-2xl tracking-tight text-gray-950">
+              <h2 className="font-serif text-2xl tracking-normal text-gray-950">
                 Mai multe articole botanice
               </h2>
               <p className="mt-1 text-sm leading-6 text-gray-600">
@@ -68,7 +68,7 @@ export default async function BlogPostPage({
             </div>
             <Link
               href="/blog"
-              className="inline-flex w-fit rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90"
+                className="inline-flex w-fit rounded-full bg-secondary px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-primary"
             >
               Vezi blogul
             </Link>

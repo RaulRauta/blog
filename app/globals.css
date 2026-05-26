@@ -1,14 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f6f4ee;
+  --foreground: #172016;
 
-  --primary: #c23a7a;
-  --primary-soft: rgba(243, 139, 200, 0.22);
+  --primary: #6f7f46;
+  --primary-soft: rgba(111, 127, 70, 0.16);
 
-  --secondary: #3e5a3e;
-  --secondary-soft: rgba(94, 143, 94, 0.22);
+  --secondary: #263821;
+  --secondary-soft: rgba(38, 56, 33, 0.12);
+  --paper: rgba(255, 255, 250, 0.78);
+  --paper-strong: rgba(255, 255, 250, 0.9);
+  --line-soft: rgba(38, 56, 33, 0.12);
+  --editorial-serif: Georgia, "Times New Roman", serif;
 }
 
 @theme inline {
@@ -20,6 +24,7 @@
   --color-secondary-soft: var(--secondary-soft);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--editorial-serif);
 }
 
 @keyframes gradientFlow {
@@ -44,19 +49,11 @@ body {
 body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(
-    120deg,
-    rgba(194, 58, 122, 0.55) 0%,
-    rgba(216, 90, 156, 0.5) 20%,
-    rgba(243, 139, 200, 0.45) 40%,
-    rgba(42, 61, 42, 0.55) 60%,
-    rgba(62, 90, 62, 0.5) 75%,
-    rgba(94, 143, 94, 0.45) 90%,
-    rgba(194, 58, 122, 0.55) 100%
-  );
-  background-size: 300% 300%;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(225, 232, 207, 0.9), transparent 32rem),
+    radial-gradient(circle at 86% 18%, rgba(214, 224, 194, 0.62), transparent 28rem),
+    linear-gradient(180deg, #fbfaf5 0%, #f3f1e9 46%, #eef2e6 100%);
   background-attachment: fixed;
-  animation: gradientFlow 18s ease infinite;
 }
 
 ::selection {
@@ -67,13 +64,13 @@ body {
 .article-reveal {
   animation: articleReveal both;
   animation-timeline: view();
-  animation-range: entry 0% cover 24%;
+  animation-range: entry 0% cover 22%;
 }
 
 @keyframes articleReveal {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(14px);
   }
 
   to {
@@ -84,8 +81,8 @@ body {
 
 .article-rich-text {
   color: inherit;
-  font-size: 1rem;
-  line-height: 1.9;
+  font-size: 1.03rem;
+  line-height: 1.95;
 }
 
 .article-rich-text > * + * {
@@ -96,9 +93,10 @@ body {
 .article-rich-text h3,
 .article-rich-text h4 {
   color: inherit;
-  font-weight: 700;
+  font-family: var(--editorial-serif);
+  font-weight: 500;
   letter-spacing: 0;
-  line-height: 1.15;
+  line-height: 1.12;
 }
 
 .article-rich-text h2 {
@@ -129,6 +127,34 @@ body {
   font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 0.18em;
+}
+
+.premium-surface {
+  border: 1px solid var(--line-soft);
+  background: var(--paper);
+  box-shadow: 0 24px 80px rgba(38, 56, 33, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+.premium-surface-strong {
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  background: var(--paper-strong);
+  box-shadow: 0 28px 96px rgba(38, 56, 33, 0.1);
+  backdrop-filter: blur(18px);
+}
+
+.premium-image {
+  transform: scale(1.01);
+  filter: saturate(0.95) contrast(1.03);
+  transition:
+    transform 900ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group:hover .premium-image,
+.premium-image:hover {
+  transform: scale(1.045);
+  filter: saturate(1.02) contrast(1.04);
 }
 
 @media (prefers-reduced-motion: reduce) {
