@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { PortableTextBlock } from "@portabletext/types";
 import {
   imageUrl,
   type ArticleCardVariant,
@@ -25,31 +24,6 @@ const variantPattern: ArticleCardVariant[] = [
   "seasonal",
   "list",
 ];
-
-function blockText(blocks?: PortableTextBlock[]) {
-  if (!blocks) return "";
-
-  return blocks
-    .map((block) => {
-      const children = (block as { children?: { text?: string }[] }).children;
-
-      return children?.map((child) => child.text || "").join(" ") || "";
-    })
-    .join(" ");
-}
-
-export function readingTime(post: SanityPost) {
-  const text = [
-    post.title,
-    post.excerpt,
-    blockText(post.introText),
-    blockText(post.secondaryText),
-    blockText(post.body),
-  ].join(" ");
-  const words = text.trim().split(/\s+/).filter(Boolean).length;
-
-  return Math.max(2, Math.ceil(words / 210));
-}
 
 export function formatDate(date?: string) {
   if (!date) return null;
@@ -81,8 +55,7 @@ function MetaLine({ post, light = false }: { post: SanityPost; light?: boolean }
       }`}
     >
       {date && <span>{date}</span>}
-      {date && <span aria-hidden="true">/</span>}
-      <span>{readingTime(post)} min citire</span>
+      {!date && post.seasonalLabel && <span>{post.seasonalLabel}</span>}
     </div>
   );
 }
@@ -282,7 +255,7 @@ export function QuoteStyleArticleCard({ post }: CardProps) {
 
   return (
     <article className="article-reveal rounded-[2.25rem] border border-blush/25 bg-[#fffaf4]/78 p-6 shadow-[0_20px_70px_rgba(92,66,52,0.07)] transition duration-500 hover:-translate-y-1 sm:p-7">
-      <span className="font-serif text-6xl leading-none text-blush/70">“</span>
+      <span className="font-serif text-6xl leading-none text-blush/70">&ldquo;</span>
       <p className="mt-1 font-serif text-2xl font-normal leading-snug tracking-normal text-secondary">
         {quote}
       </p>

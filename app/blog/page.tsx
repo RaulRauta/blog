@@ -8,7 +8,6 @@ import {
   ImageFocusCard,
   SeasonalHighlightCard,
   getCategories,
-  readingTime,
 } from "@/components/article-cards/EditorialArticleCards";
 import { demoPosts } from "@/lib/demoArticle";
 import { client, postsQuery, type SanityPost } from "@/lib/sanity";
@@ -33,10 +32,6 @@ function uniqueCategories(posts: SanityPost[]) {
   const categories = posts.flatMap(getCategories);
 
   return Array.from(new Set(categories)).slice(0, 8);
-}
-
-function totalReadingMinutes(posts: SanityPost[]) {
-  return posts.reduce((total, post) => total + readingTime(post), 0);
 }
 
 export default async function BlogPage() {
@@ -79,7 +74,7 @@ export default async function BlogPage() {
                 Ghiduri de ingrijire, inspiratie pentru gradina si povesti
                 despre flori, asezate intr-un ritm clar pentru explorare usoara.
               </p>
-              <div className="mt-6 grid grid-cols-3 gap-3">
+              <div className="mt-6 grid grid-cols-2 gap-3">
                 <div>
                   <p className="font-serif text-3xl text-secondary">
                     {posts.length}
@@ -94,14 +89,6 @@ export default async function BlogPage() {
                   </p>
                   <p className="text-xs font-semibold text-gray-500">
                     teme
-                  </p>
-                </div>
-                <div>
-                  <p className="font-serif text-3xl text-secondary">
-                    {totalReadingMinutes(posts)}
-                  </p>
-                  <p className="text-xs font-semibold text-gray-500">
-                    min
                   </p>
                 </div>
               </div>
@@ -241,7 +228,7 @@ export default async function BlogPage() {
                   <div>
                     <p className="editorial-kicker mb-3">Adaugate recent</p>
                     <h2 className="font-serif text-4xl font-normal tracking-normal text-secondary">
-                      Pentru o lectura rapida.
+                      Pentru o plimbare calma prin arhiva.
                     </h2>
                   </div>
                   <div className="rounded-[2rem] border border-secondary/10 bg-white/40 px-5 sm:px-7">
