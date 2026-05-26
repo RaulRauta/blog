@@ -39,15 +39,6 @@ export const client = createClient({
   useCdn: false,
 });
 
-export const previewClient = createClient({
-  projectId,
-  dataset,
-  apiVersion,
-  useCdn: false,
-  token: process.env.SANITY_API_READ_TOKEN,
-  perspective: "previewDrafts",
-});
-
 const builder = createImageUrlBuilder(client);
 
 export function urlFor(source: SanityImage) {
@@ -60,6 +51,7 @@ export type SanityPost = {
   slug: string;
   excerpt?: string;
   body?: PortableTextBlock[];
+  contentBlocks?: ArticleContentBlock[];
   publishedAt?: string;
   layout?: "standard" | "editorial" | "gallery" | "guide";
   mainImage?: SanityImage;
@@ -72,12 +64,125 @@ export type SanityPost = {
   }[];
 };
 
+export type ArticleVisualVariant =
+  | "editorial"
+  | "soft"
+  | "botanical"
+  | "luxury"
+  | "minimal";
+
+export type ArticleButton = {
+  label?: string;
+  href?: string;
+};
+
+export type ArticleContentBlock = {
+  _key?: string;
+  _type: string;
+  title?: string;
+  subtitle?: string;
+  body?: PortableTextBlock[];
+  image?: SanityImage;
+  images?: SanityImage[];
+  quote?: string;
+  attribution?: string;
+  items?: Array<{
+    _key?: string;
+    title?: string;
+    text?: string;
+    body?: PortableTextBlock[];
+    image?: SanityImage;
+    date?: string;
+    question?: string;
+    answer?: PortableTextBlock[];
+    slug?: string;
+    description?: string;
+  }>;
+  cards?: Array<{
+    _key?: string;
+    title?: string;
+    text?: string;
+    image?: SanityImage;
+  }>;
+  button?: ArticleButton;
+  variant?: ArticleVisualVariant;
+  articles?: SanityPost[];
+  flowers?: Array<{
+    _key?: string;
+    name?: string;
+    slug?: string;
+    description?: string;
+    image?: SanityImage;
+  }>;
+  author?: {
+    name?: string;
+    image?: SanityImage;
+    bio?: PortableTextBlock[];
+  };
+};
+
+const contentBlocksProjection = `contentBlocks[]{
+  ...,
+  image{
+    ...,
+    asset->
+  },
+  images[]{
+    ...,
+    asset->
+  },
+  cards[]{
+    ...,
+    image{
+      ...,
+      asset->
+    }
+  },
+  items[]{
+    ...,
+    image{
+      ...,
+      asset->
+    },
+    answer[]
+  },
+  flowers[]{
+    ...,
+    image{
+      ...,
+      asset->
+    }
+  },
+  author->{
+    name,
+    image{
+      ...,
+      asset->
+    },
+    bio
+  },
+  articles[]->{
+    _id,
+    title,
+    "slug": slug.current,
+    excerpt,
+    publishedAt,
+    mainImage{
+      ...,
+      asset->
+    },
+    author->{name},
+    categories[]->{title}
+  }
+}`;
+
 export const postsQuery = `*[_type == "post"] | order(publishedAt desc){
   _id,
   title,
   "slug": slug.current,
   excerpt,
   body,
+  ${contentBlocksProjection},
   publishedAt,
   layout,
   mainImage,
@@ -96,6 +201,7 @@ export const postBySlugQuery = `*[_type == "post" && slug.current == $slug][0]{
   "slug": slug.current,
   excerpt,
   body,
+  ${contentBlocksProjection},
   publishedAt,
   layout,
   mainImage,

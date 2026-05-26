@@ -10,12 +10,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-
-  allowedDevOrigins: [
-    "https://*.sanity.studio",
-    "https://*.sanity.dev",
-    "https://*.sanity.io",
-  ],
 };
 
 export default nextConfig;

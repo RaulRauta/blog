@@ -1,4 +1,5 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
+import { articleBlockNames } from "./articleBlocks";
 
 export const postType = defineType({
   name: "post",
@@ -115,8 +116,19 @@ export const postType = defineType({
 
     defineField({
       name: "body",
-      title: "Body",
+      title: "Body vechi",
+      description:
+        "Fallback pentru articolele publicate inainte de Article Builder.",
       type: "blockContent",
+    }),
+
+    defineField({
+      name: "contentBlocks",
+      title: "Article Builder / Content Builder",
+      description:
+        "Construieste articolul din blocuri editoriale modulare, in ordinea dorita.",
+      type: "array",
+      of: articleBlockNames.map((type) => defineArrayMember({ type })),
     }),
   ],
 
