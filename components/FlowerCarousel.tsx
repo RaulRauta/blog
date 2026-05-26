@@ -19,7 +19,7 @@ const AUTOPLAY_DELAY = 5200;
 const DRAG_THRESHOLD = 50;
 
 function cleanFlowerName(name: string) {
-  return name.split("Ã°")[0].split("ð")[0].trim();
+  return name.trim();
 }
 
 export default function FlowerCarousel({ flowers }: Props) {
@@ -223,7 +223,7 @@ export default function FlowerCarousel({ flowers }: Props) {
                       className={`group relative h-20 overflow-hidden rounded-2xl border transition duration-300 sm:h-24 ${
                         isActive
                           ? "border-blush shadow-[0_12px_34px_rgba(35,53,31,0.12)]"
-                          : "border-white/70 opacity-72 hover:opacity-100"
+                          : "border-white/70 opacity-70 hover:opacity-100"
                       }`}
                     >
                       <Image

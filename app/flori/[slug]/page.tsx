@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { flowers } from "@/lib/flowers";
 
 function cleanFlowerName(name: string) {
-  return name.split("ð")[0].trim();
+  return name.trim();
 }
 
 export async function generateMetadata({

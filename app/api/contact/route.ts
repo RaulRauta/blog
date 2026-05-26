@@ -11,12 +11,43 @@ const writeClient = createClient({
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const { name, email, message } = body;
+    let body: unknown;
 
-    if (!name || !email || !message) {
+    try {
+      body = await request.json();
+    } catch {
+      return NextResponse.json(
+        { error: "Mesajul trimis nu este valid." },
+        { status: 400 },
+      );
+    }
+
+    if (!body || typeof body !== "object") {
+      return NextResponse.json(
+        { error: "Mesajul trimis nu este valid." },
+        { status: 400 },
+      );
+    }
+
+    const { name, email, message } = body as Record<string, unknown>;
+
+    if (
+      typeof name !== "string" ||
+      typeof email !== "string" ||
+      typeof message !== "string" ||
+      !name.trim() ||
+      !email.trim() ||
+      !message.trim()
+    ) {
       return NextResponse.json(
         { error: "Completeaza numele, emailul si mesajul." },
+        { status: 400 },
+      );
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      return NextResponse.json(
+        { error: "Adauga o adresa de email valida." },
         { status: 400 },
       );
     }
@@ -32,12 +63,10 @@ export async function POST(request: Request) {
     const created = await writeClient.create({
       _type: "contactMessage",
       name: name.trim(),
-      email: email.trim(),
+      email: email.trim().toLowerCase(),
       message: message.trim(),
       submittedAt: new Date().toISOString(),
     });
-
-    console.log("Contact message saved:", created._id);
 
     return NextResponse.json({ success: true, id: created._id });
   } catch (error) {

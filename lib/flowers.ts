@@ -1,23 +1,23 @@
 export const flowers = [
   {
     slug: "trandafir",
-    name: "Trandafir 🌹",
+    name: "Trandafir",
     image: "/images/trandafir.jpg",
     description:
-      "Trandafirul este simbolul iubirii și pasiunii. Este una dintre cele mai populare flori din lume.",
+      "Trandafirul este simbolul iubirii si al elegantei clasice. In gradina, aduce parfum, structura si un punct focal plin de rafinament.",
   },
   {
     slug: "lalea",
-    name: "Lalea 🌷",
+    name: "Lalea",
     image: "/images/lalea.jpg",
     description:
-      "Laleaua simbolizează eleganța și primăvara. Este foarte populară în grădini.",
+      "Laleaua anunta primavara prin linii curate, culoare si o prezenta simpla, foarte potrivita pentru gradini luminoase.",
   },
   {
     slug: "floarea-soarelui",
-    name: "Floarea-soarelui 🌻",
+    name: "Floarea-soarelui",
     image: "/images/floarea-soarelui.jpg",
     description:
-      "Floarea-soarelui urmărește lumina și simbolizează energia și optimismul.",
+      "Floarea-soarelui urmareste lumina si aduce energie calda, volum si optimism in compozitii de vara.",
   },
 ];

@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import FlowerCarousel from "@/components/FlowerCarousel";
-import { formatDate, readingTime } from "@/components/article-cards/EditorialArticleCards";
 import { demoPosts } from "@/lib/demoArticle";
 import { flowers } from "@/lib/flowers";
 import { client, imageUrl, postsQuery, type SanityPost } from "@/lib/sanity";
@@ -10,40 +9,45 @@ import { client, imageUrl, postsQuery, type SanityPost } from "@/lib/sanity";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Enciclopedia Florilor | Jurnal botanic premium",
+  title: "Enciclopedia Florilor | Revista botanica pentru gradini calme",
   description:
-    "O enciclopedie florala cu ghiduri, povesti botanice si inspiratie pentru gradini calme.",
+    "Flori, ghiduri de ingrijire si inspiratie botanica pentru case si gradini calme.",
 };
 
-const sceneImages = {
-  hero: "/images/articles/hortensia-demo/hero.png",
-  border: "/images/articles/hortensia-demo/garden-border.png",
-  vertical: "/images/articles/hortensia-demo/vertical.png",
-  care: "/images/articles/hortensia-demo/care-detail.png",
-};
-
-const pathways = [
+const heroImages = [
   {
-    title: "Ingrijire cu ritm",
-    text: "Lumina, apa, sol si mici gesturi care fac plantele sa ramana frumoase mai mult timp.",
-    href: "/blog",
+    src: "/images/articles/hortensia-demo/hero.png",
+    alt: "Hortensii albastre intr-o gradina eleganta",
   },
   {
-    title: "Flori ca personaje",
-    text: "Profiluri botanice care explica atmosfera, simbolul si locul fiecarei flori in gradina.",
-    href: "/flori",
+    src: "/images/articles/hortensia-demo/garden-border.png",
+    alt: "Bordura botanica cu hortensii si frunzis bogat",
   },
   {
-    title: "Gradini cu poveste",
-    text: "Idei de compozitie, texturi si culori pentru spatii verzi care se simt asezate.",
-    href: "/blog",
+    src: "/images/trandafir.jpg",
+    alt: "Trandafir in lumina calda",
   },
 ];
 
-const journalNotes = [
-  "O floare buna nu este doar frumoasa. Are ritm, volum si o relatie clara cu lumina.",
-  "Ghidurile sunt scrise pentru cititori care vor plante sanatoase, dar si gradini cu atmosfera.",
-  "Fiecare articol trebuie sa lase in urma o idee simpla, aplicabila si memorabila.",
+const whyItems = [
+  {
+    title: "Ingrijire clara",
+    text: "Ghiduri scrise pe inteles, cu ritm, sezon, lumina, apa si sol explicate firesc.",
+  },
+  {
+    title: "Inspiratie de gradina",
+    text: "Idei pentru combinatii botanice, texturi, culori si colturi care se simt asezate.",
+  },
+  {
+    title: "Enciclopedie vie",
+    text: "Flori, articole si povesti botanice adunate intr-un loc calm, usor de explorat.",
+  },
+];
+
+const editorialNotes = [
+  "Palete moi, cu verde botanical, olive si blush discret.",
+  "Articole gandite ca pagini de revista, nu ca postari generice.",
+  "Imagini mari, lumina placuta si spatiu respirabil pe mobile.",
 ];
 
 async function getPosts() {
@@ -55,41 +59,7 @@ async function getPosts() {
 }
 
 function cleanFlowerName(name: string) {
-  return name.split("Ã")[0].split("ð")[0].trim();
-}
-
-function categoryLabel(post?: SanityPost) {
-  return post?.categories?.[0]?.title || "Jurnal botanic";
-}
-
-function postImage(post?: SanityPost, width = 1200, height = 900) {
-  if (!post?.mainImage) return sceneImages.hero;
-
-  return imageUrl(post.mainImage, width, height);
-}
-
-function StoryMeta({ post, light = false }: { post?: SanityPost; light?: boolean }) {
-  if (!post) return null;
-
-  const date = formatDate(post.publishedAt);
-
-  return (
-    <div
-      className={`flex flex-wrap items-center gap-2 text-xs ${
-        light ? "text-white/72" : "text-gray-500"
-      }`}
-    >
-      <span>{categoryLabel(post)}</span>
-      <span aria-hidden="true">/</span>
-      <span>{readingTime(post)} min citire</span>
-      {date && (
-        <>
-          <span aria-hidden="true">/</span>
-          <span>{date}</span>
-        </>
-      )}
-    </div>
-  );
+  return name.trim();
 }
 
 export default async function Home() {
@@ -100,201 +70,127 @@ export default async function Home() {
     ...sanityPosts,
   ];
 
-  const featuredPost = posts.find((post) => post.featured) || posts[0];
-  const secondaryStories = posts.filter((post) => post._id !== featuredPost?._id);
-  const firstSecondary = secondaryStories[0];
-  const secondSecondary = secondaryStories[1];
-  const recentStories = posts.slice(0, 4);
+  const featuredPost = posts[0];
+  const guidePosts = posts.slice(0, 3);
   const featuredFlowers = flowers.slice(0, 3);
 
   return (
     <main className="min-h-screen bg-transparent">
-      <section className="px-4 pb-16 pt-8 sm:pb-24 sm:pt-12">
-        <div className="mx-auto max-w-6xl">
-          <div className="article-reveal overflow-hidden rounded-[2.8rem] border border-white/70 bg-secondary text-white shadow-[0_38px_120px_rgba(31,50,28,0.24)]">
-            <div className="grid min-h-[42rem] lg:grid-cols-[0.92fr_1.08fr]">
-              <div className="relative flex flex-col justify-between gap-12 p-7 sm:p-10 lg:p-12">
-                <div className="absolute left-8 top-8 h-28 w-28 rounded-full bg-blush/24 blur-3xl" />
-                <div className="relative">
-                  <p className="mb-5 text-sm font-semibold text-blush">
-                    Enciclopedia Florilor
-                  </p>
-                  <h1 className="max-w-3xl font-serif text-5xl font-normal leading-[1.02] tracking-normal sm:text-6xl lg:text-7xl">
-                    Un jurnal botanic pentru gradini care se simt vii.
-                  </h1>
-                  <p className="mt-6 max-w-xl text-base leading-8 text-white/74 sm:text-lg">
-                    Flori, ghiduri si povesti asezate ca intr-o revista calda:
-                    cu imagine, ritm, lumina si recomandari care pot fi puse in
-                    practica.
-                  </p>
-                  <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                    <Link
-                      href="/blog"
-                      className="inline-flex justify-center rounded-full bg-[#fffaf1] px-6 py-3 text-sm font-semibold text-secondary transition hover:bg-blush-soft"
-                    >
-                      Intra in jurnal
-                    </Link>
-                    <Link
-                      href="/flori"
-                      className="inline-flex justify-center rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-white transition hover:border-blush/70 hover:bg-white/10"
-                    >
-                      Exploreaza florile
-                    </Link>
-                  </div>
-                </div>
+      <section className="relative overflow-hidden px-4 pb-16 pt-8 sm:pb-24 sm:pt-12">
+        <div className="pointer-events-none absolute left-[8%] top-12 h-56 w-56 rounded-full bg-blush/24 blur-3xl" />
+        <div className="pointer-events-none absolute right-[4%] top-28 h-72 w-72 rounded-full bg-primary/18 blur-3xl" />
+        <div className="pointer-events-none absolute bottom-8 left-[42%] h-48 w-48 rounded-full bg-petal/20 blur-3xl" />
 
-                <div className="relative grid grid-cols-3 gap-3">
-                  {["Flori", "Ghiduri", "Gradini"].map((item) => (
-                    <div
-                      key={item}
-                      className="rounded-2xl border border-white/12 bg-white/8 p-4 backdrop-blur-xl"
-                    >
-                      <p className="font-serif text-2xl leading-none text-blush">
-                        {item.slice(0, 1)}
-                      </p>
-                      <p className="mt-2 text-xs font-semibold text-white/78">
-                        {item}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+        <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[0.94fr_1.06fr]">
+          <div className="article-reveal relative z-10">
+            <p className="editorial-kicker mb-4">Enciclopedia Florilor</p>
+            <h1 className="max-w-3xl font-serif text-5xl font-normal leading-[1.02] tracking-normal text-secondary sm:text-6xl lg:text-7xl">
+              Flori, gradini si liniste botanica, intr-o revista calda.
+            </h1>
+            <p className="mt-6 max-w-2xl text-base leading-8 text-gray-700 sm:text-lg">
+              Un loc pentru ingrijire atenta, inspiratie de sezon si articole
+              botanice despre plantele care aduc viata in casa si in gradina.
+            </p>
 
-              <div className="relative min-h-[30rem] overflow-hidden lg:min-h-full">
-                <Image
-                  src={sceneImages.hero}
-                  alt="Hortensii albastre intr-o gradina eleganta"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 680px"
-                  className="premium-image object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-secondary/68 via-secondary/8 to-transparent lg:bg-gradient-to-r" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
-                  <div className="max-w-md rounded-[2rem] border border-white/18 bg-white/12 p-5 text-white backdrop-blur-xl">
-                    <p className="text-xs font-semibold text-blush">
-                      Povestea lunii
-                    </p>
-                    <p className="mt-3 font-serif text-3xl leading-tight tracking-normal">
-                      Hortensia si arta gradinilor cu lumina blanda.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="px-4 py-10 sm:py-16">
-        <div className="mx-auto max-w-6xl">
-          <div className="grid gap-5 md:grid-cols-3">
-            {pathways.map((item, index) => (
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
-                key={item.title}
-                href={item.href}
-                className="group article-reveal rounded-[2rem] border border-white/70 bg-[#fffaf1]/72 p-6 shadow-[0_22px_70px_rgba(31,50,28,0.08)] transition duration-500 hover:-translate-y-1 hover:bg-[#fffaf1]/92"
+                href="/blog"
+                className="botanical-button px-6 py-3 text-sm font-semibold"
               >
-                <span className="font-serif text-4xl text-blush">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h2 className="mt-5 font-serif text-3xl font-normal leading-tight tracking-normal text-secondary transition group-hover:text-primary">
-                  {item.title}
-                </h2>
-                <p className="mt-4 text-sm leading-7 text-gray-700">
-                  {item.text}
-                </p>
+                Citeste ghidurile
               </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {featuredPost && (
-        <section className="px-4 py-14 sm:py-24">
-          <div className="mx-auto max-w-6xl">
-            <div className="mb-10 grid gap-6 lg:grid-cols-[0.58fr_0.42fr] lg:items-end">
-              <div>
-                <p className="editorial-kicker mb-4">Poveste curatoriată</p>
-                <h2 className="max-w-3xl font-serif text-5xl font-normal leading-tight tracking-normal text-secondary sm:text-6xl">
-                  Nu publicam doar articole. Asezam povesti care dau forma unei
-                  gradini.
-                </h2>
-              </div>
-              <p className="max-w-lg text-base leading-8 text-gray-700">
-                Fiecare lectura de pe prima pagina trebuie sa aiba un rol:
-                inspiratie, claritate, ritm de ingrijire sau o idee vizuala pe
-                care o poti lua cu tine.
-              </p>
+              <Link
+                href="/contact"
+                className="botanical-button-secondary px-6 py-3 text-sm font-semibold"
+              >
+                Vorbeste cu noi
+              </Link>
             </div>
 
-            <article className="article-reveal overflow-hidden rounded-[2.65rem] border border-white/70 bg-[#fffaf1]/78 shadow-[0_34px_110px_rgba(31,50,28,0.13)]">
-              <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
-                <Link
-                  href={`/blog/${featuredPost.slug}`}
-                  className="group relative min-h-[28rem] overflow-hidden sm:min-h-[38rem]"
-                >
+            <div className="mt-10 grid max-w-xl grid-cols-3 gap-3">
+              {["120+ note botanice", "Ghiduri de sezon", "Inspiratie calma"].map(
+                (item) => (
+                  <div
+                    key={item}
+                    className="rounded-2xl border border-white/70 bg-white/52 px-3 py-4 text-center shadow-[0_18px_54px_rgba(31,50,28,0.08)] backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:bg-blush-soft/60"
+                  >
+                    <p className="text-xs font-semibold leading-5 text-secondary">
+                      {item}
+                    </p>
+                  </div>
+                ),
+              )}
+            </div>
+          </div>
+
+          <div className="article-reveal relative min-h-[34rem] lg:min-h-[40rem]">
+            <div className="absolute inset-0 rounded-[2.5rem] bg-blush-soft blur-3xl" />
+            <div className="absolute -right-8 top-12 h-28 w-28 rounded-full bg-primary/18 blur-2xl" />
+            <div className="relative grid h-full grid-cols-[0.72fr_1fr] gap-3 sm:gap-4">
+              <div className="flex flex-col gap-3 pt-12 sm:gap-4 sm:pt-16">
+                <div className="group relative h-44 overflow-hidden rounded-[2rem] border border-white/70 shadow-[0_24px_70px_rgba(31,50,28,0.15)] sm:h-56">
                   <Image
-                    src={postImage(featuredPost, 1600, 1100)}
-                    alt={featuredPost.mainImage?.alt || featuredPost.title}
+                    src={heroImages[1].src}
+                    alt={heroImages[1].alt}
                     fill
-                    sizes="(max-width: 1024px) 100vw, 640px"
+                    sizes="(max-width: 768px) 42vw, 300px"
                     className="premium-image object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-secondary/62 via-transparent to-transparent" />
-                </Link>
-
-                <div className="flex flex-col justify-between gap-10 p-7 sm:p-10 lg:p-12">
-                  <div>
-                    <StoryMeta post={featuredPost} />
-                    <h3 className="mt-6 font-serif text-4xl font-normal leading-tight tracking-normal text-secondary sm:text-5xl">
-                      <Link
-                        href={`/blog/${featuredPost.slug}`}
-                        className="transition hover:text-primary"
-                      >
-                        {featuredPost.title}
-                      </Link>
-                    </h3>
-                    {featuredPost.excerpt && (
-                      <p className="mt-6 text-base leading-8 text-gray-700">
-                        {featuredPost.excerpt}
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="grid gap-5 border-t border-secondary/10 pt-6 sm:grid-cols-[1fr_auto] sm:items-end">
-                    <p className="font-serif text-2xl leading-tight text-secondary">
-                      Citeste ca sa intelegi planta, apoi revino cand alegi
-                      locul ei in gradina.
-                    </p>
-                    <Link
-                      href={`/blog/${featuredPost.slug}`}
-                      className="botanical-button px-6 py-3 text-sm font-semibold"
-                    >
-                      Deschide povestea
-                    </Link>
-                  </div>
+                </div>
+                <div className="premium-blush-surface rounded-[2rem] p-5 transition duration-500 hover:-translate-y-1 sm:p-6">
+                  <p className="font-serif text-2xl leading-tight text-secondary">
+                    Lumina naturala, flori alese cu grija si inspiratie care nu
+                    grabeste privirea.
+                  </p>
+                </div>
+                <div className="group relative h-36 overflow-hidden rounded-[2rem] border border-white/70 shadow-[0_20px_56px_rgba(31,50,28,0.12)] sm:h-44">
+                  <Image
+                    src={heroImages[2].src}
+                    alt={heroImages[2].alt}
+                    fill
+                    sizes="(max-width: 768px) 42vw, 300px"
+                    className="premium-image object-cover"
+                  />
                 </div>
               </div>
-            </article>
-          </div>
-        </section>
-      )}
 
-      <section className="px-4 py-14 sm:py-24">
+              <div className="group relative overflow-hidden rounded-[2.5rem] border border-white/70 shadow-[0_34px_100px_rgba(31,50,28,0.18)]">
+                <Image
+                  src={heroImages[0].src}
+                  alt={heroImages[0].alt}
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 58vw, 620px"
+                  className="premium-image object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-secondary/58 via-transparent to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-5 text-white sm:p-7">
+                  <p className="max-w-xs text-sm leading-6 text-white/86">
+                    Hortensii, trandafiri, lalele si ghiduri pentru o gradina
+                    cu atmosfera.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative px-4 py-14 sm:py-20">
+        <div className="pointer-events-none absolute inset-x-0 top-0 mx-auto h-px max-w-5xl bg-gradient-to-r from-transparent via-blush/40 to-transparent" />
         <div className="mx-auto max-w-6xl">
-          <div className="mb-8 grid gap-6 lg:grid-cols-[0.72fr_0.28fr] lg:items-end">
-            <div>
-              <p className="editorial-kicker mb-4">Cabinet botanic</p>
-              <h2 className="max-w-3xl font-serif text-5xl font-normal leading-tight tracking-normal text-secondary sm:text-6xl">
-                Alege o floare dupa stare, lumina si locul in care va trai.
+          <div className="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-2xl">
+              <p className="editorial-kicker mb-3">Flori recomandate</p>
+              <h2 className="font-serif text-4xl font-normal tracking-normal text-secondary sm:text-5xl">
+                Flori alese pentru gradini cu ritm, culoare si calm.
               </h2>
             </div>
             <Link
               href="/flori"
-              className="botanical-button-secondary w-fit px-5 py-2.5 text-sm font-semibold"
+              className="botanical-button-secondary px-5 py-2.5 text-sm font-semibold"
             >
-              Vezi atlasul
+              Vezi florile
             </Link>
           </div>
 
@@ -302,195 +198,221 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="px-4 py-14 sm:py-24">
-        <div className="mx-auto max-w-6xl">
-          <div className="grid gap-5 lg:grid-cols-[0.42fr_0.58fr]">
-            <div className="article-reveal premium-blush-surface rounded-[2.35rem] p-7 sm:p-9">
-              <p className="editorial-kicker mb-4">Jurnalul gradinii</p>
-              <h2 className="font-serif text-4xl font-normal leading-tight tracking-normal text-secondary sm:text-5xl">
-                Lecturi care nu se simt ca o arhiva, ci ca un traseu.
-              </h2>
-              <p className="mt-5 text-base leading-8 text-gray-700">
-                In loc sa rasfoiesti o lista, intri intr-o selectie: note de
-                ingrijire, idei de compozitie si mici observatii care fac
-                gradina mai personala.
-              </p>
-              <div className="mt-8 space-y-4">
-                {journalNotes.map((note) => (
-                  <p
-                    key={note}
-                    className="rounded-2xl bg-white/48 p-4 text-sm leading-7 text-gray-700"
-                  >
-                    {note}
-                  </p>
-                ))}
-              </div>
-            </div>
+      <section className="relative px-4 py-14 sm:py-20">
+        <div className="pointer-events-none absolute left-0 top-1/3 h-64 w-64 rounded-full bg-primary/14 blur-3xl" />
+        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="premium-blush-surface article-reveal rounded-[2.25rem] p-6 transition duration-500 hover:-translate-y-1 sm:p-9">
+            <p className="editorial-kicker mb-4">Din revista</p>
+            <h2 className="font-serif text-4xl font-normal leading-tight tracking-normal text-secondary sm:text-5xl">
+              Ghiduri care se citesc ca o plimbare printr-o gradina buna.
+            </h2>
+            <p className="mt-5 text-base leading-8 text-gray-700">
+              Aici gasesti ghiduri de ingrijire, idei de combinatii botanice
+              si povesti despre flori care dau ritm, culoare si liniste unei
+              gradini.
+            </p>
 
-            <div className="grid gap-5">
-              <div className="grid gap-5 md:grid-cols-2">
-                <article className="group article-reveal overflow-hidden rounded-[2.35rem] border border-white/70 bg-secondary text-white shadow-[0_28px_90px_rgba(31,50,28,0.18)]">
-                  <Link
-                    href={firstSecondary ? `/blog/${firstSecondary.slug}` : "/blog"}
-                    className="relative block h-72 overflow-hidden"
-                  >
-                    <Image
-                      src={postImage(firstSecondary || featuredPost, 1000, 760)}
-                      alt={firstSecondary?.title || featuredPost?.title || "Gradina botanica"}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 360px"
-                      className="premium-image object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-secondary/68 via-transparent to-transparent" />
-                  </Link>
-                  <div className="p-6">
-                    <p className="text-sm font-semibold text-blush">
-                      De citit cand ai 10 minute
-                    </p>
-                    <h3 className="mt-4 font-serif text-3xl font-normal leading-tight tracking-normal">
-                      <Link
-                        href={firstSecondary ? `/blog/${firstSecondary.slug}` : "/blog"}
-                        className="transition hover:text-blush"
-                      >
-                        {firstSecondary?.title || "Exploreaza colectia botanica"}
-                      </Link>
-                    </h3>
-                  </div>
-                </article>
-
-                <article className="article-reveal rounded-[2.35rem] border border-white/70 bg-[#fffaf1]/78 p-6 shadow-[0_24px_78px_rgba(31,50,28,0.08)]">
-                  <p className="editorial-kicker mb-4">Nota de sezon</p>
-                  <h3 className="font-serif text-3xl font-normal leading-tight tracking-normal text-secondary">
-                    {secondSecondary?.title ||
-                      "Lumina de dimineata este cel mai bun inceput pentru multe flori."}
-                  </h3>
-                  <p className="mt-5 text-sm leading-7 text-gray-700">
-                    {secondSecondary?.excerpt ||
-                      "Alege plantele nu doar dupa culoare, ci dupa felul in care lumina le atinge la ore diferite."}
-                  </p>
-                  <Link
-                    href={secondSecondary ? `/blog/${secondSecondary.slug}` : "/blog"}
-                    className="mt-6 inline-flex text-sm font-semibold text-secondary transition hover:text-primary"
-                  >
-                    Continua lectura
-                  </Link>
-                </article>
-              </div>
-
-              <div className="article-reveal rounded-[2.35rem] border border-secondary/10 bg-white/44 px-5 py-3 backdrop-blur-xl sm:px-7">
-                {recentStories.map((post, index) => (
-                  <Link
-                    key={`${post._id}-${index}`}
-                    href={`/blog/${post.slug}`}
-                    className="grid gap-3 border-b border-secondary/10 py-5 last:border-b-0 sm:grid-cols-[3rem_1fr_auto] sm:items-center"
-                  >
-                    <span className="font-serif text-3xl text-blush">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <span className="font-serif text-2xl leading-tight text-secondary transition hover:text-primary">
-                      {post.title}
-                    </span>
-                    <span className="text-xs text-gray-500">
-                      {readingTime(post)} min
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            </div>
+            <ul className="mt-7 space-y-3">
+              {editorialNotes.map((note) => (
+                <li
+                  key={note}
+                  className="flex gap-3 rounded-2xl bg-white/48 p-4 text-sm leading-7 text-gray-700 transition duration-300 hover:bg-white/70"
+                >
+                  <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-blush shadow-[0_0_18px_rgba(209,142,134,0.72)]" />
+                  <span>{note}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
-      </section>
 
-      <section className="px-4 py-14 sm:py-24">
-        <div className="mx-auto max-w-6xl overflow-hidden rounded-[2.75rem] border border-white/70 bg-[#fffaf1]/82 shadow-[0_32px_100px_rgba(31,50,28,0.12)]">
-          <div className="grid lg:grid-cols-[1fr_0.86fr]">
-            <div className="p-7 sm:p-10 lg:p-12">
-              <p className="editorial-kicker mb-4">Atlas de atmosfera</p>
-              <h2 className="max-w-2xl font-serif text-5xl font-normal leading-tight tracking-normal text-secondary sm:text-6xl">
-                Trei flori, trei feluri de a schimba un spatiu.
-              </h2>
-              <div className="mt-9 grid gap-4">
-                {featuredFlowers.map((flower) => (
-                  <Link
-                    key={flower.slug}
-                    href={`/flori/${flower.slug}`}
-                    className="group grid gap-4 rounded-[2rem] border border-secondary/10 bg-white/48 p-4 transition hover:border-blush/40 hover:bg-white/70 sm:grid-cols-[6rem_1fr] sm:items-center"
-                  >
-                    <div className="relative h-28 overflow-hidden rounded-[1.4rem] sm:h-24">
-                      <Image
-                        src={flower.image}
-                        alt={cleanFlowerName(flower.name)}
-                        fill
-                        sizes="120px"
-                        className="object-cover transition duration-700 group-hover:scale-105"
-                      />
-                    </div>
-                    <div>
-                      <h3 className="font-serif text-3xl font-normal tracking-normal text-secondary">
-                        {cleanFlowerName(flower.name)}
-                      </h3>
-                      <p className="mt-2 line-clamp-2 text-sm leading-7 text-gray-700">
-                        {flower.description}
-                      </p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <div className="relative min-h-[32rem]">
+          <div className="article-reveal grid gap-4 sm:grid-cols-2">
+            <div className="group relative min-h-[26rem] overflow-hidden rounded-[2.25rem] border border-white/70 shadow-[0_28px_84px_rgba(31,50,28,0.14)] sm:min-h-[34rem]">
               <Image
-                src={sceneImages.vertical}
-                alt="Hortensie verticala intr-un colt de terasa"
+                src="/images/articles/hortensia-demo/vertical.png"
+                alt="Hortensie verticala intr-o compozitie editoriala"
                 fill
-                sizes="(max-width: 1024px) 100vw, 520px"
+                sizes="(max-width: 768px) 100vw, 360px"
                 className="premium-image object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-secondary/54 via-transparent to-transparent" />
+            </div>
+            <div className="flex flex-col gap-4">
+              {featuredFlowers.map((flower) => (
+                <Link
+                  key={flower.slug}
+                  href={`/flori/${flower.slug}`}
+                  className="group premium-surface-strong rounded-[2rem] p-5 transition duration-500 hover:-translate-y-1 hover:border-blush/30"
+                >
+                  <p className="mb-2 text-xs font-semibold text-blush">
+                    Floare de explorat
+                  </p>
+                  <h3 className="font-serif text-3xl font-normal tracking-normal text-secondary transition group-hover:text-primary">
+                    {cleanFlowerName(flower.name)}
+                  </h3>
+                  <p className="mt-3 line-clamp-3 text-sm leading-7 text-gray-600">
+                    {flower.description}
+                  </p>
+                </Link>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="px-4 py-14 sm:py-24">
-        <div className="mx-auto max-w-6xl overflow-hidden rounded-[2.75rem] border border-white/70 bg-secondary text-white shadow-[0_32px_100px_rgba(31,50,28,0.24)]">
-          <div className="grid lg:grid-cols-[0.86fr_1fr]">
-            <div className="relative min-h-[22rem] lg:min-h-full">
-              <Image
-                src={sceneImages.care}
-                alt="Detaliu botanic cu unelte de ingrijire"
-                fill
-                sizes="(max-width: 1024px) 100vw, 520px"
-                className="object-cover opacity-90"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-secondary/60 to-transparent" />
+      <section className="px-4 py-14 sm:py-20">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-2xl">
+              <p className="editorial-kicker mb-3">Articole si ghiduri</p>
+              <h2 className="font-serif text-4xl font-normal tracking-normal text-secondary sm:text-5xl">
+                Lecturi recente pentru casa, gradina si sezon.
+              </h2>
             </div>
+            <Link
+              href="/blog"
+              className="botanical-button-secondary px-5 py-2.5 text-sm font-semibold"
+            >
+              Toate articolele
+            </Link>
+          </div>
+
+          <div className="grid gap-5 lg:grid-cols-3">
+            {guidePosts.map((post) => {
+              const cardImageUrl = post.mainImage
+                ? imageUrl(post.mainImage, 1000, 760)
+                : null;
+
+              return (
+                <article
+                  key={post._id}
+                  className="group article-reveal overflow-hidden rounded-[2rem] border border-white/70 bg-[#fffaf1]/78 shadow-[0_24px_76px_rgba(31,50,28,0.09)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_30px_96px_rgba(31,50,28,0.14)]"
+                >
+                  {cardImageUrl && (
+                    <Link href={`/blog/${post.slug}`} className="block">
+                      <div className="relative h-64 w-full overflow-hidden">
+                        <Image
+                          src={cardImageUrl}
+                          alt={post.title}
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 360px"
+                          className="premium-image object-cover"
+                        />
+                      </div>
+                    </Link>
+                  )}
+
+                  <div className="p-5 sm:p-6">
+                    <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-gray-500">
+                      <span className="rounded-full bg-blush-soft px-3 py-1 font-semibold text-secondary">
+                        Ghid botanic
+                      </span>
+                      {post.publishedAt && (
+                        <span>
+                          {new Date(post.publishedAt).toLocaleDateString(
+                            "ro-RO",
+                          )}
+                        </span>
+                      )}
+                    </div>
+
+                    <h3 className="font-serif text-3xl font-normal leading-tight tracking-normal text-secondary">
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="transition hover:text-primary"
+                      >
+                        {post.title}
+                      </Link>
+                    </h3>
+
+                    {post.excerpt && (
+                      <p className="mt-4 line-clamp-4 text-sm leading-7 text-gray-600">
+                        {post.excerpt}
+                      </p>
+                    )}
+
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="mt-6 inline-flex text-sm font-semibold text-secondary transition hover:text-primary"
+                    >
+                      Citeste articolul
+                    </Link>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-4 py-14 sm:py-20">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-5 md:grid-cols-3">
+            {whyItems.map((item) => (
+              <div
+                key={item.title}
+                className="premium-surface article-reveal rounded-[2rem] p-6 transition duration-500 hover:-translate-y-1 hover:bg-[#fffaf1]/84 sm:p-7"
+              >
+                <div className="mb-5 h-10 w-10 rounded-full bg-blush-soft shadow-[0_0_28px_rgba(209,142,134,0.34)]" />
+                <h3 className="font-serif text-3xl font-normal tracking-normal text-secondary">
+                  {item.title}
+                </h3>
+                <p className="mt-4 text-sm leading-7 text-gray-600">
+                  {item.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-4 py-14 sm:py-20">
+        <div className="mx-auto max-w-6xl overflow-hidden rounded-[2.5rem] border border-white/70 bg-secondary text-white shadow-[0_36px_110px_rgba(31,50,28,0.26)]">
+          <div className="grid gap-0 lg:grid-cols-[1fr_0.8fr]">
             <div className="p-7 sm:p-10 lg:p-12">
               <p className="mb-4 text-sm font-semibold text-blush">
-                Incepe de oriunde
+                Urmatorul pas
               </p>
               <h2 className="max-w-2xl font-serif text-4xl font-normal leading-tight tracking-normal sm:text-5xl">
-                Alege o floare, citeste o poveste sau scrie-ne despre gradina
-                pe care vrei sa o cresti.
+                Alege o floare, citeste un ghid sau spune-ne ce colt botanic
+                pregatesti.
               </h2>
               <p className="mt-5 max-w-xl text-base leading-8 text-white/72">
-                Enciclopedia Florilor este gandita ca o plimbare lenta: revii
-                pentru raspunsuri, ramai pentru inspiratie.
+                Enciclopedia Florilor este locul in care alegi mai usor florile
+                potrivite si descoperi idei pentru spatii verzi cu atmosfera.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link
                   href="/blog"
                   className="inline-flex justify-center rounded-full bg-[#fffaf1] px-6 py-3 text-sm font-semibold text-secondary transition hover:bg-blush-soft"
                 >
-                  Citeste jurnalul
+                  Exploreaza articole
                 </Link>
                 <Link
                   href="/contact"
                   className="inline-flex justify-center rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-white transition hover:border-blush/70 hover:bg-white/10"
                 >
-                  Scrie-ne
+                  Contact
                 </Link>
               </div>
+            </div>
+            <div className="relative min-h-[22rem] lg:min-h-full">
+              {featuredPost?.mainImage ? (
+                <Image
+                  src={imageUrl(featuredPost.mainImage, 1000, 900)}
+                  alt={featuredPost.title}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 460px"
+                  className="object-cover opacity-90"
+                />
+              ) : (
+                <Image
+                  src="/images/articles/hortensia-demo/care-detail.png"
+                  alt="Detaliu botanic"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 460px"
+                  className="object-cover opacity-90"
+                />
+              )}
+              <div className="absolute inset-0 bg-gradient-to-r from-secondary/56 via-transparent to-transparent" />
             </div>
           </div>
         </div>

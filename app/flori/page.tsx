@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 function cleanFlowerName(name: string) {
-  return name.split("ð")[0].trim();
+  return name.trim();
 }
 
 export default function FlowersPage() {
