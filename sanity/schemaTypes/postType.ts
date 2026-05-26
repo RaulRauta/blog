@@ -18,6 +18,18 @@ const layoutOptions = [
   { title: "Layout 10 - Feature magazine cu galerie si related", value: "layout10" },
 ];
 
+const cardVariantOptions = [
+  { title: "Automat", value: "auto" },
+  { title: "Cinematic featured", value: "cinematic" },
+  { title: "Compact minimal", value: "compact" },
+  { title: "Horizontal editorial", value: "horizontal" },
+  { title: "Image-focused premium", value: "imageFocus" },
+  { title: "Soft botanical", value: "soft" },
+  { title: "Quote style", value: "quote" },
+  { title: "List style", value: "list" },
+  { title: "Seasonal highlight", value: "seasonal" },
+];
+
 const hiddenExcept =
   (...layouts: string[]) =>
   ({ document }: ConditionalPropertyCallbackContext) =>
@@ -95,6 +107,44 @@ export const postType = defineType({
       type: "text",
       rows: 3,
       validation: (Rule) => Rule.required(),
+    }),
+
+    defineField({
+      name: "featured",
+      title: "Articol recomandat",
+      description:
+        "Marcheaza articolul pentru zonele speciale din pagina de articole.",
+      type: "boolean",
+      initialValue: false,
+    }),
+
+    defineField({
+      name: "cardVariant",
+      title: "Varianta card in listing",
+      description:
+        "Optional. Daca ramane gol, site-ul alterneaza automat variantele.",
+      type: "string",
+      options: {
+        list: cardVariantOptions,
+        layout: "dropdown",
+      },
+    }),
+
+    defineField({
+      name: "seasonalLabel",
+      title: "Eticheta sezoniera",
+      description: "Ex: Primavara, Vara, Gradini umbrite, Buchete de interior.",
+      type: "string",
+    }),
+
+    defineField({
+      name: "tags",
+      title: "Tags",
+      type: "array",
+      of: [defineArrayMember({ type: "string" })],
+      options: {
+        layout: "tags",
+      },
     }),
 
     defineField({

@@ -67,6 +67,17 @@ export type ArticleLayout =
   | "gallery"
   | "guide";
 
+export type ArticleCardVariant =
+  | "auto"
+  | "cinematic"
+  | "compact"
+  | "horizontal"
+  | "imageFocus"
+  | "soft"
+  | "quote"
+  | "list"
+  | "seasonal";
+
 export type ArticleListItem = {
   _key?: string;
   title?: string;
@@ -104,6 +115,10 @@ export type SanityPost = {
   secondaryText?: PortableTextBlock[];
   publishedAt?: string;
   layout?: ArticleLayout;
+  featured?: boolean;
+  cardVariant?: ArticleCardVariant;
+  seasonalLabel?: string;
+  tags?: string[];
   mainImage?: SanityImage;
   secondaryImage?: SanityImage;
   verticalImage?: SanityImage;
@@ -140,6 +155,10 @@ const postFields = `
   secondaryText,
   publishedAt,
   layout,
+  featured,
+  cardVariant,
+  seasonalLabel,
+  tags,
   mainImage${imageProjection},
   secondaryImage${imageProjection},
   verticalImage${imageProjection},
