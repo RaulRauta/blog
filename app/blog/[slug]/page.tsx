@@ -75,7 +75,7 @@ export default async function BlogPostPage({
                 Mai multe articole botanice
               </h2>
               <p className="mt-1 text-sm leading-6 text-gray-600">
-                Revino la colectia editoriala si descopera noi povesti florale.
+                Revino la colectia de articole si descopera noi povesti florale.
               </p>
             </div>
             <Link

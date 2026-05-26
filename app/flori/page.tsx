@@ -22,8 +22,8 @@ export default function FlowersPage() {
             Flori pentru gradini calme, case luminoase si inspiratie de sezon.
           </h1>
           <p className="mt-5 text-base leading-8 text-gray-700">
-            O selectie in crestere, pregatita sa fie legata de continutul
-            editorial si de ghidurile din Sanity.
+            O selectie in crestere pentru cititori care cauta flori frumoase,
+            usor de inteles si potrivite pentru gradini cu personalitate.
           </p>
         </section>
 

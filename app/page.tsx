@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Enciclopedia Florilor | Revista botanica pentru gradini calme",
   description:
-    "Flori, ghiduri de ingrijire si inspiratie botanica intr-un format editorial premium.",
+    "Flori, ghiduri de ingrijire si inspiratie botanica pentru case si gradini calme.",
 };
 
 const heroImages = [
@@ -40,14 +40,14 @@ const whyItems = [
   },
   {
     title: "Enciclopedie vie",
-    text: "Flori, articole si povesti editoriale legate de Sanity, pregatite sa creasca in timp.",
+    text: "Flori, articole si povesti botanice adunate intr-un loc calm, usor de explorat.",
   },
 ];
 
 const editorialNotes = [
   "Palete moi, cu verde botanical, olive si blush discret.",
   "Articole gandite ca pagini de revista, nu ca postari generice.",
-  "Imagini mari, crop editorial si spatiu respirabil pe mobile.",
+  "Imagini mari, lumina placuta si spatiu respirabil pe mobile.",
 ];
 
 async function getPosts() {
@@ -85,7 +85,7 @@ export default async function Home() {
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-gray-700 sm:text-lg">
               Un loc pentru ingrijire atenta, inspiratie de sezon si articole
-              editoriale despre plantele care aduc viata in casa si in gradina.
+              botanice despre plantele care aduc viata in casa si in gradina.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -104,7 +104,7 @@ export default async function Home() {
             </div>
 
             <div className="mt-10 grid max-w-xl grid-cols-3 gap-3">
-              {["120+ note botanice", "Ghiduri de sezon", "Design editorial"].map(
+              {["120+ note botanice", "Ghiduri de sezon", "Inspiratie calma"].map(
                 (item) => (
                   <div
                     key={item}
@@ -199,9 +199,9 @@ export default async function Home() {
               Ghiduri care se citesc ca o plimbare printr-o gradina buna.
             </h2>
             <p className="mt-5 text-base leading-8 text-gray-700">
-              Home-ul devine usa de intrare intr-un CMS editorial premium:
-              articolele vin din Sanity, iar fiecare poveste poate avea ritmul
-              ei fara sa piarda identitatea botanica.
+              Aici gasesti ghiduri de ingrijire, idei de combinatii botanice
+              si povesti despre flori care dau ritm, culoare si liniste unei
+              gradini.
             </p>
 
             <ul className="mt-7 space-y-3">
@@ -297,7 +297,7 @@ export default async function Home() {
                   <div className="p-5 sm:p-6">
                     <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-gray-500">
                       <span className="rounded-full bg-blush-soft px-3 py-1 font-semibold text-secondary">
-                        Ghid editorial
+                        Ghid botanic
                       </span>
                       {post.publishedAt && (
                         <span>
@@ -370,8 +370,8 @@ export default async function Home() {
                 pregatesti.
               </h2>
               <p className="mt-5 max-w-xl text-base leading-8 text-white/72">
-                Enciclopedia Florilor ramane conectata la Sanity, dar capata o
-                intrare mai calda, mai editoriala si mai memorabila.
+                Enciclopedia Florilor este locul in care alegi mai usor florile
+                potrivite si descoperi idei pentru spatii verzi cu atmosfera.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link
