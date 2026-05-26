@@ -1,16 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f6f4ee;
+  --background: #f8f4eb;
   --foreground: #172016;
 
-  --primary: #6f7f46;
-  --primary-soft: rgba(111, 127, 70, 0.16);
+  --primary: #6d7d45;
+  --primary-soft: rgba(109, 125, 69, 0.15);
 
-  --secondary: #263821;
-  --secondary-soft: rgba(38, 56, 33, 0.12);
-  --paper: rgba(255, 255, 250, 0.78);
-  --paper-strong: rgba(255, 255, 250, 0.9);
+  --secondary: #23351f;
+  --secondary-soft: rgba(35, 53, 31, 0.11);
+  --blush: #d7a49d;
+  --blush-soft: rgba(215, 164, 157, 0.18);
+  --rose-mist: #f3ded8;
+  --cream: #f3eadb;
+  --sage: #dfe6d0;
+  --paper: rgba(255, 253, 247, 0.82);
+  --paper-strong: rgba(255, 253, 247, 0.94);
   --line-soft: rgba(38, 56, 33, 0.12);
   --editorial-serif: Georgia, "Times New Roman", serif;
 }
@@ -22,6 +27,8 @@
   --color-primary-soft: var(--primary-soft);
   --color-secondary: var(--secondary);
   --color-secondary-soft: var(--secondary-soft);
+  --color-blush: var(--blush);
+  --color-blush-soft: var(--blush-soft);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--editorial-serif);
@@ -50,14 +57,15 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   background:
-    radial-gradient(circle at 12% 8%, rgba(225, 232, 207, 0.9), transparent 32rem),
-    radial-gradient(circle at 86% 18%, rgba(214, 224, 194, 0.62), transparent 28rem),
-    linear-gradient(180deg, #fbfaf5 0%, #f3f1e9 46%, #eef2e6 100%);
+    radial-gradient(circle at 12% 8%, rgba(226, 232, 208, 0.82), transparent 31rem),
+    radial-gradient(circle at 88% 12%, rgba(243, 222, 216, 0.72), transparent 26rem),
+    radial-gradient(circle at 76% 78%, rgba(214, 224, 194, 0.56), transparent 30rem),
+    linear-gradient(180deg, #fffdf7 0%, #f6efe4 45%, #edf2e5 100%);
   background-attachment: fixed;
 }
 
 ::selection {
-  background: rgba(194, 58, 122, 0.25);
+  background: rgba(215, 164, 157, 0.42);
   color: #111827;
 }
 
@@ -132,15 +140,74 @@ body {
 .premium-surface {
   border: 1px solid var(--line-soft);
   background: var(--paper);
-  box-shadow: 0 24px 80px rgba(38, 56, 33, 0.08);
+  box-shadow: 0 24px 80px rgba(38, 56, 33, 0.07);
   backdrop-filter: blur(18px);
 }
 
 .premium-surface-strong {
   border: 1px solid rgba(255, 255, 255, 0.72);
   background: var(--paper-strong);
-  box-shadow: 0 28px 96px rgba(38, 56, 33, 0.1);
+  box-shadow: 0 28px 96px rgba(38, 56, 33, 0.09);
   backdrop-filter: blur(18px);
+}
+
+.premium-blush-surface {
+  border: 1px solid rgba(215, 164, 157, 0.2);
+  background:
+    linear-gradient(135deg, rgba(255, 253, 247, 0.9), rgba(243, 222, 216, 0.32)),
+    var(--paper);
+  box-shadow: 0 26px 90px rgba(92, 66, 52, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+.editorial-kicker {
+  color: var(--primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.botanical-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--secondary);
+  color: #fffdf7;
+  box-shadow: 0 16px 42px rgba(35, 53, 31, 0.16);
+  transition:
+    transform 250ms ease,
+    background 250ms ease,
+    box-shadow 250ms ease;
+}
+
+.botanical-button:hover {
+  background: #304628;
+  box-shadow: 0 18px 48px rgba(35, 53, 31, 0.2);
+  transform: translateY(-1px);
+}
+
+.botanical-button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(35, 53, 31, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 253, 247, 0.62);
+  color: var(--secondary);
+  transition:
+    transform 250ms ease,
+    border-color 250ms ease,
+    background 250ms ease,
+    color 250ms ease;
+}
+
+.botanical-button-secondary:hover {
+  border-color: rgba(215, 164, 157, 0.42);
+  background: rgba(243, 222, 216, 0.42);
+  color: #172016;
+  transform: translateY(-1px);
 }
 
 .premium-image {

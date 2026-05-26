@@ -18,6 +18,10 @@ type Props = {
 const AUTOPLAY_DELAY = 4800;
 const DRAG_THRESHOLD = 50;
 
+function cleanFlowerName(name: string) {
+  return name.split("ð")[0].trim();
+}
+
 export default function FlowerCarousel({ flowers }: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -112,11 +116,15 @@ export default function FlowerCarousel({ flowers }: Props) {
 
   function renderCard(flower: Flower, relativeIndex: number, large = false) {
     return (
-      <div className="premium-surface-strong group overflow-hidden rounded-[2rem] transition duration-500 hover:-translate-y-1">
-        <div className={`relative w-full overflow-hidden ${large ? "h-72" : "h-64"}`}>
+      <div className="group overflow-hidden rounded-[2rem] border border-white/70 bg-[#fffdf7]/86 shadow-[0_26px_82px_rgba(35,53,31,0.1)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_30px_92px_rgba(35,53,31,0.14)]">
+        <div
+          className={`relative w-full overflow-hidden ${
+            large ? "h-72" : "h-64"
+          }`}
+        >
           <Image
             src={flower.image}
-            alt={flower.name}
+            alt={cleanFlowerName(flower.name)}
             fill
             draggable={false}
             className="premium-image object-cover"
@@ -125,15 +133,19 @@ export default function FlowerCarousel({ flowers }: Props) {
         </div>
 
         <div className={large ? "p-7" : "p-6"}>
-          <div className="mb-4 inline-flex rounded-full border border-secondary/10 bg-primary-soft px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-secondary">
-            Floare
+          <div className="mb-4 inline-flex rounded-full border border-blush/20 bg-blush-soft px-3 py-1 text-[10px] font-semibold uppercase tracking-normal text-secondary">
+            Floare recomandata
           </div>
 
-          <h2 className={`${large ? "text-4xl" : "text-3xl"} mb-3 font-serif font-normal tracking-normal text-gray-950`}>
-            {flower.name}
+          <h2
+            className={`${large ? "text-4xl" : "text-3xl"} mb-3 font-serif font-normal tracking-normal text-secondary`}
+          >
+            {cleanFlowerName(flower.name)}
           </h2>
 
-          <p className={`${large ? "text-base" : "text-sm"} line-clamp-3 leading-7 text-gray-600`}>
+          <p
+            className={`${large ? "text-base" : "text-sm"} line-clamp-3 leading-7 text-gray-600`}
+          >
             {flower.description}
           </p>
         </div>
@@ -269,7 +281,7 @@ export default function FlowerCarousel({ flowers }: Props) {
           type="button"
           aria-label="Floarea anterioara"
           onClick={goToPrev}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-secondary/10 bg-white/58 text-lg text-secondary backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white/80"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-blush/20 bg-[#fffdf7]/72 text-lg text-secondary shadow-[0_10px_30px_rgba(35,53,31,0.08)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-blush-soft"
         >
           {"<"}
         </button>
@@ -285,7 +297,7 @@ export default function FlowerCarousel({ flowers }: Props) {
                 aria-label={`Mergi la cardul ${index + 1}`}
                 onClick={() => goToIndex(index)}
                 className={`h-2 rounded-full transition-all duration-300 ${
-                  isActive ? "w-8 bg-secondary" : "w-2 bg-secondary/20"
+                  isActive ? "w-8 bg-blush" : "w-2 bg-secondary/20"
                 }`}
               />
             );
@@ -296,7 +308,7 @@ export default function FlowerCarousel({ flowers }: Props) {
           type="button"
           aria-label="Floarea urmatoare"
           onClick={goToNext}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-secondary/10 bg-white/58 text-lg text-secondary backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white/80"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-blush/20 bg-[#fffdf7]/72 text-lg text-secondary shadow-[0_10px_30px_rgba(35,53,31,0.08)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-blush-soft"
         >
           {">"}
         </button>
