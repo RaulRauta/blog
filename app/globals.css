@@ -1,23 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f9f1e4;
+  --background: #fbefdd;
   --foreground: #142014;
 
-  --primary: #65783c;
-  --primary-soft: rgba(101, 120, 60, 0.2);
+  --primary: #5f7433;
+  --primary-soft: rgba(95, 116, 51, 0.24);
 
-  --secondary: #1f321c;
-  --secondary-soft: rgba(31, 50, 28, 0.14);
-  --blush: #d18e86;
-  --blush-soft: rgba(209, 142, 134, 0.24);
-  --rose-mist: #f1d3ca;
-  --petal: #e6afa1;
-  --cream: #f0dfc8;
-  --sage: #cad8b2;
-  --paper: rgba(255, 251, 242, 0.86);
-  --paper-strong: rgba(255, 251, 242, 0.96);
-  --line-soft: rgba(31, 50, 28, 0.14);
+  --secondary: #1b3118;
+  --secondary-soft: rgba(27, 49, 24, 0.16);
+  --blush: #cb7f78;
+  --blush-soft: rgba(203, 127, 120, 0.3);
+  --rose-mist: #efc7bd;
+  --petal: #e39b8c;
+  --cream: #eed9bd;
+  --sage: #bccf97;
+  --paper: rgba(255, 249, 239, 0.87);
+  --paper-strong: rgba(255, 249, 239, 0.97);
+  --line-soft: rgba(27, 49, 24, 0.16);
   --editorial-serif: Georgia, "Times New Roman", serif;
 }
 
@@ -49,6 +49,55 @@
   }
 }
 
+@keyframes botanicalColorWaves {
+  0% {
+    background-position:
+      0% 46%,
+      100% 18%,
+      76% 86%,
+      8% 92%,
+      50% 50%;
+  }
+  35% {
+    background-position:
+      18% 28%,
+      82% 34%,
+      64% 72%,
+      24% 78%,
+      50% 50%;
+  }
+  70% {
+    background-position:
+      6% 64%,
+      94% 10%,
+      86% 68%,
+      12% 84%,
+      50% 50%;
+  }
+  100% {
+    background-position:
+      0% 46%,
+      100% 18%,
+      76% 86%,
+      8% 92%,
+      50% 50%;
+  }
+}
+
+@keyframes diagonalLightSweep {
+  0% {
+    transform: translate3d(-42%, -36%, 0) rotate(18deg);
+    opacity: 0.08;
+  }
+  45% {
+    opacity: 0.16;
+  }
+  100% {
+    transform: translate3d(42%, 34%, 0) rotate(18deg);
+    opacity: 0.08;
+  }
+}
+
 html,
 body {
   margin: 0;
@@ -60,12 +109,49 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   background:
-    radial-gradient(circle at 12% 8%, rgba(202, 216, 178, 0.9), transparent 31rem),
-    radial-gradient(circle at 88% 12%, rgba(241, 211, 202, 0.82), transparent 27rem),
-    radial-gradient(circle at 78% 78%, rgba(196, 211, 166, 0.66), transparent 31rem),
-    radial-gradient(circle at 16% 92%, rgba(230, 175, 161, 0.34), transparent 26rem),
-    linear-gradient(180deg, #fffaf1 0%, #f7ead8 46%, #e9f0dc 100%);
+    radial-gradient(circle at 0% 46%, rgba(188, 207, 151, 0.98), transparent 33rem),
+    radial-gradient(circle at 100% 18%, rgba(239, 199, 189, 0.92), transparent 30rem),
+    radial-gradient(circle at 76% 86%, rgba(170, 193, 126, 0.72), transparent 34rem),
+    radial-gradient(circle at 8% 92%, rgba(227, 155, 140, 0.44), transparent 28rem),
+    linear-gradient(180deg, #fff8ec 0%, #f6e4cf 48%, #e2edcf 100%);
+  background-size:
+    115% 115%,
+    120% 120%,
+    110% 110%,
+    125% 125%,
+    100% 100%;
   background-attachment: fixed;
+  animation: botanicalColorWaves 24s ease-in-out infinite;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: -35%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      110deg,
+      transparent 35%,
+      rgba(255, 255, 246, 0.08) 43%,
+      rgba(255, 244, 222, 0.2) 50%,
+      rgba(255, 255, 246, 0.09) 57%,
+      transparent 66%
+    );
+  mix-blend-mode: soft-light;
+  animation: diagonalLightSweep 18s ease-in-out infinite alternate;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    linear-gradient(120deg, rgba(255, 250, 241, 0.62), transparent 34%),
+    radial-gradient(circle at 52% 22%, rgba(255, 255, 255, 0.2), transparent 24rem);
 }
 
 ::selection {
@@ -187,8 +273,10 @@ body {
 }
 
 .botanical-button:hover {
-  background: #2f4827;
-  box-shadow: 0 18px 48px rgba(31, 50, 28, 0.24);
+  background: #2d4b22;
+  box-shadow:
+    0 18px 48px rgba(31, 50, 28, 0.26),
+    0 0 24px rgba(203, 127, 120, 0.18);
   transform: translateY(-1px);
 }
 
@@ -208,8 +296,8 @@ body {
 }
 
 .botanical-button-secondary:hover {
-  border-color: rgba(215, 164, 157, 0.42);
-  background: rgba(241, 211, 202, 0.52);
+  border-color: rgba(203, 127, 120, 0.54);
+  background: rgba(239, 199, 189, 0.62);
   color: #172016;
   transform: translateY(-1px);
 }
@@ -229,6 +317,11 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  body,
+  body::before {
+    animation: none;
+  }
+
   .article-reveal {
     animation: none;
   }
