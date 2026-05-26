@@ -12,21 +12,19 @@ const writeClient = createClient({
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    console.log("CONTACT BODY:", body);
-
     const { name, email, message } = body;
 
     if (!name || !email || !message) {
       return NextResponse.json(
-        { error: "Toate câmpurile sunt obligatorii." },
+        { error: "Completeaza numele, emailul si mesajul." },
         { status: 400 },
       );
     }
 
     if (!process.env.SANITY_API_WRITE_TOKEN) {
-      console.error("Lipsește SANITY_API_WRITE_TOKEN");
+      console.error("Missing contact write token");
       return NextResponse.json(
-        { error: "Lipsește tokenul de scriere pentru Sanity." },
+        { error: "Mesajul nu a putut fi trimis momentan." },
         { status: 500 },
       );
     }
@@ -39,14 +37,14 @@ export async function POST(request: Request) {
       submittedAt: new Date().toISOString(),
     });
 
-    console.log("CONTACT SALVAT:", created._id);
+    console.log("Contact message saved:", created._id);
 
     return NextResponse.json({ success: true, id: created._id });
   } catch (error) {
-    console.error("EROARE CONTACT:", error);
+    console.error("Contact form error:", error);
 
     return NextResponse.json(
-      { error: "A apărut o eroare la trimiterea mesajului." },
+      { error: "Mesajul nu a putut fi trimis momentan." },
       { status: 500 },
     );
   }

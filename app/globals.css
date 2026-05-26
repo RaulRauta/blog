@@ -1,22 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8f4eb;
-  --foreground: #172016;
+  --background: #f9f1e4;
+  --foreground: #142014;
 
-  --primary: #6d7d45;
-  --primary-soft: rgba(109, 125, 69, 0.15);
+  --primary: #65783c;
+  --primary-soft: rgba(101, 120, 60, 0.2);
 
-  --secondary: #23351f;
-  --secondary-soft: rgba(35, 53, 31, 0.11);
-  --blush: #d7a49d;
-  --blush-soft: rgba(215, 164, 157, 0.18);
-  --rose-mist: #f3ded8;
-  --cream: #f3eadb;
-  --sage: #dfe6d0;
-  --paper: rgba(255, 253, 247, 0.82);
-  --paper-strong: rgba(255, 253, 247, 0.94);
-  --line-soft: rgba(38, 56, 33, 0.12);
+  --secondary: #1f321c;
+  --secondary-soft: rgba(31, 50, 28, 0.14);
+  --blush: #d18e86;
+  --blush-soft: rgba(209, 142, 134, 0.24);
+  --rose-mist: #f1d3ca;
+  --petal: #e6afa1;
+  --cream: #f0dfc8;
+  --sage: #cad8b2;
+  --paper: rgba(255, 251, 242, 0.86);
+  --paper-strong: rgba(255, 251, 242, 0.96);
+  --line-soft: rgba(31, 50, 28, 0.14);
   --editorial-serif: Georgia, "Times New Roman", serif;
 }
 
@@ -29,6 +30,8 @@
   --color-secondary-soft: var(--secondary-soft);
   --color-blush: var(--blush);
   --color-blush-soft: var(--blush-soft);
+  --color-petal: var(--petal);
+  --color-sage: var(--sage);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--editorial-serif);
@@ -57,15 +60,16 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   background:
-    radial-gradient(circle at 12% 8%, rgba(226, 232, 208, 0.82), transparent 31rem),
-    radial-gradient(circle at 88% 12%, rgba(243, 222, 216, 0.72), transparent 26rem),
-    radial-gradient(circle at 76% 78%, rgba(214, 224, 194, 0.56), transparent 30rem),
-    linear-gradient(180deg, #fffdf7 0%, #f6efe4 45%, #edf2e5 100%);
+    radial-gradient(circle at 12% 8%, rgba(202, 216, 178, 0.9), transparent 31rem),
+    radial-gradient(circle at 88% 12%, rgba(241, 211, 202, 0.82), transparent 27rem),
+    radial-gradient(circle at 78% 78%, rgba(196, 211, 166, 0.66), transparent 31rem),
+    radial-gradient(circle at 16% 92%, rgba(230, 175, 161, 0.34), transparent 26rem),
+    linear-gradient(180deg, #fffaf1 0%, #f7ead8 46%, #e9f0dc 100%);
   background-attachment: fixed;
 }
 
 ::selection {
-  background: rgba(215, 164, 157, 0.42);
+  background: rgba(209, 142, 134, 0.46);
   color: #111827;
 }
 
@@ -154,9 +158,9 @@ body {
 .premium-blush-surface {
   border: 1px solid rgba(215, 164, 157, 0.2);
   background:
-    linear-gradient(135deg, rgba(255, 253, 247, 0.9), rgba(243, 222, 216, 0.32)),
+    linear-gradient(135deg, rgba(255, 251, 242, 0.92), rgba(241, 211, 202, 0.42)),
     var(--paper);
-  box-shadow: 0 26px 90px rgba(92, 66, 52, 0.08);
+  box-shadow: 0 26px 90px rgba(92, 66, 52, 0.1);
   backdrop-filter: blur(18px);
 }
 
@@ -183,8 +187,8 @@ body {
 }
 
 .botanical-button:hover {
-  background: #304628;
-  box-shadow: 0 18px 48px rgba(35, 53, 31, 0.2);
+  background: #2f4827;
+  box-shadow: 0 18px 48px rgba(31, 50, 28, 0.24);
   transform: translateY(-1px);
 }
 
@@ -205,7 +209,7 @@ body {
 
 .botanical-button-secondary:hover {
   border-color: rgba(215, 164, 157, 0.42);
-  background: rgba(243, 222, 216, 0.42);
+  background: rgba(241, 211, 202, 0.52);
   color: #172016;
   transform: translateY(-1px);
 }

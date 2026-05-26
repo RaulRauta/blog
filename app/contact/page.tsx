@@ -1,6 +1,29 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
+
+const contactReasons = [
+  {
+    title: "Ai nevoie de o recomandare florala",
+    text: "Spune-ne ce spatiu ai, ce lumina primeste si ce atmosfera vrei sa creezi.",
+  },
+  {
+    title: "Pregatesti o gradina sau o terasa",
+    text: "Ne poti scrie despre culori, ghivece, borduri, plante favorite si ritmul sezonului.",
+  },
+  {
+    title: "Vrei sa propui o poveste botanica",
+    text: "Primim cu drag sugestii de flori, ghiduri si subiecte care merita explorate.",
+  },
+];
+
+const expectations = [
+  "Raspundem cu grija, de obicei in 1-2 zile lucratoare.",
+  "Citirea mesajului tau este facuta de oameni, nu de un raspuns automat rece.",
+  "Cu cat oferi mai mult context, cu atat recomandarea poate fi mai potrivita.",
+];
 
 export default function ContactPage() {
   const [name, setName] = useState("");
@@ -30,16 +53,18 @@ export default function ContactPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        setErrorMessage(data.error || "A apărut o eroare.");
+        setErrorMessage(data.error || "Mesajul nu a putut fi trimis.");
         return;
       }
 
-      setSuccessMessage("Mesajul a fost trimis cu succes.");
+      setSuccessMessage(
+        "Mesajul a ajuns la noi. Iti raspundem cu grija cat de curand.",
+      );
       setName("");
       setEmail("");
       setMessage("");
     } catch {
-      setErrorMessage("A apărut o eroare. Încearcă din nou.");
+      setErrorMessage("Mesajul nu a putut fi trimis. Incearca din nou.");
     } finally {
       setLoading(false);
     }
@@ -48,129 +73,223 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-transparent px-4 py-10 sm:py-14">
       <div className="mx-auto max-w-6xl">
-        <section className="mb-10">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-primary">
-            Contact
-          </p>
+        <section className="article-reveal mb-16 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <Link
+              href="/"
+              className="mb-8 inline-flex text-sm font-semibold text-gray-600 transition hover:text-primary"
+            >
+              Inapoi acasa
+            </Link>
+            <p className="editorial-kicker mb-4">Contact</p>
+            <h1 className="max-w-3xl font-serif text-5xl font-normal leading-[1.02] tracking-normal text-secondary sm:text-6xl lg:text-7xl">
+              Scrie-ne ca intr-o scrisoare catre o gradina draga.
+            </h1>
+            <p className="mt-6 max-w-2xl text-base leading-8 text-gray-700 sm:text-lg">
+              Fie ca ai o intrebare despre o floare, o idee pentru o terasa sau
+              o poveste botanica pe care vrei sa o propui, aici incepe
+              conversatia.
+            </p>
 
-          <h1 className="mb-4 max-w-3xl text-4xl font-bold tracking-tight text-gray-950 sm:text-5xl lg:text-6xl">
-            Hai să vorbim despre flori
-          </h1>
+            <div className="mt-8 grid max-w-2xl gap-3 sm:grid-cols-3">
+              {["calm", "botanic", "personal"].map((item) => (
+                <div
+                  key={item}
+                  className="rounded-2xl border border-white/70 bg-white/48 px-4 py-4 text-center shadow-[0_16px_46px_rgba(31,50,28,0.07)] backdrop-blur-xl"
+                >
+                  <p className="text-sm font-semibold text-secondary">{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
 
-          <p className="max-w-2xl text-sm leading-7 text-gray-600 sm:text-base">
-            Ai o întrebare, o sugestie sau vrei să iei legătura cu noi? Trimite
-            un mesaj folosind formularul de mai jos.
-          </p>
-        </section>
-
-        <section className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
-          <aside className="rounded-4xl border border-white/70 bg-white p-6 shadow-xl sm:p-8">
-            <div className="mb-8 rounded-3xl bg-linear-to-br from-primary-soft via-white to-secondary-soft p-6">
-              <p className="mb-4 text-5xl">🌸</p>
-              <h2 className="mb-3 text-2xl font-bold tracking-tight text-gray-950">
-                Ne bucurăm să te auzim
-              </h2>
-              <p className="text-sm leading-7 text-gray-600">
-                Fiecare mesaj ne ajută să construim un spațiu floral mai util,
-                mai frumos și mai aproape de oamenii care iubesc florile.
+          <div className="relative min-h-[32rem] overflow-hidden rounded-[2.75rem] border border-white/70 shadow-[0_34px_110px_rgba(31,50,28,0.18)]">
+            <Image
+              src="/images/articles/hortensia-demo/care-detail.png"
+              alt="Masa botanica eleganta cu unelte de ingrijire si flori"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 620px"
+              className="premium-image object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-secondary/64 via-secondary/8 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-8">
+              <p className="max-w-md font-serif text-3xl leading-tight tracking-normal sm:text-4xl">
+                Un mesaj bun incepe cu lumina, locul si floarea pe care o ai in
+                minte.
               </p>
             </div>
+          </div>
+        </section>
 
-            <div className="space-y-5">
-              <div>
-                <p className="mb-1 text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">
-                  Email
-                </p>
-                <p className="font-semibold text-gray-950">contact@flori.ro</p>
+        <section className="mb-16 grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-start sm:mb-20">
+          <aside className="grid gap-5">
+            <div className="premium-blush-surface article-reveal rounded-[2.25rem] p-6 sm:p-8">
+              <p className="editorial-kicker mb-4">Ne poti scrie pentru</p>
+              <div className="space-y-5">
+                {contactReasons.map((reason) => (
+                  <div
+                    key={reason.title}
+                    className="border-b border-secondary/10 pb-5 last:border-b-0 last:pb-0"
+                  >
+                    <h2 className="font-serif text-2xl font-normal leading-tight tracking-normal text-secondary">
+                      {reason.title}
+                    </h2>
+                    <p className="mt-2 text-sm leading-7 text-gray-700">
+                      {reason.text}
+                    </p>
+                  </div>
+                ))}
               </div>
+            </div>
 
-              <div>
-                <p className="mb-1 text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">
-                  Telefon
-                </p>
-                <p className="font-semibold text-gray-950">07xx xxx xxx</p>
-              </div>
-
-              <div>
-                <p className="mb-1 text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">
-                  Răspuns
-                </p>
-                <p className="text-sm leading-7 text-gray-600">
-                  Încercăm să răspundem cât mai curând posibil.
-                </p>
+            <div className="premium-surface article-reveal rounded-[2.25rem] p-6 sm:p-8">
+              <p className="editorial-kicker mb-4">Date de contact</p>
+              <div className="space-y-5 text-sm leading-7 text-gray-700">
+                <div>
+                  <p className="font-semibold text-secondary">Email</p>
+                  <a
+                    href="mailto:contact@flori.ro"
+                    className="transition hover:text-primary"
+                  >
+                    contact@flori.ro
+                  </a>
+                </div>
+                <div>
+                  <p className="font-semibold text-secondary">Program de raspuns</p>
+                  <p>Luni - Vineri, in ritmul firesc al unei redactii calme.</p>
+                </div>
+                <div>
+                  <p className="font-semibold text-secondary">Subiecte potrivite</p>
+                  <p>Flori, gradini, inspiratie botanica, propuneri editoriale.</p>
+                </div>
               </div>
             </div>
           </aside>
 
-          <div className="rounded-4xl border border-white/70 bg-white p-6 shadow-xl sm:p-8 lg:p-10">
-            <h2 className="mb-2 text-3xl font-bold tracking-tight text-gray-950">
-              Trimite un mesaj
-            </h2>
+          <section className="article-reveal overflow-hidden rounded-[2.5rem] border border-white/70 bg-[#fffaf1]/82 shadow-[0_30px_100px_rgba(31,50,28,0.13)] backdrop-blur-xl">
+            <div className="border-b border-secondary/10 bg-gradient-to-r from-blush-soft via-white/40 to-primary-soft p-6 sm:p-8">
+              <p className="editorial-kicker mb-3">Trimite mesajul</p>
+              <h2 className="font-serif text-4xl font-normal leading-tight tracking-normal text-secondary sm:text-5xl">
+                Spune-ne ce vrei sa crestem impreuna.
+              </h2>
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-gray-700 sm:text-base">
+                Formularul este gandit ca un mic ritual: numele tau, locul unde
+                iti raspundem si cateva randuri despre ce ai nevoie.
+              </p>
+            </div>
 
-            <p className="mb-8 text-sm leading-7 text-gray-600">
-              Completează formularul, iar mesajul tău va ajunge la noi.
-            </p>
-
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
-                <label className="mb-2 block text-sm font-semibold text-gray-700">
-                  Numele tău
+            <form onSubmit={handleSubmit} className="space-y-5 p-6 sm:p-8">
+              <div className="grid gap-5 sm:grid-cols-2">
+                <label className="group block">
+                  <span className="mb-2 block text-sm font-semibold text-secondary">
+                    Numele tau
+                  </span>
+                  <input
+                    type="text"
+                    placeholder="Ex: Maria Popescu"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full rounded-2xl border border-secondary/12 bg-white/58 px-4 py-3.5 text-sm text-secondary outline-none transition placeholder:text-gray-400 focus:border-blush/70 focus:bg-[#fffdf7] focus:ring-4 focus:ring-blush-soft"
+                  />
                 </label>
-                <input
-                  type="text"
-                  placeholder="Ex: Maria Popescu"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="w-full rounded-2xl border border-gray-200 bg-transparent px-4 py-3 text-sm outline-none transition placeholder:text-gray-400 focus:border-primary focus:bg-white focus:ring-4 focus:ring-pink-100"
-                />
+
+                <label className="group block">
+                  <span className="mb-2 block text-sm font-semibold text-secondary">
+                    Email pentru raspuns
+                  </span>
+                  <input
+                    type="email"
+                    placeholder="exemplu@email.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full rounded-2xl border border-secondary/12 bg-white/58 px-4 py-3.5 text-sm text-secondary outline-none transition placeholder:text-gray-400 focus:border-blush/70 focus:bg-[#fffdf7] focus:ring-4 focus:ring-blush-soft"
+                  />
+                </label>
               </div>
 
-              <div>
-                <label className="mb-2 block text-sm font-semibold text-gray-700">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  placeholder="exemplu@email.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full rounded-2xl border border-gray-200 bg-transparent px-4 py-3 text-sm outline-none transition placeholder:text-gray-400 focus:border-primary focus:bg-white focus:ring-4 focus:ring-pink-100"
-                />
-              </div>
-
-              <div>
-                <label className="mb-2 block text-sm font-semibold text-gray-700">
-                  Mesaj
-                </label>
+              <label className="block">
+                <span className="mb-2 block text-sm font-semibold text-secondary">
+                  Mesajul tau
+                </span>
                 <textarea
-                  placeholder="Scrie mesajul tău aici..."
-                  rows={6}
+                  placeholder="Ex: Am o terasa cu lumina de dimineata si as vrea flori elegante, usor de ingrijit..."
+                  rows={7}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-full resize-none rounded-2xl border border-gray-200 bg-transparent px-4 py-3 text-sm outline-none transition placeholder:text-gray-400 focus:border-primary focus:bg-white focus:ring-4 focus:ring-pink-100"
+                  className="w-full resize-none rounded-[1.35rem] border border-secondary/12 bg-white/58 px-4 py-4 text-sm leading-7 text-secondary outline-none transition placeholder:text-gray-400 focus:border-blush/70 focus:bg-[#fffdf7] focus:ring-4 focus:ring-blush-soft"
                 />
+              </label>
+
+              <div className="flex flex-col gap-4 border-t border-secondary/10 pt-5 sm:flex-row sm:items-center sm:justify-between">
+                <p className="max-w-md text-xs leading-6 text-gray-600">
+                  Include, daca poti, lumina, spatiul, sezonul si floarea care
+                  te intereseaza. Ajuta mult.
+                </p>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="botanical-button w-full px-7 py-3.5 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+                >
+                  {loading ? "Se trimite..." : "Trimite mesajul"}
+                </button>
               </div>
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
-              >
-                {loading ? "Se trimite..." : "Trimite mesajul"}
-              </button>
-
               {successMessage && (
-                <div className="rounded-2xl bg-secondary-soft px-4 py-3 text-sm font-semibold text-secondary">
+                <div className="rounded-2xl border border-primary/20 bg-primary-soft px-4 py-3 text-sm font-semibold text-secondary">
                   {successMessage}
                 </div>
               )}
 
               {errorMessage && (
-                <div className="rounded-2xl bg-red-50 px-4 py-3 text-sm font-semibold text-red-600">
+                <div className="rounded-2xl border border-blush/30 bg-blush-soft px-4 py-3 text-sm font-semibold text-secondary">
                   {errorMessage}
                 </div>
               )}
             </form>
+          </section>
+        </section>
+
+        <section className="mb-16 grid gap-5 md:grid-cols-3 sm:mb-20">
+          {expectations.map((item, index) => (
+            <div
+              key={item}
+              className="premium-surface article-reveal rounded-[2rem] p-6"
+            >
+              <span className="font-serif text-4xl text-blush">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <p className="mt-5 text-sm leading-7 text-gray-700">{item}</p>
+            </div>
+          ))}
+        </section>
+
+        <section className="article-reveal overflow-hidden rounded-[2.5rem] border border-white/70 bg-secondary text-white shadow-[0_32px_100px_rgba(31,50,28,0.22)]">
+          <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="relative min-h-[20rem] lg:min-h-full">
+              <Image
+                src="/images/articles/hortensia-demo/garden-border.png"
+                alt="Bordura botanica eleganta cu hortensii si frunzis"
+                fill
+                sizes="(max-width: 1024px) 100vw, 520px"
+                className="object-cover opacity-90"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-secondary/58 to-transparent" />
+            </div>
+            <div className="p-7 sm:p-10 lg:p-12">
+              <p className="mb-4 text-sm font-semibold text-blush">
+                O ultima nota
+              </p>
+              <blockquote className="max-w-2xl font-serif text-4xl font-normal leading-tight tracking-normal sm:text-5xl">
+                Florile bune nu grabesc raspunsurile. Ele ne invata sa observam
+                mai atent.
+              </blockquote>
+              <p className="mt-6 max-w-xl text-base leading-8 text-white/72">
+                Daca mesajul tau porneste din curiozitate, dintr-o gradina in
+                lucru sau dintr-o floare pe care vrei sa o intelegi mai bine,
+                esti in locul potrivit.
+              </p>
+            </div>
           </div>
         </section>
       </div>
