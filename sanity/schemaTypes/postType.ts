@@ -4,6 +4,7 @@ import {
   defineField,
   defineType,
 } from "sanity";
+import { ArticleLayoutInput } from "../components/ArticleLayoutInput";
 
 const layoutOptions = [
   { title: "Layout 1 - Hero stanga, text si imagine mica", value: "layout1" },
@@ -92,12 +93,15 @@ export const postType = defineType({
       name: "layout",
       title: "Layout articol",
       description:
-        "Alege template-ul editorial. Campurile de mai jos se adapteaza automat.",
+        "Alege template-ul editorial cu ajutorul preview-urilor vizuale. Campurile de mai jos se adapteaza automat.",
       type: "string",
       initialValue: "layout1",
       options: {
         list: layoutOptions,
         layout: "dropdown",
+      },
+      components: {
+        input: ArticleLayoutInput,
       },
     }),
 
