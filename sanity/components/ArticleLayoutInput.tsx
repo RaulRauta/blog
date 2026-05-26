@@ -432,11 +432,11 @@ function VisualPattern({ template }: { template: TemplatePreview }) {
 
 function TemplateDocumentation({ template }: { template: TemplatePreview }) {
   const rows = [
-    ["Best used for", template.bestFor],
-    ["Article type", template.articleType],
-    ["Visual flow", template.flow],
-    ["Emphasizes", template.emphasis],
-    ["Image guidance", template.imageGuidance],
+    ["Cel mai potrivit pentru", template.bestFor],
+    ["Tip de articol", template.articleType],
+    ["Cum curge vizual", template.flow],
+    ["Ce pune in evidenta", template.emphasis],
+    ["Recomandari pentru imagini", template.imageGuidance],
   ];
 
   return (
