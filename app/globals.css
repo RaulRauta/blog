@@ -114,6 +114,11 @@ body {
   color: color-mix(in srgb, currentColor 76%, transparent);
 }
 
+.article-rich-text-light p,
+.article-rich-text-light li {
+  color: rgba(255, 255, 255, 0.72);
+}
+
 .article-rich-text ul,
 .article-rich-text ol {
   padding-left: 1.25rem;

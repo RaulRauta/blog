@@ -5,7 +5,6 @@ import { categoryType } from "./categoryType";
 import { postType } from "./postType";
 import { authorType } from "./authorType";
 import { contactMessageType } from "./contactMessageType";
-import { articleBlockTypes } from "./articleBlocks";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -14,6 +13,5 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     postType,
     authorType,
     contactMessageType,
-    ...articleBlockTypes,
   ],
 };

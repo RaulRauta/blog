@@ -2,7 +2,7 @@ import { createClient } from "@sanity/client";
 import { createImageUrlBuilder } from "@sanity/image-url";
 import type { PortableTextBlock } from "@portabletext/types";
 
-type SanityImage = {
+export type SanityImage = {
   _type?: "image";
   asset?: {
     _ref?: string;
@@ -45,171 +45,132 @@ export function urlFor(source: SanityImage) {
   return builder.image(source);
 }
 
+export type ArticleLayout =
+  | "layout1"
+  | "layout2"
+  | "layout3"
+  | "layout4"
+  | "layout5"
+  | "layout6"
+  | "layout7"
+  | "layout8"
+  | "layout9"
+  | "layout10"
+  | "standard"
+  | "editorial"
+  | "gallery"
+  | "guide";
+
+export type ArticleListItem = {
+  _key?: string;
+  title?: string;
+  text?: string;
+};
+
+export type ArticleCard = {
+  _key?: string;
+  title?: string;
+  text?: string;
+  image?: SanityImage;
+};
+
+export type TimelineItem = {
+  _key?: string;
+  date?: string;
+  title?: string;
+  text?: string;
+};
+
+export type ArticleCallout = {
+  title?: string;
+  text?: string;
+  buttonLabel?: string;
+  buttonHref?: string;
+};
+
 export type SanityPost = {
   _id: string;
   title: string;
   slug: string;
   excerpt?: string;
   body?: PortableTextBlock[];
-  contentBlocks?: ArticleContentBlock[];
+  introText?: PortableTextBlock[];
+  secondaryText?: PortableTextBlock[];
   publishedAt?: string;
-  layout?: "standard" | "editorial" | "gallery" | "guide";
+  layout?: ArticleLayout;
   mainImage?: SanityImage;
+  secondaryImage?: SanityImage;
+  verticalImage?: SanityImage;
   galleryImages?: SanityImage[];
+  quoteText?: string;
+  quoteAttribution?: string;
+  checklistItems?: ArticleListItem[];
+  infoCards?: ArticleCard[];
+  timelineItems?: TimelineItem[];
+  callout?: ArticleCallout;
+  relatedArticles?: SanityPost[];
   author?: {
     name?: string;
+    image?: SanityImage;
+    bio?: PortableTextBlock[];
   };
   categories?: {
     title: string;
   }[];
 };
 
-export type ArticleVisualVariant =
-  | "editorial"
-  | "soft"
-  | "botanical"
-  | "luxury"
-  | "minimal";
-
-export type ArticleButton = {
-  label?: string;
-  href?: string;
-};
-
-export type ArticleContentBlock = {
-  _key?: string;
-  _type: string;
-  title?: string;
-  subtitle?: string;
-  body?: PortableTextBlock[];
-  image?: SanityImage;
-  images?: SanityImage[];
-  quote?: string;
-  attribution?: string;
-  items?: Array<{
-    _key?: string;
-    title?: string;
-    text?: string;
-    body?: PortableTextBlock[];
-    image?: SanityImage;
-    date?: string;
-    question?: string;
-    answer?: PortableTextBlock[];
-    slug?: string;
-    description?: string;
-  }>;
-  cards?: Array<{
-    _key?: string;
-    title?: string;
-    text?: string;
-    image?: SanityImage;
-  }>;
-  button?: ArticleButton;
-  variant?: ArticleVisualVariant;
-  articles?: SanityPost[];
-  flowers?: Array<{
-    _key?: string;
-    name?: string;
-    slug?: string;
-    description?: string;
-    image?: SanityImage;
-  }>;
-  author?: {
-    name?: string;
-    image?: SanityImage;
-    bio?: PortableTextBlock[];
-  };
-};
-
-const contentBlocksProjection = `contentBlocks[]{
+const imageProjection = `{
   ...,
-  image{
+  asset->
+}`;
+
+const postFields = `
+  _id,
+  title,
+  "slug": slug.current,
+  excerpt,
+  body,
+  introText,
+  secondaryText,
+  publishedAt,
+  layout,
+  mainImage${imageProjection},
+  secondaryImage${imageProjection},
+  verticalImage${imageProjection},
+  galleryImages[]${imageProjection},
+  quoteText,
+  quoteAttribution,
+  checklistItems,
+  infoCards[]{
     ...,
-    asset->
+    image${imageProjection}
   },
-  images[]{
-    ...,
-    asset->
-  },
-  cards[]{
-    ...,
-    image{
-      ...,
-      asset->
-    }
-  },
-  items[]{
-    ...,
-    image{
-      ...,
-      asset->
-    },
-    answer[]
-  },
-  flowers[]{
-    ...,
-    image{
-      ...,
-      asset->
-    }
-  },
-  author->{
-    name,
-    image{
-      ...,
-      asset->
-    },
-    bio
-  },
-  articles[]->{
+  timelineItems,
+  callout,
+  relatedArticles[]->{
     _id,
     title,
     "slug": slug.current,
     excerpt,
     publishedAt,
-    mainImage{
-      ...,
-      asset->
-    },
+    mainImage${imageProjection},
     author->{name},
     categories[]->{title}
-  }
-}`;
-
-export const postsQuery = `*[_type == "post"] | order(publishedAt desc){
-  _id,
-  title,
-  "slug": slug.current,
-  excerpt,
-  body,
-  ${contentBlocksProjection},
-  publishedAt,
-  layout,
-  mainImage,
-  galleryImages,
+  },
   author->{
-    name
+    name,
+    image${imageProjection},
+    bio
   },
   categories[]->{
     title
   }
+`;
+
+export const postsQuery = `*[_type == "post"] | order(publishedAt desc){
+  ${postFields}
 }`;
 
 export const postBySlugQuery = `*[_type == "post" && slug.current == $slug][0]{
-  _id,
-  title,
-  "slug": slug.current,
-  excerpt,
-  body,
-  ${contentBlocksProjection},
-  publishedAt,
-  layout,
-  mainImage,
-  galleryImages,
-  author->{
-    name
-  },
-  categories[]->{
-    title
-  }
+  ${postFields}
 }`;
