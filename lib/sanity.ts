@@ -45,6 +45,12 @@ export function urlFor(source: SanityImage) {
   return builder.image(source);
 }
 
+export function imageUrl(source: SanityImage, width = 1600, height = 1000) {
+  if (source.asset?.url) return source.asset.url;
+
+  return urlFor(source).width(width).height(height).url();
+}
+
 export type ArticleLayout =
   | "layout1"
   | "layout2"

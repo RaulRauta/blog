@@ -1,9 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleLayoutRenderer } from "@/components/article-layouts/ArticleLayouts";
+import { getDemoPostBySlug } from "@/lib/demoArticle";
 import { client, postBySlugQuery, type SanityPost } from "@/lib/sanity";
 
 export const dynamic = "force-dynamic";
+
+async function getPost(slug: string) {
+  try {
+    return (
+      ((await client.fetch(postBySlugQuery, { slug })) as SanityPost | null) ||
+      getDemoPostBySlug(slug)
+    );
+  } catch {
+    return getDemoPostBySlug(slug);
+  }
+}
 
 export async function generateMetadata({
   params,
@@ -11,7 +23,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post: SanityPost | null = await client.fetch(postBySlugQuery, { slug });
+  const post = await getPost(slug);
 
   return {
     title: post ? `${post.title} | Enciclopedia Florilor` : "Articol",
@@ -25,7 +37,7 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post: SanityPost | null = await client.fetch(postBySlugQuery, { slug });
+  const post = await getPost(slug);
 
   if (!post) {
     return (

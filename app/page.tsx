@@ -2,8 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import FlowerCarousel from "@/components/FlowerCarousel";
+import { demoPosts } from "@/lib/demoArticle";
 import { flowers } from "@/lib/flowers";
-import { client, postsQuery, type SanityPost, urlFor } from "@/lib/sanity";
+import { client, imageUrl, postsQuery, type SanityPost } from "@/lib/sanity";
 
 export const dynamic = "force-dynamic";
 
@@ -13,8 +14,21 @@ export const metadata: Metadata = {
     "Descoperă informații despre flori, semnificația lor și articole utile despre îngrijire.",
 };
 
+async function getPosts() {
+  try {
+    return (await client.fetch(postsQuery)) as SanityPost[];
+  } catch {
+    return [];
+  }
+}
+
 export default async function Home() {
-  const posts: SanityPost[] = await client.fetch(postsQuery);
+  const sanityPosts = await getPosts();
+  const sanitySlugs = new Set(sanityPosts.map((post) => post.slug));
+  const posts = [
+    ...demoPosts.filter((post) => !sanitySlugs.has(post.slug)),
+    ...sanityPosts,
+  ];
 
   return (
     <main className="min-h-screen bg-transparent px-4 py-8 sm:py-10">
@@ -64,8 +78,8 @@ export default async function Home() {
 
           <div className="grid gap-6 lg:grid-cols-2">
             {posts.slice(0, 2).map((post) => {
-              const imageUrl = post.mainImage
-                ? urlFor(post.mainImage).width(1200).height(800).url()
+              const cardImageUrl = post.mainImage
+                ? imageUrl(post.mainImage, 1200, 800)
                 : null;
 
               return (
@@ -73,11 +87,11 @@ export default async function Home() {
                   key={post._id}
                   className="group premium-surface overflow-hidden rounded-[1.75rem] transition duration-500 hover:-translate-y-1"
                 >
-                  {imageUrl && (
+                  {cardImageUrl && (
                     <Link href={`/blog/${post.slug}`} className="block">
                       <div className="relative h-64 w-full overflow-hidden sm:h-80">
                         <Image
-                          src={imageUrl}
+                          src={cardImageUrl}
                           alt={post.title}
                           fill
                           className="premium-image object-cover"

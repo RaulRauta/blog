@@ -3,7 +3,7 @@ import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import type { PortableTextBlock } from "@portabletext/types";
 import type { SanityImage, SanityPost } from "@/lib/sanity";
-import { urlFor } from "@/lib/sanity";
+import { imageUrl } from "@/lib/sanity";
 
 type LayoutProps = {
   post: SanityPost;
@@ -92,7 +92,7 @@ function Figure({
   return (
     <figure className={className}>
       <Image
-        src={urlFor(image).width(2000).height(1300).url()}
+        src={imageUrl(image, 2000, 1300)}
         alt={image.alt || title || "Imagine articol"}
         fill
         priority={priority}
@@ -233,12 +233,22 @@ function RelatedArticles({ post }: LayoutProps) {
 
   return (
     <section className="article-reveal mx-auto max-w-7xl px-4 py-12">
-      <h2 className="mb-7 font-serif text-3xl tracking-normal text-gray-950">
-        Articole recomandate
-      </h2>
-      <div className="grid gap-5 md:grid-cols-3">
+      <div className="mb-7 flex items-end justify-between gap-4">
+        <div>
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-secondary/60">
+            Continua lectura
+          </p>
+          <h2 className="font-serif text-3xl tracking-normal text-gray-950">
+            Articole recomandate
+          </h2>
+        </div>
+      </div>
+      <div className="flex snap-x gap-5 overflow-x-auto pb-3">
         {post.relatedArticles.map((article) => (
-          <article key={article._id} className="group premium-surface overflow-hidden rounded-[1.5rem]">
+          <article
+            key={article._id}
+            className="group premium-surface min-w-[18rem] snap-start overflow-hidden rounded-[1.5rem] md:min-w-[24rem]"
+          >
             {article.mainImage && (
               <Link href={`/blog/${article.slug}`} className="relative block h-56">
                 <Figure image={article.mainImage} title={article.title} sizes="33vw" />
@@ -254,6 +264,31 @@ function RelatedArticles({ post }: LayoutProps) {
             </div>
           </article>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function AuthorBox({ post }: LayoutProps) {
+  if (!post.author) return null;
+
+  return (
+    <section className="article-reveal mx-auto max-w-5xl px-4 py-8">
+      <div className="premium-surface grid gap-6 rounded-[2rem] p-6 sm:grid-cols-[8rem_1fr] sm:p-8">
+        {post.author.image && (
+          <div className="relative h-32 w-32 overflow-hidden rounded-full">
+            <Figure image={post.author.image} title={post.author.name} sizes="8rem" />
+          </div>
+        )}
+        <div>
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-secondary/60">
+            Semnat de
+          </p>
+          <h2 className="font-serif text-3xl text-gray-950">{post.author.name}</h2>
+          <div className="mt-4">
+            <RichText value={post.author.bio} />
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -522,18 +557,18 @@ export function ArticleLayout10({ post }: LayoutProps) {
     <article className="px-4 py-10">
       <div className="mx-auto max-w-7xl">
         <BackLink />
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="premium-surface rounded-[2rem] p-6 sm:p-10">
+        <div className="premium-surface-strong grid gap-8 rounded-[2rem] p-5 lg:grid-cols-[0.82fr_1.18fr] lg:p-8">
+          <div className="flex flex-col justify-center p-2 sm:p-6">
             <ArticleIntro post={post} />
             <div className="mt-8">
               <RichText value={post.introText || post.body} />
             </div>
           </div>
-          <div className="grid gap-4 sm:grid-cols-[0.72fr_0.28fr]">
-            <div className="relative min-h-[620px] overflow-hidden rounded-[2rem]">
+          <div className="grid gap-4 sm:grid-cols-[0.7fr_0.3fr]">
+            <div className="relative min-h-[620px] overflow-hidden rounded-[1.75rem]">
               <Figure image={post.mainImage} title={post.title} priority />
             </div>
-            <div className="relative min-h-[620px] overflow-hidden rounded-[2rem]">
+            <div className="relative min-h-[620px] overflow-hidden rounded-[1.75rem]">
               <Figure image={post.verticalImage || post.secondaryImage} title={post.title} />
             </div>
           </div>
@@ -551,6 +586,7 @@ export function ArticleLayout10({ post }: LayoutProps) {
           <Gallery post={post} />
         </section>
       </div>
+      <AuthorBox post={post} />
       <RelatedArticles post={post} />
     </article>
   );

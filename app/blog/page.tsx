@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { client, postsQuery, type SanityPost, urlFor } from "@/lib/sanity";
+import { demoPosts } from "@/lib/demoArticle";
+import { client, imageUrl, postsQuery, type SanityPost } from "@/lib/sanity";
 
 export const dynamic = "force-dynamic";
 
@@ -11,8 +12,21 @@ export const metadata: Metadata = {
     "Articole despre flori, semnificații, îngrijire și inspirație florală.",
 };
 
+async function getPosts() {
+  try {
+    return (await client.fetch(postsQuery)) as SanityPost[];
+  } catch {
+    return [];
+  }
+}
+
 export default async function BlogPage() {
-  const posts: SanityPost[] = await client.fetch(postsQuery);
+  const sanityPosts = await getPosts();
+  const sanitySlugs = new Set(sanityPosts.map((post) => post.slug));
+  const posts = [
+    ...demoPosts.filter((post) => !sanitySlugs.has(post.slug)),
+    ...sanityPosts,
+  ];
 
   const featuredPost = posts[0];
   const otherPosts = posts.slice(1);
@@ -62,10 +76,7 @@ export default async function BlogPage() {
                     className="relative block h-72 overflow-hidden sm:h-96 lg:h-full"
                   >
                     <Image
-                      src={urlFor(featuredPost.mainImage)
-                        .width(1400)
-                        .height(900)
-                        .url()}
+                      src={imageUrl(featuredPost.mainImage, 1400, 900)}
                       alt={featuredPost.title}
                       fill
                       priority
@@ -150,8 +161,8 @@ export default async function BlogPage() {
           {otherPosts.length > 0 ? (
             <div className="grid gap-8 md:grid-cols-2">
               {otherPosts.map((post) => {
-                const imageUrl = post.mainImage
-                  ? urlFor(post.mainImage).width(1000).height(700).url()
+                const cardImageUrl = post.mainImage
+                  ? imageUrl(post.mainImage, 1000, 700)
                   : null;
 
                 return (
@@ -159,11 +170,11 @@ export default async function BlogPage() {
                     key={post._id}
                     className="group overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
                   >
-                    {imageUrl && (
+                    {cardImageUrl && (
                       <Link href={`/blog/${post.slug}`} className="block">
                         <div className="relative h-64 w-full overflow-hidden">
                           <Image
-                            src={imageUrl}
+                            src={cardImageUrl}
                             alt={post.title}
                             fill
                             className="object-cover transition duration-700 group-hover:scale-105"
