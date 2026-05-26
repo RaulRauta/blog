@@ -176,7 +176,7 @@ export default async function Home() {
             <div className="max-w-2xl">
               <p className="editorial-kicker mb-3">Flori recomandate</p>
               <h2 className="font-serif text-4xl font-normal tracking-normal text-secondary sm:text-5xl">
-                Un carousel botanic, mai lin si mai editorial.
+                Flori alese pentru gradini cu ritm, culoare si calm.
               </h2>
             </div>
             <Link
