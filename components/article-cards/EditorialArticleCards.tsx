@@ -120,32 +120,32 @@ function ArticleImage({
 
 export function FeaturedArticleCard({ post }: CardProps) {
   return (
-    <article className="group overflow-hidden rounded-[2.75rem] border border-white/70 bg-secondary text-white shadow-[0_34px_110px_rgba(35,53,31,0.2)]">
+    <article className="group overflow-hidden rounded-[1.7rem] border border-white/70 bg-secondary text-white shadow-[0_26px_76px_rgba(35,53,31,0.18)] sm:rounded-[2.75rem]">
       <div className="grid lg:grid-cols-[1.18fr_0.82fr]">
         <Link
           href={`/blog/${post.slug}`}
-          className="relative min-h-[26rem] overflow-hidden sm:min-h-[34rem] lg:min-h-[38rem]"
+          className="relative min-h-[20rem] overflow-hidden sm:min-h-[34rem] lg:min-h-[38rem]"
         >
           <ArticleImage post={post} width={1600} height={1100} priority />
           <div className="absolute inset-0 bg-gradient-to-t from-secondary/72 via-secondary/8 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 lg:hidden">
+          <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-8 lg:hidden">
             <CategoryBadges post={post} light />
           </div>
         </Link>
 
-        <div className="flex flex-col justify-between gap-10 p-7 sm:p-10 lg:p-12">
+        <div className="flex flex-col justify-between gap-7 p-5 sm:gap-10 sm:p-10 lg:p-12">
           <div>
-            <p className="mb-5 text-sm font-semibold text-blush">
+            <p className="mb-4 text-sm font-semibold text-blush sm:mb-5">
               Articol recomandat
             </p>
             <CategoryBadges post={post} light />
-            <h2 className="mt-6 max-w-xl font-serif text-4xl font-normal leading-tight tracking-normal sm:text-5xl">
+            <h2 className="mt-5 max-w-xl font-serif text-[2.15rem] font-normal leading-tight tracking-normal sm:mt-6 sm:text-5xl">
               <Link href={`/blog/${post.slug}`} className="transition hover:text-blush">
                 {post.title}
               </Link>
             </h2>
             {post.excerpt && (
-              <p className="mt-6 max-w-lg text-base leading-8 text-white/72">
+              <p className="mt-4 max-w-lg text-sm leading-7 text-white/72 sm:mt-6 sm:text-base sm:leading-8">
                 {post.excerpt}
               </p>
             )}
@@ -155,7 +155,7 @@ export function FeaturedArticleCard({ post }: CardProps) {
             <MetaLine post={post} light />
             <Link
               href={`/blog/${post.slug}`}
-              className="inline-flex w-fit rounded-full bg-[#fffdf7] px-5 py-3 text-sm font-semibold text-secondary transition hover:bg-blush-soft"
+              className="inline-flex w-full justify-center rounded-full bg-[#fffdf7] px-5 py-3 text-sm font-semibold text-secondary transition hover:bg-blush-soft sm:w-fit"
             >
               Citeste articolul
             </Link>
@@ -168,18 +168,18 @@ export function FeaturedArticleCard({ post }: CardProps) {
 
 export function ImageFocusCard({ post }: CardProps) {
   return (
-    <article className="group article-reveal overflow-hidden rounded-[2.25rem] border border-white/70 bg-[#fffdf7]/78 shadow-[0_24px_78px_rgba(35,53,31,0.08)] transition duration-500 hover:-translate-y-1">
-      <Link href={`/blog/${post.slug}`} className="relative block h-80 overflow-hidden">
+    <article className="group article-reveal overflow-hidden rounded-[1.5rem] border border-white/70 bg-[#fffdf7]/78 shadow-[0_18px_52px_rgba(35,53,31,0.075)] transition duration-500 hover:-translate-y-1 sm:rounded-[2.25rem]">
+      <Link href={`/blog/${post.slug}`} className="relative block h-56 overflow-hidden sm:h-80">
         <ArticleImage post={post} width={1100} height={900} />
         <div className="absolute inset-0 bg-gradient-to-t from-secondary/58 via-transparent to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 p-5 text-white">
+        <div className="absolute inset-x-0 bottom-0 p-4 text-white sm:p-5">
           <CategoryBadges post={post} light limit={1} />
-          <h3 className="mt-4 font-serif text-3xl font-normal leading-tight tracking-normal">
+          <h3 className="mt-3 font-serif text-[1.8rem] font-normal leading-tight tracking-normal sm:mt-4 sm:text-3xl">
             {post.title}
           </h3>
         </div>
       </Link>
-      <div className="p-5">
+      <div className="p-4 sm:p-5">
         <MetaLine post={post} />
         {post.excerpt && (
           <p className="mt-4 line-clamp-3 text-sm leading-7 text-gray-600">
@@ -193,9 +193,9 @@ export function ImageFocusCard({ post }: CardProps) {
 
 export function SoftBotanicalCard({ post }: CardProps) {
   return (
-    <article className="premium-blush-surface group article-reveal rounded-[2.25rem] p-5 transition duration-500 hover:-translate-y-1 sm:p-6">
+    <article className="premium-blush-surface group article-reveal rounded-[1.5rem] p-4 transition duration-500 hover:-translate-y-1 sm:rounded-[2.25rem] sm:p-6">
       <CategoryBadges post={post} />
-      <h3 className="mt-5 font-serif text-3xl font-normal leading-tight tracking-normal text-secondary">
+      <h3 className="mt-4 font-serif text-[1.8rem] font-normal leading-tight tracking-normal text-secondary sm:mt-5 sm:text-3xl">
         <Link href={`/blog/${post.slug}`} className="transition hover:text-primary">
           {post.title}
         </Link>
@@ -205,7 +205,7 @@ export function SoftBotanicalCard({ post }: CardProps) {
           {post.excerpt}
         </p>
       )}
-      <div className="mt-7 flex items-center justify-between gap-4">
+      <div className="mt-5 flex items-center justify-between gap-4 sm:mt-7">
         <MetaLine post={post} />
         <span className="h-10 w-10 rounded-full bg-blush-soft" />
       </div>
@@ -215,14 +215,14 @@ export function SoftBotanicalCard({ post }: CardProps) {
 
 export function HorizontalArticleCard({ post }: CardProps) {
   return (
-    <article className="group article-reveal overflow-hidden rounded-[2rem] border border-white/70 bg-[#fffdf7]/78 shadow-[0_20px_64px_rgba(35,53,31,0.07)] transition duration-500 hover:-translate-y-1">
+    <article className="group article-reveal overflow-hidden rounded-[1.45rem] border border-white/70 bg-[#fffdf7]/78 shadow-[0_16px_48px_rgba(35,53,31,0.07)] transition duration-500 hover:-translate-y-1 sm:rounded-[2rem]">
       <div className="grid sm:grid-cols-[0.42fr_0.58fr]">
-        <Link href={`/blog/${post.slug}`} className="relative min-h-56 overflow-hidden">
+        <Link href={`/blog/${post.slug}`} className="relative min-h-44 overflow-hidden sm:min-h-56">
           <ArticleImage post={post} width={800} height={700} />
         </Link>
-        <div className="p-5 sm:p-6">
+        <div className="p-4 sm:p-6">
           <CategoryBadges post={post} limit={1} />
-          <h3 className="mt-4 font-serif text-3xl font-normal leading-tight tracking-normal text-secondary">
+          <h3 className="mt-3 font-serif text-[1.75rem] font-normal leading-tight tracking-normal text-secondary sm:mt-4 sm:text-3xl">
             <Link href={`/blog/${post.slug}`} className="transition hover:text-primary">
               {post.title}
             </Link>
@@ -238,9 +238,9 @@ export function HorizontalArticleCard({ post }: CardProps) {
 
 export function CompactArticleCard({ post }: CardProps) {
   return (
-    <article className="article-reveal rounded-[1.75rem] border border-secondary/10 bg-white/48 p-5 transition duration-300 hover:border-blush/40 hover:bg-[#fffdf7]/82 sm:p-6">
+    <article className="article-reveal rounded-[1.35rem] border border-secondary/10 bg-white/48 p-4 transition duration-300 hover:border-blush/40 hover:bg-[#fffdf7]/82 sm:rounded-[1.75rem] sm:p-6">
       <MetaLine post={post} />
-      <h3 className="mt-4 font-serif text-2xl font-normal leading-tight tracking-normal text-secondary">
+      <h3 className="mt-3 font-serif text-[1.45rem] font-normal leading-tight tracking-normal text-secondary sm:mt-4 sm:text-2xl">
         <Link href={`/blog/${post.slug}`} className="transition hover:text-primary">
           {post.title}
         </Link>
@@ -254,9 +254,9 @@ export function QuoteStyleArticleCard({ post }: CardProps) {
   const quote = post.quoteText || post.excerpt;
 
   return (
-    <article className="article-reveal rounded-[2.25rem] border border-blush/25 bg-[#fffaf4]/78 p-6 shadow-[0_20px_70px_rgba(92,66,52,0.07)] transition duration-500 hover:-translate-y-1 sm:p-7">
-      <span className="font-serif text-6xl leading-none text-blush/70">&ldquo;</span>
-      <p className="mt-1 font-serif text-2xl font-normal leading-snug tracking-normal text-secondary">
+    <article className="article-reveal rounded-[1.5rem] border border-blush/25 bg-[#fffaf4]/78 p-5 shadow-[0_16px_48px_rgba(92,66,52,0.065)] transition duration-500 hover:-translate-y-1 sm:rounded-[2.25rem] sm:p-7">
+      <span className="font-serif text-5xl leading-none text-blush/70 sm:text-6xl">&ldquo;</span>
+      <p className="mt-1 font-serif text-[1.45rem] font-normal leading-snug tracking-normal text-secondary sm:text-2xl">
         {quote}
       </p>
       <div className="mt-7 border-t border-secondary/10 pt-5">
@@ -298,15 +298,15 @@ export function ListStyleArticleCard({ post, index = 0 }: CardProps) {
 
 export function SeasonalHighlightCard({ post }: CardProps) {
   return (
-    <article className="group article-reveal overflow-hidden rounded-[2.25rem] border border-white/70 bg-[#eef3e7]/78 shadow-[0_22px_72px_rgba(35,53,31,0.08)] transition duration-500 hover:-translate-y-1">
-      <div className="relative h-52 overflow-hidden">
+    <article className="group article-reveal overflow-hidden rounded-[1.5rem] border border-white/70 bg-[#eef3e7]/78 shadow-[0_18px_52px_rgba(35,53,31,0.075)] transition duration-500 hover:-translate-y-1 sm:rounded-[2.25rem]">
+      <div className="relative h-44 overflow-hidden sm:h-52">
         <ArticleImage post={post} width={900} height={620} />
       </div>
-      <div className="p-6">
+      <div className="p-4 sm:p-6">
         <span className="rounded-full bg-white/72 px-3 py-1 text-xs font-semibold text-primary">
           {post.seasonalLabel || "Inspiratie de sezon"}
         </span>
-        <h3 className="mt-5 font-serif text-3xl font-normal leading-tight tracking-normal text-secondary">
+        <h3 className="mt-4 font-serif text-[1.75rem] font-normal leading-tight tracking-normal text-secondary sm:mt-5 sm:text-3xl">
           <Link href={`/blog/${post.slug}`} className="transition hover:text-primary">
             {post.title}
           </Link>

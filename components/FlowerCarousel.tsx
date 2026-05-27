@@ -114,9 +114,9 @@ export default function FlowerCarousel({ flowers }: Props) {
   }
 
   return (
-    <div className="mx-auto mt-10 w-full max-w-6xl">
+    <div className="mx-auto mt-6 w-full max-w-6xl sm:mt-10">
       <div
-        className="premium-blush-surface relative cursor-grab select-none overflow-hidden rounded-[2.5rem] p-3 active:cursor-grabbing sm:p-4 lg:p-5"
+        className="premium-blush-surface relative cursor-grab select-none overflow-hidden rounded-[1.65rem] p-2.5 active:cursor-grabbing sm:rounded-[2.5rem] sm:p-4 lg:p-5"
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
@@ -126,11 +126,11 @@ export default function FlowerCarousel({ flowers }: Props) {
         }}
       >
         <div className="absolute right-6 top-6 hidden h-24 w-24 rounded-full bg-blush-soft blur-2xl sm:block" />
-        <div className="grid gap-4 lg:grid-cols-[1.18fr_0.82fr]">
+        <div className="grid gap-3 sm:gap-4 lg:grid-cols-[1.18fr_0.82fr]">
           <Link
             href={`/flori/${activeFlower.slug}`}
             onClick={handleActiveClick}
-            className="group relative min-h-[24rem] overflow-hidden rounded-[2.15rem] border border-white/70 shadow-[0_28px_86px_rgba(35,53,31,0.13)] sm:min-h-[34rem]"
+            className="group relative min-h-[20rem] overflow-hidden rounded-[1.45rem] border border-white/70 shadow-[0_22px_58px_rgba(35,53,31,0.12)] sm:min-h-[34rem] sm:rounded-[2.15rem]"
           >
             <Image
               key={activeFlower.slug}
@@ -143,28 +143,28 @@ export default function FlowerCarousel({ flowers }: Props) {
               className="premium-image object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-secondary/52 via-secondary/4 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-5 text-white sm:p-7">
+            <div className="absolute bottom-0 left-0 right-0 p-4 text-white sm:p-7">
               <p className="mb-3 inline-flex rounded-full bg-white/18 px-3 py-1 text-xs font-semibold backdrop-blur-xl">
                 Floare recomandata
               </p>
-              <h3 className="max-w-xl font-serif text-4xl font-normal leading-tight tracking-normal sm:text-5xl">
+              <h3 className="max-w-xl font-serif text-[2.25rem] font-normal leading-tight tracking-normal sm:text-5xl">
                 {cleanFlowerName(activeFlower.name)}
               </h3>
             </div>
           </Link>
 
-          <div className="flex flex-col justify-between rounded-[2.15rem] border border-white/60 bg-[#fffdf7]/68 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur-xl sm:p-7">
+          <div className="flex flex-col justify-between rounded-[1.45rem] border border-white/60 bg-[#fffdf7]/68 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur-xl sm:rounded-[2.15rem] sm:p-7">
             <div>
               <p className="editorial-kicker mb-4">Profil de gradina</p>
-              <h3 className="font-serif text-4xl font-normal leading-tight tracking-normal text-secondary sm:text-5xl">
+              <h3 className="font-serif text-[2rem] font-normal leading-tight tracking-normal text-secondary sm:text-5xl">
                 {cleanFlowerName(activeFlower.name)}
               </h3>
-              <p className="mt-5 text-base leading-8 text-gray-700">
+              <p className="mt-4 text-[0.95rem] leading-7 text-gray-700 sm:mt-5 sm:text-base sm:leading-8">
                 {activeFlower.description}
               </p>
 
-              <div className="mt-7 grid grid-cols-2 gap-3">
-                <div className="rounded-2xl bg-white/58 p-4">
+              <div className="mt-5 grid grid-cols-2 gap-2.5 sm:mt-7 sm:gap-3">
+                <div className="rounded-[1.1rem] bg-white/58 p-3 sm:rounded-2xl sm:p-4">
                   <p className="text-xs font-semibold text-blush">
                     Atmosfera
                   </p>
@@ -172,7 +172,7 @@ export default function FlowerCarousel({ flowers }: Props) {
                     Textura blanda si culoare cu prezenta.
                   </p>
                 </div>
-                <div className="rounded-2xl bg-white/58 p-4">
+                <div className="rounded-[1.1rem] bg-white/58 p-3 sm:rounded-2xl sm:p-4">
                   <p className="text-xs font-semibold text-blush">Ritm</p>
                   <p className="mt-2 text-sm leading-6 text-gray-700">
                     Ideala pentru compozitii aerisite.
@@ -181,11 +181,11 @@ export default function FlowerCarousel({ flowers }: Props) {
               </div>
             </div>
 
-            <div className="mt-8 flex flex-col gap-4">
+            <div className="mt-6 flex flex-col gap-4 sm:mt-8">
               <div className="flex items-center justify-between gap-3">
                 <Link
                   href={`/flori/${activeFlower.slug}`}
-                  className="botanical-button px-5 py-2.5 text-sm font-semibold"
+                  className="botanical-button px-5 py-2.5 text-sm font-semibold sm:w-auto"
                 >
                   Vezi profilul
                 </Link>
@@ -220,7 +220,7 @@ export default function FlowerCarousel({ flowers }: Props) {
                       type="button"
                       aria-label={`Selecteaza ${cleanFlowerName(flower.name)}`}
                       onClick={() => goToIndex(index)}
-                      className={`group relative h-20 overflow-hidden rounded-2xl border transition duration-300 sm:h-24 ${
+                      className={`group relative h-16 overflow-hidden rounded-[1rem] border transition duration-300 sm:h-24 sm:rounded-2xl ${
                         isActive
                           ? "border-blush shadow-[0_12px_34px_rgba(35,53,31,0.12)]"
                           : "border-white/70 opacity-70 hover:opacity-100"

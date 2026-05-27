@@ -17,20 +17,20 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-[9999] border-b border-secondary/10 bg-[#fffdf7]/72 backdrop-blur-2xl">
-      <div className="mx-auto max-w-6xl px-4">
-        <div className="flex items-center justify-between py-3.5">
+    <header className="sticky top-0 z-[9999] border-b border-secondary/10 bg-[#fffdf7]/78 backdrop-blur-2xl">
+      <div className="mx-auto max-w-6xl px-3 sm:px-4">
+        <div className="flex items-center justify-between py-2.5 sm:py-3.5">
           <Link
             href="/"
             className="flex min-w-0 items-center gap-3 transition hover:opacity-90"
             onClick={() => setOpen(false)}
           >
-            <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-2xl border border-white/80 bg-white shadow-[0_12px_32px_rgba(35,53,31,0.08)] sm:h-12 sm:w-16">
+            <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-[1rem] border border-white/80 bg-white shadow-[0_10px_24px_rgba(35,53,31,0.08)] sm:h-12 sm:w-16 sm:rounded-2xl">
               <Image src="/logo.png" alt="Logo" fill className="object-cover" />
             </div>
 
             <div className="min-w-0">
-              <p className="truncate font-serif text-lg font-normal tracking-normal text-secondary sm:text-xl">
+              <p className="max-w-[12rem] truncate font-serif text-base font-normal tracking-normal text-secondary sm:max-w-none sm:text-xl">
                 Enciclopedia Florilor
               </p>
               <p className="hidden text-[11px] font-medium text-primary sm:block">
@@ -71,7 +71,7 @@ export default function Navbar() {
             onClick={() => setOpen((prev) => !prev)}
             aria-label={open ? "Inchide meniul" : "Deschide meniul"}
             aria-expanded={open}
-            className="relative inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/70 bg-white/82 text-secondary shadow-sm transition hover:bg-blush-soft md:hidden"
+            className="relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[1rem] border border-white/70 bg-white/82 text-secondary shadow-[0_10px_28px_rgba(35,53,31,0.08)] transition hover:bg-blush-soft md:hidden"
           >
             <span
               className={`absolute h-0.5 w-5 rounded-full bg-current transition-all duration-300 ${
@@ -93,11 +93,11 @@ export default function Navbar() {
 
         <div
           className={`overflow-hidden transition-all duration-300 md:hidden ${
-            open ? "max-h-96 pb-4 opacity-100" : "max-h-0 opacity-0"
+            open ? "max-h-80 pb-3 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="rounded-3xl border border-white/70 bg-[#fffdf7]/84 p-3 shadow-[0_24px_70px_rgba(35,53,31,0.1)] backdrop-blur-xl">
-            <nav className="flex flex-col gap-2">
+          <div className="rounded-[1.5rem] border border-white/70 bg-[#fffdf7]/88 p-2 shadow-[0_18px_54px_rgba(35,53,31,0.1)] backdrop-blur-xl">
+            <nav className="grid grid-cols-2 gap-2">
               {links.map((link) => {
                 const isActive = pathname === link.href;
 
@@ -106,7 +106,7 @@ export default function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className={`rounded-2xl px-4 py-3 text-sm font-semibold tracking-normal transition ${
+                    className={`rounded-[1.1rem] px-4 py-3 text-center text-sm font-semibold tracking-normal transition ${
                       isActive
                         ? "bg-blush-soft text-secondary"
                         : "text-gray-700 hover:bg-primary-soft hover:text-secondary"

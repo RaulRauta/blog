@@ -71,31 +71,31 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="min-h-screen bg-transparent px-4 py-10 sm:py-14">
+    <main className="min-h-screen bg-transparent px-4 py-7 sm:py-14">
       <div className="mx-auto max-w-6xl">
-        <section className="article-reveal mb-16 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <section className="article-reveal mb-11 grid gap-7 sm:mb-16 sm:gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
             <Link
               href="/"
-              className="mb-8 inline-flex text-sm font-semibold text-gray-600 transition hover:text-primary"
+              className="mb-6 inline-flex text-sm font-semibold text-gray-600 transition hover:text-primary sm:mb-8"
             >
               Inapoi acasa
             </Link>
-            <p className="editorial-kicker mb-4">Contact</p>
-            <h1 className="max-w-3xl font-serif text-5xl font-normal leading-[1.02] tracking-normal text-secondary sm:text-6xl lg:text-7xl">
+            <p className="editorial-kicker mb-3 sm:mb-4">Contact</p>
+            <h1 className="max-w-3xl font-serif text-[2.7rem] font-normal leading-[1.03] tracking-normal text-secondary sm:text-6xl lg:text-7xl">
               Scrie-ne ca intr-o scrisoare catre o gradina draga.
             </h1>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-gray-700 sm:text-lg">
+            <p className="mt-5 max-w-2xl text-[0.98rem] leading-7 text-gray-700 sm:mt-6 sm:text-lg sm:leading-8">
               Fie ca ai o intrebare despre o floare, o idee pentru o terasa sau
               o poveste botanica pe care vrei sa o propui, aici incepe
               conversatia.
             </p>
 
-            <div className="mt-8 grid max-w-2xl gap-3 sm:grid-cols-3">
+            <div className="mt-7 grid max-w-2xl grid-cols-3 gap-2 sm:mt-8 sm:gap-3">
               {["calm", "botanic", "personal"].map((item) => (
                 <div
                   key={item}
-                  className="rounded-2xl border border-white/70 bg-white/48 px-4 py-4 text-center shadow-[0_16px_46px_rgba(31,50,28,0.07)] backdrop-blur-xl"
+                  className="rounded-[1.1rem] border border-white/70 bg-white/48 px-2 py-3 text-center shadow-[0_14px_38px_rgba(31,50,28,0.07)] backdrop-blur-xl sm:rounded-2xl sm:px-4 sm:py-4"
                 >
                   <p className="text-sm font-semibold text-secondary">{item}</p>
                 </div>
@@ -103,7 +103,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="relative min-h-[32rem] overflow-hidden rounded-[2.75rem] border border-white/70 shadow-[0_34px_110px_rgba(31,50,28,0.18)]">
+          <div className="relative min-h-[22rem] overflow-hidden rounded-[1.7rem] border border-white/70 shadow-[0_26px_76px_rgba(31,50,28,0.16)] sm:min-h-[32rem] sm:rounded-[2.75rem]">
             <Image
               src="/images/articles/hortensia-demo/care-detail.png"
               alt="Masa botanica eleganta cu unelte de ingrijire si flori"
@@ -113,8 +113,8 @@ export default function ContactPage() {
               className="premium-image object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-secondary/64 via-secondary/8 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-8">
-              <p className="max-w-md font-serif text-3xl leading-tight tracking-normal sm:text-4xl">
+            <div className="absolute inset-x-0 bottom-0 p-5 text-white sm:p-8">
+              <p className="max-w-md font-serif text-[1.85rem] leading-tight tracking-normal sm:text-4xl">
                 Un mesaj bun incepe cu lumina, locul si floarea pe care o ai in
                 minte.
               </p>
@@ -122,9 +122,9 @@ export default function ContactPage() {
           </div>
         </section>
 
-        <section className="mb-16 grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-start sm:mb-20">
+        <section className="mb-11 grid gap-5 sm:mb-20 sm:gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
           <aside className="grid gap-5">
-            <div className="premium-blush-surface article-reveal rounded-[2.25rem] p-6 sm:p-8">
+            <div className="premium-blush-surface article-reveal rounded-[1.55rem] p-5 sm:rounded-[2.25rem] sm:p-8">
               <p className="editorial-kicker mb-4">Ne poti scrie pentru</p>
               <div className="space-y-5">
                 {contactReasons.map((reason) => (
@@ -132,7 +132,7 @@ export default function ContactPage() {
                     key={reason.title}
                     className="border-b border-secondary/10 pb-5 last:border-b-0 last:pb-0"
                   >
-                    <h2 className="font-serif text-2xl font-normal leading-tight tracking-normal text-secondary">
+                    <h2 className="font-serif text-[1.45rem] font-normal leading-tight tracking-normal text-secondary sm:text-2xl">
                       {reason.title}
                     </h2>
                     <p className="mt-2 text-sm leading-7 text-gray-700">
@@ -143,7 +143,7 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="premium-surface article-reveal rounded-[2.25rem] p-6 sm:p-8">
+            <div className="premium-surface article-reveal rounded-[1.55rem] p-5 sm:rounded-[2.25rem] sm:p-8">
               <p className="editorial-kicker mb-4">Date de contact</p>
               <div className="space-y-5 text-sm leading-7 text-gray-700">
                 <div>
@@ -167,10 +167,10 @@ export default function ContactPage() {
             </div>
           </aside>
 
-          <section className="article-reveal overflow-hidden rounded-[2.5rem] border border-white/70 bg-[#fffaf1]/82 shadow-[0_30px_100px_rgba(31,50,28,0.13)] backdrop-blur-xl">
-            <div className="border-b border-secondary/10 bg-gradient-to-r from-blush-soft via-white/40 to-primary-soft p-6 sm:p-8">
+          <section className="article-reveal overflow-hidden rounded-[1.7rem] border border-white/70 bg-[#fffaf1]/82 shadow-[0_24px_70px_rgba(31,50,28,0.12)] backdrop-blur-xl sm:rounded-[2.5rem]">
+            <div className="border-b border-secondary/10 bg-gradient-to-r from-blush-soft via-white/40 to-primary-soft p-5 sm:p-8">
               <p className="editorial-kicker mb-3">Trimite mesajul</p>
-              <h2 className="font-serif text-4xl font-normal leading-tight tracking-normal text-secondary sm:text-5xl">
+              <h2 className="font-serif text-[2.05rem] font-normal leading-tight tracking-normal text-secondary sm:text-5xl">
                 Spune-ne ce vrei sa crestem impreuna.
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-gray-700 sm:text-base">
@@ -179,7 +179,7 @@ export default function ContactPage() {
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5 p-6 sm:p-8">
+            <form onSubmit={handleSubmit} className="space-y-4 p-5 sm:space-y-5 sm:p-8">
               <div className="grid gap-5 sm:grid-cols-2">
                 <label className="group block">
                   <span className="mb-2 block text-sm font-semibold text-secondary">
@@ -190,7 +190,7 @@ export default function ContactPage() {
                     placeholder="Ex: Maria Popescu"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full rounded-2xl border border-secondary/12 bg-white/58 px-4 py-3.5 text-sm text-secondary outline-none transition placeholder:text-gray-400 focus:border-blush/70 focus:bg-[#fffdf7] focus:ring-4 focus:ring-blush-soft"
+                    className="w-full rounded-[1.1rem] border border-secondary/12 bg-white/58 px-4 py-3.5 text-sm text-secondary outline-none transition placeholder:text-gray-400 focus:border-blush/70 focus:bg-[#fffdf7] focus:ring-4 focus:ring-blush-soft sm:rounded-2xl"
                   />
                 </label>
 
@@ -203,7 +203,7 @@ export default function ContactPage() {
                     placeholder="exemplu@email.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full rounded-2xl border border-secondary/12 bg-white/58 px-4 py-3.5 text-sm text-secondary outline-none transition placeholder:text-gray-400 focus:border-blush/70 focus:bg-[#fffdf7] focus:ring-4 focus:ring-blush-soft"
+                    className="w-full rounded-[1.1rem] border border-secondary/12 bg-white/58 px-4 py-3.5 text-sm text-secondary outline-none transition placeholder:text-gray-400 focus:border-blush/70 focus:bg-[#fffdf7] focus:ring-4 focus:ring-blush-soft sm:rounded-2xl"
                   />
                 </label>
               </div>
@@ -217,7 +217,7 @@ export default function ContactPage() {
                   rows={7}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-full resize-none rounded-[1.35rem] border border-secondary/12 bg-white/58 px-4 py-4 text-sm leading-7 text-secondary outline-none transition placeholder:text-gray-400 focus:border-blush/70 focus:bg-[#fffdf7] focus:ring-4 focus:ring-blush-soft"
+                  className="w-full resize-none rounded-[1.15rem] border border-secondary/12 bg-white/58 px-4 py-4 text-sm leading-7 text-secondary outline-none transition placeholder:text-gray-400 focus:border-blush/70 focus:bg-[#fffdf7] focus:ring-4 focus:ring-blush-soft sm:rounded-[1.35rem]"
                 />
               </label>
 
@@ -250,11 +250,11 @@ export default function ContactPage() {
           </section>
         </section>
 
-        <section className="mb-16 grid gap-5 md:grid-cols-3 sm:mb-20">
+        <section className="mb-11 grid gap-4 sm:mb-20 sm:gap-5 md:grid-cols-3">
           {expectations.map((item, index) => (
             <div
               key={item}
-              className="premium-surface article-reveal rounded-[2rem] p-6"
+              className="premium-surface article-reveal rounded-[1.45rem] p-5 sm:rounded-[2rem] sm:p-6"
             >
               <span className="font-serif text-4xl text-blush">
                 {String(index + 1).padStart(2, "0")}
@@ -264,9 +264,9 @@ export default function ContactPage() {
           ))}
         </section>
 
-        <section className="article-reveal overflow-hidden rounded-[2.5rem] border border-white/70 bg-secondary text-white shadow-[0_32px_100px_rgba(31,50,28,0.22)]">
+        <section className="article-reveal overflow-hidden rounded-[1.7rem] border border-white/70 bg-secondary text-white shadow-[0_26px_76px_rgba(31,50,28,0.2)] sm:rounded-[2.5rem]">
           <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
-            <div className="relative min-h-[20rem] lg:min-h-full">
+            <div className="relative min-h-[15rem] sm:min-h-[20rem] lg:min-h-full">
               <Image
                 src="/images/articles/hortensia-demo/garden-border.png"
                 alt="Bordura botanica eleganta cu hortensii si frunzis"
@@ -276,11 +276,11 @@ export default function ContactPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-r from-secondary/58 to-transparent" />
             </div>
-            <div className="p-7 sm:p-10 lg:p-12">
+            <div className="p-5 sm:p-10 lg:p-12">
               <p className="mb-4 text-sm font-semibold text-blush">
                 O ultima nota
               </p>
-              <blockquote className="max-w-2xl font-serif text-4xl font-normal leading-tight tracking-normal sm:text-5xl">
+              <blockquote className="max-w-2xl font-serif text-[2.05rem] font-normal leading-tight tracking-normal sm:text-5xl">
                 Florile bune nu grabesc raspunsurile. Ele ne invata sa observam
                 mai atent.
               </blockquote>

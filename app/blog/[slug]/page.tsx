@@ -41,8 +41,8 @@ export default async function BlogPostPage({
 
   if (!post) {
     return (
-      <main className="min-h-screen bg-transparent px-4 py-16">
-        <div className="premium-surface mx-auto max-w-3xl rounded-[2rem] p-8 text-center">
+      <main className="min-h-screen bg-transparent px-4 py-10 sm:py-16">
+        <div className="premium-surface mx-auto max-w-3xl rounded-[1.5rem] p-6 text-center sm:rounded-[2rem] sm:p-8">
           <h1 className="mb-4 text-3xl font-bold text-gray-950">
             Articol inexistent
           </h1>
@@ -64,14 +64,14 @@ export default async function BlogPostPage({
     <main className="min-h-screen bg-transparent">
       <ArticleLayoutRenderer post={post} />
 
-      <section className="mx-auto max-w-5xl px-4 pb-16 pt-4">
-        <div className="premium-surface rounded-[2rem] p-6 sm:p-8">
+      <section className="mx-auto max-w-5xl px-4 pb-12 pt-2 sm:pb-16 sm:pt-4">
+        <div className="premium-surface rounded-[1.5rem] p-5 sm:rounded-[2rem] sm:p-8">
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-secondary">
             Continua explorarea
           </p>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h2 className="font-serif text-2xl tracking-normal text-gray-950">
+              <h2 className="font-serif text-[1.55rem] tracking-normal text-gray-950 sm:text-2xl">
                 Mai multe articole botanice
               </h2>
               <p className="mt-1 text-sm leading-6 text-gray-600">
@@ -80,7 +80,7 @@ export default async function BlogPostPage({
             </div>
             <Link
               href="/blog"
-                className="inline-flex w-fit rounded-full bg-secondary px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-primary"
+                className="inline-flex w-full justify-center rounded-full bg-secondary px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-primary sm:w-fit"
             >
               Vezi blogul
             </Link>

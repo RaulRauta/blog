@@ -38,33 +38,33 @@ export default async function FlowerPage({
   const name = cleanFlowerName(flower.name);
 
   return (
-    <main className="min-h-screen px-4 py-12 sm:py-16">
-      <article className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+    <main className="min-h-screen px-4 py-8 sm:py-16">
+      <article className="mx-auto grid max-w-6xl gap-7 sm:gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="article-reveal">
           <Link
             href="/flori"
-            className="mb-8 inline-flex text-sm font-semibold text-gray-600 transition hover:text-primary"
+            className="mb-6 inline-flex text-sm font-semibold text-gray-600 transition hover:text-primary sm:mb-8"
           >
             Inapoi la flori
           </Link>
 
-          <p className="editorial-kicker mb-4">Profil botanic</p>
-          <h1 className="font-serif text-5xl font-normal leading-tight tracking-normal text-secondary sm:text-6xl">
+          <p className="editorial-kicker mb-3 sm:mb-4">Profil botanic</p>
+          <h1 className="font-serif text-[2.75rem] font-normal leading-[1.05] tracking-normal text-secondary sm:text-6xl">
             {name}
           </h1>
-          <p className="mt-6 max-w-xl text-base leading-8 text-gray-700 sm:text-lg">
+          <p className="mt-5 max-w-xl text-[0.98rem] leading-7 text-gray-700 sm:mt-6 sm:text-lg sm:leading-8">
             {flower.description}
           </p>
 
-          <div className="premium-blush-surface mt-8 rounded-[2rem] p-6">
-            <p className="font-serif text-2xl leading-tight text-secondary">
+          <div className="premium-blush-surface mt-6 rounded-[1.5rem] p-5 sm:mt-8 sm:rounded-[2rem] sm:p-6">
+            <p className="font-serif text-[1.45rem] leading-tight text-secondary sm:text-2xl">
               O floare buna schimba ritmul unei gradini: aduce culoare, volum
               si un punct de liniste in compozitie.
             </p>
           </div>
         </div>
 
-        <div className="article-reveal relative min-h-[32rem] overflow-hidden rounded-[2.5rem] border border-white/70 shadow-[0_30px_90px_rgba(35,53,31,0.14)]">
+        <div className="article-reveal relative min-h-[23rem] overflow-hidden rounded-[1.7rem] border border-white/70 shadow-[0_24px_66px_rgba(35,53,31,0.13)] sm:min-h-[32rem] sm:rounded-[2.5rem]">
           <Image
             src={flower.image}
             alt={name}

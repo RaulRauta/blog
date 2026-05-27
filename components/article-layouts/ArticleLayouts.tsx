@@ -13,7 +13,7 @@ function BackLink() {
   return (
     <Link
       href="/blog"
-      className="mb-8 inline-flex items-center gap-2 rounded-full border border-secondary/10 bg-white/45 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-secondary/70 backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white/70 hover:text-secondary"
+      className="mb-6 inline-flex items-center gap-2 rounded-full border border-secondary/10 bg-white/45 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-secondary/70 backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white/70 hover:text-secondary sm:mb-8 sm:tracking-[0.18em]"
     >
       <span aria-hidden="true">←</span>
       Inapoi la articole
@@ -113,7 +113,7 @@ function Quote({ post, light = false }: { post: SanityPost; light?: boolean }) {
 
   return (
     <blockquote
-      className={`article-reveal relative rounded-[2rem] border px-7 py-8 font-serif sm:px-10 ${
+      className={`article-reveal relative rounded-[1.5rem] border px-5 py-6 font-serif sm:rounded-[2rem] sm:px-10 sm:py-8 ${
         light
           ? "border-white/12 bg-white/8 text-white"
           : "border-secondary/10 bg-white/58 text-gray-950"
@@ -122,7 +122,7 @@ function Quote({ post, light = false }: { post: SanityPost; light?: boolean }) {
       <span className={`mb-3 block text-6xl leading-none ${light ? "text-white/20" : "text-primary/30"}`}>
         &quot;
       </span>
-      <p className="text-3xl leading-tight tracking-normal sm:text-4xl">
+      <p className="text-[1.65rem] leading-tight tracking-normal sm:text-4xl">
         {post.quoteText}
       </p>
       {post.quoteAttribution && (
@@ -142,9 +142,9 @@ function Checklist({ post }: LayoutProps) {
   if (!post.checklistItems || post.checklistItems.length === 0) return null;
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2">
+    <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
       {post.checklistItems.map((item, index) => (
-        <div key={item._key || index} className="article-reveal premium-surface rounded-[1.5rem] p-5">
+        <div key={item._key || index} className="article-reveal premium-surface rounded-[1.25rem] p-4 sm:rounded-[1.5rem] sm:p-5">
           <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-secondary text-sm font-bold text-white shadow-sm">
             {index + 1}
           </div>
@@ -160,9 +160,9 @@ function Cards({ post }: LayoutProps) {
   if (!post.infoCards || post.infoCards.length === 0) return null;
 
   return (
-    <div className="grid gap-5 md:grid-cols-3">
+    <div className="grid gap-4 md:grid-cols-3 md:gap-5">
       {post.infoCards.map((card, index) => (
-        <article key={card._key || index} className="article-reveal group premium-surface overflow-hidden rounded-[1.5rem]">
+        <article key={card._key || index} className="article-reveal group premium-surface overflow-hidden rounded-[1.25rem] sm:rounded-[1.5rem]">
           {card.image && (
             <div className="relative h-52">
               <Figure image={card.image} title={card.title} sizes="33vw" />
@@ -182,12 +182,12 @@ function Gallery({ post, columns = "md:grid-cols-3" }: LayoutProps & { columns?:
   if (!post.galleryImages || post.galleryImages.length === 0) return null;
 
   return (
-    <div className={`grid gap-4 ${columns}`}>
+    <div className={`grid gap-3 sm:gap-4 ${columns}`}>
       {post.galleryImages.map((image, index) => (
         <div
           key={`${image.asset?._ref || image.asset?._id}-${index}`}
-          className={`article-reveal relative overflow-hidden rounded-[1.5rem] ${
-            index === 0 ? "min-h-[360px]" : "min-h-[260px]"
+          className={`article-reveal relative overflow-hidden rounded-[1.25rem] sm:rounded-[1.5rem] ${
+            index === 0 ? "min-h-[17rem] sm:min-h-[360px]" : "min-h-[13rem] sm:min-h-[260px]"
           }`}
         >
           <Figure image={image} title={post.title} sizes="(min-width: 768px) 33vw, 100vw" />
@@ -204,7 +204,7 @@ function Callout({ post, light = false }: { post: SanityPost; light?: boolean })
 
   return (
     <aside
-      className={`article-reveal rounded-[2rem] p-6 sm:p-8 ${
+      className={`article-reveal rounded-[1.5rem] p-5 sm:rounded-[2rem] sm:p-8 ${
         light ? "border border-white/12 bg-white/8 text-white" : "premium-surface text-gray-950"
       }`}
     >
@@ -232,8 +232,8 @@ function RelatedArticles({ post }: LayoutProps) {
   if (!post.relatedArticles || post.relatedArticles.length === 0) return null;
 
   return (
-    <section className="article-reveal mx-auto max-w-7xl px-4 py-12">
-      <div className="mb-7 flex items-end justify-between gap-4">
+    <section className="article-reveal mx-auto max-w-7xl px-4 py-9 sm:py-12">
+      <div className="mb-5 flex items-end justify-between gap-4 sm:mb-7">
         <div>
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-secondary/60">
             Continua lectura
@@ -243,11 +243,11 @@ function RelatedArticles({ post }: LayoutProps) {
           </h2>
         </div>
       </div>
-      <div className="flex snap-x gap-5 overflow-x-auto pb-3">
+      <div className="flex snap-x gap-3 overflow-x-auto pb-3 sm:gap-5">
         {post.relatedArticles.map((article) => (
           <article
             key={article._id}
-            className="group premium-surface min-w-[18rem] snap-start overflow-hidden rounded-[1.5rem] md:min-w-[24rem]"
+            className="group premium-surface min-w-[16rem] snap-start overflow-hidden rounded-[1.25rem] sm:rounded-[1.5rem] md:min-w-[24rem]"
           >
             {article.mainImage && (
               <Link href={`/blog/${article.slug}`} className="relative block h-56">
@@ -273,8 +273,8 @@ function AuthorBox({ post }: LayoutProps) {
   if (!post.author) return null;
 
   return (
-    <section className="article-reveal mx-auto max-w-5xl px-4 py-8">
-      <div className="premium-surface grid gap-6 rounded-[2rem] p-6 sm:grid-cols-[8rem_1fr] sm:p-8">
+    <section className="article-reveal mx-auto max-w-5xl px-4 py-7 sm:py-8">
+      <div className="premium-surface grid gap-5 rounded-[1.5rem] p-5 sm:grid-cols-[8rem_1fr] sm:rounded-[2rem] sm:p-8">
         {post.author.image && (
           <div className="relative h-32 w-32 overflow-hidden rounded-full">
             <Figure image={post.author.image} title={post.author.name} sizes="8rem" />
@@ -284,7 +284,7 @@ function AuthorBox({ post }: LayoutProps) {
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-secondary/60">
             Semnat de
           </p>
-          <h2 className="font-serif text-3xl text-gray-950">{post.author.name}</h2>
+          <h2 className="font-serif text-[1.8rem] text-gray-950 sm:text-3xl">{post.author.name}</h2>
           <div className="mt-4">
             <RichText value={post.author.bio} />
           </div>
@@ -299,14 +299,14 @@ function ArticleIntro({ post, light = false }: { post: SanityPost; light?: boole
     <>
       <CategoryPills post={post} light={light} />
       <h1
-        className={`font-serif text-5xl font-normal tracking-normal sm:text-6xl lg:text-7xl ${
+        className={`font-serif text-[2.65rem] font-normal leading-[1.05] tracking-normal sm:text-6xl lg:text-7xl ${
           light ? "text-white" : "text-gray-950"
         }`}
       >
         {post.title}
       </h1>
       {post.excerpt && (
-        <p className={`mt-6 max-w-2xl text-lg leading-8 ${light ? "text-white/72" : "text-gray-600"}`}>
+        <p className={`mt-5 max-w-2xl text-[0.98rem] leading-7 sm:mt-6 sm:text-lg sm:leading-8 ${light ? "text-white/72" : "text-gray-600"}`}>
           {post.excerpt}
         </p>
       )}
@@ -317,10 +317,10 @@ function ArticleIntro({ post, light = false }: { post: SanityPost; light?: boole
 
 export function ArticleLayout1({ post }: LayoutProps) {
   return (
-    <article className="px-4 py-10">
+    <article className="px-4 py-7 sm:py-10">
       <div className="mx-auto max-w-7xl">
         <BackLink />
-        <div className="premium-surface-strong grid gap-8 rounded-[2rem] p-6 lg:grid-cols-[0.9fr_1.1fr] lg:p-12">
+        <div className="premium-surface-strong grid gap-6 rounded-[1.5rem] p-5 sm:rounded-[2rem] sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:p-12">
           <div className="flex flex-col justify-center">
             <ArticleIntro post={post} />
             <div className="mt-8">
@@ -328,11 +328,11 @@ export function ArticleLayout1({ post }: LayoutProps) {
             </div>
           </div>
           <div className="space-y-5">
-            <div className="relative min-h-[520px] overflow-hidden rounded-[1.5rem]">
+            <div className="relative min-h-[22rem] overflow-hidden rounded-[1.25rem] sm:min-h-[520px] sm:rounded-[1.5rem]">
               <Figure image={post.mainImage} title={post.title} priority />
             </div>
             {post.secondaryImage && (
-              <div className="relative ml-auto min-h-56 w-full max-w-md overflow-hidden rounded-[1.5rem]">
+              <div className="relative ml-auto min-h-44 w-full max-w-md overflow-hidden rounded-[1.25rem] sm:min-h-56 sm:rounded-[1.5rem]">
                 <Figure image={post.secondaryImage} title={post.title} />
               </div>
             )}
@@ -345,20 +345,20 @@ export function ArticleLayout1({ post }: LayoutProps) {
 
 export function ArticleLayout2({ post }: LayoutProps) {
   return (
-    <article className="px-4 py-10">
+    <article className="px-4 py-7 sm:py-10">
       <div className="mx-auto max-w-6xl text-center">
         <BackLink />
         <ArticleIntro post={post} />
-        <div className="article-reveal relative mt-10 min-h-[540px] overflow-hidden rounded-[2rem] ring-1 ring-white/50">
+        <div className="article-reveal relative mt-7 min-h-[22rem] overflow-hidden rounded-[1.5rem] ring-1 ring-white/50 sm:mt-10 sm:min-h-[540px] sm:rounded-[2rem]">
           <Figure image={post.mainImage} title={post.title} priority sizes="100vw" />
         </div>
-        <div className="mx-auto mt-12 max-w-3xl text-left">
+        <div className="mx-auto mt-8 max-w-3xl text-left sm:mt-12">
           <RichText value={post.introText || post.body} />
         </div>
-        <div className="mx-auto mt-12 max-w-4xl text-left">
+        <div className="mx-auto mt-8 max-w-4xl text-left sm:mt-12">
           <Quote post={post} />
         </div>
-        <div className="mx-auto mt-10 max-w-3xl text-left">
+        <div className="mx-auto mt-8 max-w-3xl text-left sm:mt-10">
           <RichText value={post.secondaryText} />
         </div>
       </div>
@@ -369,15 +369,15 @@ export function ArticleLayout2({ post }: LayoutProps) {
 export function ArticleLayout3({ post }: LayoutProps) {
   return (
     <article>
-      <div className="mx-auto max-w-7xl px-4 pt-10">
+      <div className="mx-auto max-w-7xl px-4 pt-7 sm:pt-10">
         <BackLink />
         <ArticleIntro post={post} />
       </div>
-      <div className="article-reveal relative my-10 min-h-[72vh] overflow-hidden">
+      <div className="article-reveal relative my-7 min-h-[24rem] overflow-hidden sm:my-10 sm:min-h-[72vh]">
         <Figure image={post.mainImage} title={post.title} priority sizes="100vw" />
       </div>
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 pb-16 lg:grid-cols-[1fr_0.7fr]">
-        <div className="premium-surface rounded-[2rem] p-6 sm:p-10">
+      <div className="mx-auto grid max-w-6xl gap-6 px-4 pb-12 sm:gap-8 sm:pb-16 lg:grid-cols-[1fr_0.7fr]">
+        <div className="premium-surface rounded-[1.5rem] p-5 sm:rounded-[2rem] sm:p-10">
           <RichText value={post.introText || post.body} />
           <div className="mt-8">
             <RichText value={post.secondaryText} />
@@ -391,18 +391,18 @@ export function ArticleLayout3({ post }: LayoutProps) {
 
 export function ArticleLayout4({ post }: LayoutProps) {
   return (
-    <article className="px-4 py-10">
+    <article className="px-4 py-7 sm:py-10">
       <div className="mx-auto max-w-7xl">
         <BackLink />
-        <div className="relative min-h-[600px] overflow-hidden rounded-[2rem]">
+        <div className="relative min-h-[27rem] overflow-hidden rounded-[1.5rem] sm:min-h-[600px] sm:rounded-[2rem]">
           <Figure image={post.mainImage} title={post.title} priority sizes="100vw" />
           <div className="absolute inset-0 bg-linear-to-t from-black/65 via-black/15 to-transparent" />
-          <div className="absolute bottom-0 max-w-3xl p-7 sm:p-12">
+          <div className="absolute bottom-0 max-w-3xl p-5 sm:p-12">
             <ArticleIntro post={post} light />
           </div>
         </div>
-        <div className="mt-8 grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
-          <div className="premium-surface rounded-[2rem] p-6 sm:p-9">
+        <div className="mt-6 grid gap-6 sm:mt-8 sm:gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+          <div className="premium-surface rounded-[1.5rem] p-5 sm:rounded-[2rem] sm:p-9">
             <RichText value={post.introText || post.body} />
           </div>
           <div className="space-y-8">
@@ -417,17 +417,17 @@ export function ArticleLayout4({ post }: LayoutProps) {
 
 export function ArticleLayout5({ post }: LayoutProps) {
   return (
-    <article className="px-4 py-10">
+    <article className="px-4 py-7 sm:py-10">
       <div className="mx-auto max-w-7xl">
         <BackLink />
-        <div className="grid gap-8 lg:grid-cols-[1fr_0.82fr]">
-          <div className="premium-surface flex flex-col justify-center rounded-[2rem] p-6 sm:p-10">
+        <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1fr_0.82fr]">
+          <div className="premium-surface flex flex-col justify-center rounded-[1.5rem] p-5 sm:rounded-[2rem] sm:p-10">
             <ArticleIntro post={post} />
             <div className="mt-8">
               <RichText value={post.introText || post.body} />
             </div>
           </div>
-          <div className="relative min-h-[720px] overflow-hidden rounded-[2rem]">
+          <div className="relative min-h-[28rem] overflow-hidden rounded-[1.5rem] sm:min-h-[720px] sm:rounded-[2rem]">
             <Figure image={post.verticalImage || post.mainImage} title={post.title} priority />
           </div>
         </div>
@@ -441,28 +441,28 @@ export function ArticleLayout5({ post }: LayoutProps) {
 
 export function ArticleLayout6({ post }: LayoutProps) {
   return (
-    <article className="px-4 py-10">
+    <article className="px-4 py-7 sm:py-10">
       <div className="mx-auto max-w-7xl">
         <BackLink />
-        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="grid gap-6 sm:gap-8 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
             <ArticleIntro post={post} />
-            <div className="mt-10">
+            <div className="mt-7 sm:mt-10">
               <Quote post={post} />
             </div>
           </div>
-          <div className="relative min-h-[620px] overflow-hidden rounded-[2rem]">
+          <div className="relative min-h-[24rem] overflow-hidden rounded-[1.5rem] sm:min-h-[620px] sm:rounded-[2rem]">
             <Figure image={post.mainImage} title={post.title} priority />
           </div>
         </div>
-        <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-center">
-          <div className="premium-surface rounded-[2rem] p-6 sm:p-10">
+        <div className="mt-7 grid gap-6 sm:mt-10 sm:gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+          <div className="premium-surface rounded-[1.5rem] p-5 sm:rounded-[2rem] sm:p-10">
             <RichText value={post.introText || post.body} />
             <div className="mt-8">
               <RichText value={post.secondaryText} />
             </div>
           </div>
-          <div className="relative min-h-[420px] overflow-hidden rounded-[2rem]">
+          <div className="relative min-h-[20rem] overflow-hidden rounded-[1.5rem] sm:min-h-[420px] sm:rounded-[2rem]">
             <Figure image={post.secondaryImage} title={post.title} />
           </div>
         </div>
@@ -473,12 +473,12 @@ export function ArticleLayout6({ post }: LayoutProps) {
 
 export function ArticleLayout7({ post }: LayoutProps) {
   return (
-    <article className="px-4 py-10">
+    <article className="px-4 py-7 sm:py-10">
       <div className="mx-auto max-w-7xl">
         <BackLink />
         <ArticleIntro post={post} />
-        <div className="mt-10 grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
-          <div className="premium-surface rounded-[2rem] p-6 sm:p-9">
+        <div className="mt-7 grid gap-6 sm:mt-10 sm:gap-8 lg:grid-cols-[0.75fr_1.25fr]">
+          <div className="premium-surface rounded-[1.5rem] p-5 sm:rounded-[2rem] sm:p-9">
             <RichText value={post.introText || post.body} />
             <div className="mt-8 space-y-6 border-l border-secondary/25 pl-5">
               {(post.timelineItems || []).map((item, index) => (
@@ -504,16 +504,16 @@ export function ArticleLayout7({ post }: LayoutProps) {
 
 export function ArticleLayout8({ post }: LayoutProps) {
   return (
-    <article className="px-4 py-10">
+    <article className="px-4 py-7 sm:py-10">
       <div className="mx-auto max-w-7xl">
         <BackLink />
-        <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+        <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
           <ArticleIntro post={post} />
-          <div className="relative min-h-[360px] overflow-hidden rounded-[2rem]">
+          <div className="relative min-h-[19rem] overflow-hidden rounded-[1.5rem] sm:min-h-[360px] sm:rounded-[2rem]">
             <Figure image={post.secondaryImage || post.mainImage} title={post.title} priority />
           </div>
         </div>
-        <div className="premium-surface mt-8 rounded-[2rem] p-6 sm:p-10">
+        <div className="premium-surface mt-6 rounded-[1.5rem] p-5 sm:mt-8 sm:rounded-[2rem] sm:p-10">
           <RichText value={post.introText || post.body} />
         </div>
         <div className="mt-8">
@@ -529,17 +529,17 @@ export function ArticleLayout8({ post }: LayoutProps) {
 
 export function ArticleLayout9({ post }: LayoutProps) {
   return (
-    <article className="bg-[#263426]/92 px-4 py-10 text-white">
+    <article className="bg-[#263426]/92 px-4 py-7 text-white sm:py-10">
       <div className="mx-auto max-w-6xl">
         <BackLink />
         <div className="mx-auto max-w-3xl text-center">
           <ArticleIntro post={post} light />
         </div>
-        <div className="mx-auto mt-12 max-w-4xl">
+        <div className="mx-auto mt-8 max-w-4xl sm:mt-12">
           <Quote post={post} light />
         </div>
-        <div className="mx-auto mt-12 grid gap-8 lg:grid-cols-[1fr_0.7fr]">
-          <div className="rounded-[2rem] border border-white/12 bg-white/8 p-6 backdrop-blur-xl sm:p-10">
+        <div className="mx-auto mt-8 grid gap-6 sm:mt-12 sm:gap-8 lg:grid-cols-[1fr_0.7fr]">
+          <div className="rounded-[1.5rem] border border-white/12 bg-white/8 p-5 backdrop-blur-xl sm:rounded-[2rem] sm:p-10">
             <RichText value={post.introText || post.body} light />
             <div className="mt-8">
               <RichText value={post.secondaryText} light />
@@ -554,10 +554,10 @@ export function ArticleLayout9({ post }: LayoutProps) {
 
 export function ArticleLayout10({ post }: LayoutProps) {
   return (
-    <article className="px-4 py-10">
+    <article className="px-4 py-7 sm:py-10">
       <div className="mx-auto max-w-7xl">
         <BackLink />
-        <div className="premium-surface-strong grid gap-8 rounded-[2rem] p-5 lg:grid-cols-[0.82fr_1.18fr] lg:p-8">
+        <div className="premium-surface-strong grid gap-6 rounded-[1.5rem] p-4 sm:rounded-[2rem] sm:p-5 lg:grid-cols-[0.82fr_1.18fr] lg:p-8">
           <div className="flex flex-col justify-center p-2 sm:p-6">
             <ArticleIntro post={post} />
             <div className="mt-8">
@@ -565,15 +565,15 @@ export function ArticleLayout10({ post }: LayoutProps) {
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-[0.7fr_0.3fr]">
-            <div className="relative min-h-[620px] overflow-hidden rounded-[1.75rem]">
+            <div className="relative min-h-[24rem] overflow-hidden rounded-[1.25rem] sm:min-h-[620px] sm:rounded-[1.75rem]">
               <Figure image={post.mainImage} title={post.title} priority />
             </div>
-            <div className="relative min-h-[620px] overflow-hidden rounded-[1.75rem]">
+            <div className="relative min-h-[18rem] overflow-hidden rounded-[1.25rem] sm:min-h-[620px] sm:rounded-[1.75rem]">
               <Figure image={post.verticalImage || post.secondaryImage} title={post.title} />
             </div>
           </div>
         </div>
-        <div className="mt-8 grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
+        <div className="mt-6 grid gap-6 sm:mt-8 sm:gap-8 lg:grid-cols-[0.75fr_1.25fr]">
           <Callout post={post} />
           <div>
             <RichText value={post.secondaryText} />
@@ -594,10 +594,10 @@ export function ArticleLayout10({ post }: LayoutProps) {
 
 function LegacyArticle({ post }: LayoutProps) {
   return (
-    <article className="px-4 py-10">
+    <article className="px-4 py-7 sm:py-10">
       <div className="mx-auto max-w-5xl">
         <BackLink />
-        <div className="premium-surface-strong rounded-[2rem] p-6 sm:p-10">
+        <div className="premium-surface-strong rounded-[1.5rem] p-5 sm:rounded-[2rem] sm:p-10">
           <ArticleIntro post={post} />
           <div className="mt-8">
             <RichText value={post.introText || post.body} />

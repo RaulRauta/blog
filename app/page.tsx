@@ -76,23 +76,23 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-transparent">
-      <section className="relative overflow-hidden px-4 pb-16 pt-8 sm:pb-24 sm:pt-12">
+      <section className="relative overflow-hidden px-4 pb-10 pt-6 sm:pb-24 sm:pt-12">
         <div className="pointer-events-none absolute left-[8%] top-12 h-56 w-56 rounded-full bg-blush/24 blur-3xl" />
         <div className="pointer-events-none absolute right-[4%] top-28 h-72 w-72 rounded-full bg-primary/18 blur-3xl" />
         <div className="pointer-events-none absolute bottom-8 left-[42%] h-48 w-48 rounded-full bg-petal/20 blur-3xl" />
 
-        <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[0.94fr_1.06fr]">
+        <div className="mx-auto grid max-w-6xl items-center gap-8 lg:grid-cols-[0.94fr_1.06fr] lg:gap-10">
           <div className="article-reveal relative z-10">
-            <p className="editorial-kicker mb-4">Enciclopedia Florilor</p>
-            <h1 className="max-w-3xl font-serif text-5xl font-normal leading-[1.02] tracking-normal text-secondary sm:text-6xl lg:text-7xl">
+            <p className="editorial-kicker mb-3 sm:mb-4">Enciclopedia Florilor</p>
+            <h1 className="max-w-3xl font-serif text-[2.85rem] font-normal leading-[1.02] tracking-normal text-secondary sm:text-6xl lg:text-7xl">
               Flori, gradini si liniste botanica, intr-o revista calda.
             </h1>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-gray-700 sm:text-lg">
+            <p className="mt-5 max-w-2xl text-[0.98rem] leading-7 text-gray-700 sm:mt-6 sm:text-lg sm:leading-8">
               Un loc pentru ingrijire atenta, inspiratie de sezon si articole
               botanice despre plantele care aduc viata in casa si in gradina.
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row">
               <Link
                 href="/blog"
                 className="botanical-button px-6 py-3 text-sm font-semibold"
@@ -107,12 +107,12 @@ export default async function Home() {
               </Link>
             </div>
 
-            <div className="mt-10 grid max-w-xl grid-cols-3 gap-3">
+            <div className="mt-8 grid max-w-xl grid-cols-3 gap-2 sm:mt-10 sm:gap-3">
               {["120+ note botanice", "Ghiduri de sezon", "Inspiratie calma"].map(
                 (item) => (
                   <div
                     key={item}
-                    className="rounded-2xl border border-white/70 bg-white/52 px-3 py-4 text-center shadow-[0_18px_54px_rgba(31,50,28,0.08)] backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:bg-blush-soft/60"
+                    className="rounded-[1.15rem] border border-white/70 bg-white/52 px-2.5 py-3 text-center shadow-[0_14px_38px_rgba(31,50,28,0.07)] backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:bg-blush-soft/60 sm:rounded-2xl sm:px-3 sm:py-4"
                   >
                     <p className="text-xs font-semibold leading-5 text-secondary">
                       {item}
@@ -123,12 +123,12 @@ export default async function Home() {
             </div>
           </div>
 
-          <div className="article-reveal relative min-h-[34rem] lg:min-h-[40rem]">
+          <div className="article-reveal relative min-h-[24rem] sm:min-h-[34rem] lg:min-h-[40rem]">
             <div className="absolute inset-0 rounded-[2.5rem] bg-blush-soft blur-3xl" />
             <div className="absolute -right-8 top-12 h-28 w-28 rounded-full bg-primary/18 blur-2xl" />
-            <div className="relative grid h-full grid-cols-[0.72fr_1fr] gap-3 sm:gap-4">
-              <div className="flex flex-col gap-3 pt-12 sm:gap-4 sm:pt-16">
-                <div className="group relative h-44 overflow-hidden rounded-[2rem] border border-white/70 shadow-[0_24px_70px_rgba(31,50,28,0.15)] sm:h-56">
+            <div className="relative grid h-full grid-cols-[0.66fr_1fr] gap-2.5 sm:grid-cols-[0.72fr_1fr] sm:gap-4">
+              <div className="flex flex-col gap-2.5 pt-8 sm:gap-4 sm:pt-16">
+                <div className="group relative h-32 overflow-hidden rounded-[1.35rem] border border-white/70 shadow-[0_18px_48px_rgba(31,50,28,0.12)] sm:h-56 sm:rounded-[2rem]">
                   <Image
                     src={heroImages[1].src}
                     alt={heroImages[1].alt}
@@ -137,13 +137,13 @@ export default async function Home() {
                     className="premium-image object-cover"
                   />
                 </div>
-                <div className="premium-blush-surface rounded-[2rem] p-5 transition duration-500 hover:-translate-y-1 sm:p-6">
-                  <p className="font-serif text-2xl leading-tight text-secondary">
+                <div className="premium-blush-surface rounded-[1.35rem] p-3.5 transition duration-500 hover:-translate-y-1 sm:rounded-[2rem] sm:p-6">
+                  <p className="font-serif text-[1.18rem] leading-tight text-secondary sm:text-2xl">
                     Lumina naturala, flori alese cu grija si inspiratie care nu
                     grabeste privirea.
                   </p>
                 </div>
-                <div className="group relative h-36 overflow-hidden rounded-[2rem] border border-white/70 shadow-[0_20px_56px_rgba(31,50,28,0.12)] sm:h-44">
+                <div className="group relative h-28 overflow-hidden rounded-[1.35rem] border border-white/70 shadow-[0_16px_42px_rgba(31,50,28,0.1)] sm:h-44 sm:rounded-[2rem]">
                   <Image
                     src={heroImages[2].src}
                     alt={heroImages[2].alt}
@@ -154,7 +154,7 @@ export default async function Home() {
                 </div>
               </div>
 
-              <div className="group relative overflow-hidden rounded-[2.5rem] border border-white/70 shadow-[0_34px_100px_rgba(31,50,28,0.18)]">
+              <div className="group relative overflow-hidden rounded-[1.65rem] border border-white/70 shadow-[0_24px_66px_rgba(31,50,28,0.15)] sm:rounded-[2.5rem]">
                 <Image
                   src={heroImages[0].src}
                   alt={heroImages[0].alt}
@@ -164,8 +164,8 @@ export default async function Home() {
                   className="premium-image object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-secondary/58 via-transparent to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-5 text-white sm:p-7">
-                  <p className="max-w-xs text-sm leading-6 text-white/86">
+                <div className="absolute inset-x-0 bottom-0 p-4 text-white sm:p-7">
+                  <p className="max-w-xs text-xs leading-5 text-white/86 sm:text-sm sm:leading-6">
                     Hortensii, trandafiri, lalele si ghiduri pentru o gradina
                     cu atmosfera.
                   </p>
@@ -176,13 +176,13 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="relative px-4 py-14 sm:py-20">
+      <section className="relative px-4 py-10 sm:py-20">
         <div className="pointer-events-none absolute inset-x-0 top-0 mx-auto h-px max-w-5xl bg-gradient-to-r from-transparent via-blush/40 to-transparent" />
         <div className="mx-auto max-w-6xl">
-          <div className="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">
+          <div className="mb-5 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
               <p className="editorial-kicker mb-3">Flori recomandate</p>
-              <h2 className="font-serif text-4xl font-normal tracking-normal text-secondary sm:text-5xl">
+              <h2 className="font-serif text-[2.25rem] font-normal leading-tight tracking-normal text-secondary sm:text-5xl">
                 Flori alese pentru gradini cu ritm, culoare si calm.
               </h2>
             </div>
@@ -198,12 +198,12 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="relative px-4 py-14 sm:py-20">
+      <section className="relative px-4 py-10 sm:py-20">
         <div className="pointer-events-none absolute left-0 top-1/3 h-64 w-64 rounded-full bg-primary/14 blur-3xl" />
         <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="premium-blush-surface article-reveal rounded-[2.25rem] p-6 transition duration-500 hover:-translate-y-1 sm:p-9">
+          <div className="premium-blush-surface article-reveal rounded-[1.6rem] p-5 transition duration-500 hover:-translate-y-1 sm:rounded-[2.25rem] sm:p-9">
             <p className="editorial-kicker mb-4">Din revista</p>
-            <h2 className="font-serif text-4xl font-normal leading-tight tracking-normal text-secondary sm:text-5xl">
+            <h2 className="font-serif text-[2.15rem] font-normal leading-tight tracking-normal text-secondary sm:text-5xl">
               Ghiduri care se citesc ca o plimbare printr-o gradina buna.
             </h2>
             <p className="mt-5 text-base leading-8 text-gray-700">
@@ -212,7 +212,7 @@ export default async function Home() {
               gradini.
             </p>
 
-            <ul className="mt-7 space-y-3">
+            <ul className="mt-6 space-y-2.5 sm:mt-7 sm:space-y-3">
               {editorialNotes.map((note) => (
                 <li
                   key={note}
@@ -226,7 +226,7 @@ export default async function Home() {
           </div>
 
           <div className="article-reveal grid gap-4 sm:grid-cols-2">
-            <div className="group relative min-h-[26rem] overflow-hidden rounded-[2.25rem] border border-white/70 shadow-[0_28px_84px_rgba(31,50,28,0.14)] sm:min-h-[34rem]">
+            <div className="group relative min-h-[20rem] overflow-hidden rounded-[1.6rem] border border-white/70 shadow-[0_22px_58px_rgba(31,50,28,0.12)] sm:min-h-[34rem] sm:rounded-[2.25rem]">
               <Image
                 src="/images/articles/hortensia-demo/vertical.png"
                 alt="Hortensie verticala intr-o compozitie editoriala"
@@ -240,12 +240,12 @@ export default async function Home() {
                 <Link
                   key={flower.slug}
                   href={`/flori/${flower.slug}`}
-                  className="group premium-surface-strong rounded-[2rem] p-5 transition duration-500 hover:-translate-y-1 hover:border-blush/30"
+                  className="group premium-surface-strong rounded-[1.5rem] p-4 transition duration-500 hover:-translate-y-1 hover:border-blush/30 sm:rounded-[2rem] sm:p-5"
                 >
                   <p className="mb-2 text-xs font-semibold text-blush">
                     Floare de explorat
                   </p>
-                  <h3 className="font-serif text-3xl font-normal tracking-normal text-secondary transition group-hover:text-primary">
+                  <h3 className="font-serif text-[1.65rem] font-normal tracking-normal text-secondary transition group-hover:text-primary sm:text-3xl">
                     {cleanFlowerName(flower.name)}
                   </h3>
                   <p className="mt-3 line-clamp-3 text-sm leading-7 text-gray-600">
@@ -258,12 +258,12 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="px-4 py-14 sm:py-20">
+      <section className="px-4 py-10 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <div className="mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
               <p className="editorial-kicker mb-3">Articole si ghiduri</p>
-              <h2 className="font-serif text-4xl font-normal tracking-normal text-secondary sm:text-5xl">
+              <h2 className="font-serif text-[2.2rem] font-normal leading-tight tracking-normal text-secondary sm:text-5xl">
                 Lecturi recente pentru casa, gradina si sezon.
               </h2>
             </div>
@@ -284,11 +284,11 @@ export default async function Home() {
               return (
                 <article
                   key={post._id}
-                  className="group article-reveal overflow-hidden rounded-[2rem] border border-white/70 bg-[#fffaf1]/78 shadow-[0_24px_76px_rgba(31,50,28,0.09)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_30px_96px_rgba(31,50,28,0.14)]"
+                  className="group article-reveal overflow-hidden rounded-[1.55rem] border border-white/70 bg-[#fffaf1]/78 shadow-[0_18px_52px_rgba(31,50,28,0.08)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_30px_96px_rgba(31,50,28,0.14)] sm:rounded-[2rem]"
                 >
                   {cardImageUrl && (
                     <Link href={`/blog/${post.slug}`} className="block">
-                      <div className="relative h-64 w-full overflow-hidden">
+                      <div className="relative h-52 w-full overflow-hidden sm:h-64">
                         <Image
                           src={cardImageUrl}
                           alt={post.title}
@@ -300,7 +300,7 @@ export default async function Home() {
                     </Link>
                   )}
 
-                  <div className="p-5 sm:p-6">
+                  <div className="p-[1.125rem] sm:p-6">
                     <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-gray-500">
                       <span className="rounded-full bg-blush-soft px-3 py-1 font-semibold text-secondary">
                         Ghid botanic
@@ -314,7 +314,7 @@ export default async function Home() {
                       )}
                     </div>
 
-                    <h3 className="font-serif text-3xl font-normal leading-tight tracking-normal text-secondary">
+                    <h3 className="font-serif text-[1.75rem] font-normal leading-tight tracking-normal text-secondary sm:text-3xl">
                       <Link
                         href={`/blog/${post.slug}`}
                         className="transition hover:text-primary"
@@ -343,13 +343,13 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="px-4 py-14 sm:py-20">
+      <section className="px-4 py-10 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-5 md:grid-cols-3">
             {whyItems.map((item) => (
               <div
                 key={item.title}
-                className="premium-surface article-reveal rounded-[2rem] p-6 transition duration-500 hover:-translate-y-1 hover:bg-[#fffaf1]/84 sm:p-7"
+                className="premium-surface article-reveal rounded-[1.5rem] p-5 transition duration-500 hover:-translate-y-1 hover:bg-[#fffaf1]/84 sm:rounded-[2rem] sm:p-7"
               >
                 <div className="mb-5 h-10 w-10 rounded-full bg-blush-soft shadow-[0_0_28px_rgba(209,142,134,0.34)]" />
                 <h3 className="font-serif text-3xl font-normal tracking-normal text-secondary">
@@ -364,14 +364,14 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="px-4 py-14 sm:py-20">
-        <div className="mx-auto max-w-6xl overflow-hidden rounded-[2.5rem] border border-white/70 bg-secondary text-white shadow-[0_36px_110px_rgba(31,50,28,0.26)]">
+      <section className="px-4 py-10 sm:py-20">
+        <div className="mx-auto max-w-6xl overflow-hidden rounded-[1.7rem] border border-white/70 bg-secondary text-white shadow-[0_28px_80px_rgba(31,50,28,0.22)] sm:rounded-[2.5rem]">
           <div className="grid gap-0 lg:grid-cols-[1fr_0.8fr]">
-            <div className="p-7 sm:p-10 lg:p-12">
+            <div className="p-5 sm:p-10 lg:p-12">
               <p className="mb-4 text-sm font-semibold text-blush">
                 Urmatorul pas
               </p>
-              <h2 className="max-w-2xl font-serif text-4xl font-normal leading-tight tracking-normal sm:text-5xl">
+              <h2 className="max-w-2xl font-serif text-[2.15rem] font-normal leading-tight tracking-normal sm:text-5xl">
                 Alege o floare, citeste un ghid sau spune-ne ce colt botanic
                 pregatesti.
               </h2>
@@ -394,7 +394,7 @@ export default async function Home() {
                 </Link>
               </div>
             </div>
-            <div className="relative min-h-[22rem] lg:min-h-full">
+            <div className="relative min-h-[16rem] sm:min-h-[22rem] lg:min-h-full">
               {featuredPost?.mainImage ? (
                 <Image
                   src={imageUrl(featuredPost.mainImage, 1000, 900)}
