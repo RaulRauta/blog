@@ -19,18 +19,18 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-[9999] border-b border-secondary/10 bg-[#fffdf7]/78 backdrop-blur-2xl">
       <div className="mx-auto max-w-6xl px-3 sm:px-4">
-        <div className="flex items-center justify-between py-2.5 sm:py-3.5">
+        <div className="flex items-center justify-between gap-2 py-2.5 sm:gap-4 sm:py-3.5">
           <Link
             href="/"
-            className="flex min-w-0 items-center gap-3 transition hover:opacity-90"
+            className="flex min-w-0 flex-1 items-center gap-2.5 transition hover:opacity-90 sm:gap-3 md:flex-none"
             onClick={() => setOpen(false)}
           >
-            <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-[1rem] border border-white/80 bg-white shadow-[0_10px_24px_rgba(35,53,31,0.08)] sm:h-12 sm:w-16 sm:rounded-2xl">
+            <div className="relative h-9 w-9 shrink-0 overflow-hidden rounded-[0.9rem] border border-white/80 bg-white shadow-[0_10px_24px_rgba(35,53,31,0.08)] sm:h-12 sm:w-16 sm:rounded-2xl">
               <Image src="/logo.png" alt="Logo" fill className="object-cover" />
             </div>
 
             <div className="min-w-0">
-              <p className="max-w-[12rem] truncate font-serif text-base font-normal tracking-normal text-secondary sm:max-w-none sm:text-xl">
+              <p className="truncate font-serif text-[1.05rem] font-normal leading-tight tracking-normal text-secondary sm:text-xl">
                 Enciclopedia Florilor
               </p>
               <p className="hidden text-[11px] font-medium text-primary sm:block">
@@ -61,7 +61,7 @@ export default function Navbar() {
 
           <Link
             href="/blog"
-            className="botanical-button hidden px-5 py-2.5 text-sm font-semibold md:inline-flex"
+            className="hidden items-center justify-center rounded-full bg-secondary px-5 py-2.5 text-sm font-semibold text-[#fffdf7] shadow-[0_16px_42px_rgba(35,53,31,0.16)] transition hover:-translate-y-0.5 hover:bg-[#2f4827] hover:shadow-[0_18px_48px_rgba(31,50,28,0.24)] lg:inline-flex"
           >
             Exploreaza ghiduri
           </Link>
